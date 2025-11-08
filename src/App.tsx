@@ -1,5 +1,14 @@
+import { Outlet } from "react-router";
+import HomeBar from "./components/home-bar/home-bar";
+
 function App() {
-  return <h1 className="text-red-500">teste</h1>;
+  return (
+    <>
+      <HomeBar />
+
+      <Outlet />
+    </>
+  );
 }
 
 export default App;
