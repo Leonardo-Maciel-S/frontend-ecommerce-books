@@ -4,16 +4,18 @@ import { Link } from "react-router";
 
 const HomeBar = () => {
   return (
-    <nav className="flex justify-between items-center px-10 py-5">
-      <Link to="/" className="text-4xl font-bold cursor-pointer">
+    <nav className="flex justify-between items-center py-5">
+      <Link
+        to="/"
+        className="text-4xl font-semibold cursor-pointer font-primary"
+      >
         Bookstore
       </Link>
 
       <div className="flex justify-between gap-8">
         <ButtonWithMarkBook to="/">BOOKS</ButtonWithMarkBook>
-        <ButtonWithMarkBook to="/">AUDIOLIVROS</ButtonWithMarkBook>
-        <ButtonWithMarkBook to="/">STATIONERY & GIFTS</ButtonWithMarkBook>
-        <ButtonWithMarkBook to="/">BLOG</ButtonWithMarkBook>
+        <ButtonWithMarkBook to="/">AUTHORS</ButtonWithMarkBook>
+        <ButtonWithMarkBook to="/">CATEGORIES</ButtonWithMarkBook>
       </div>
 
       <div className="flex justify-between items-center gap-5 ">
