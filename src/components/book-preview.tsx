@@ -8,7 +8,7 @@ interface BookPreviewProps {
 
 const BookPreview = ({ book }: BookPreviewProps) => {
   return (
-    <div className="grid grid-cols-2 w-[550px] ">
+    <div className="grid grid-cols-2 max-w-[550px] ">
       <img src={book.coverImg} alt="" className="w-full h-full" />
 
       <div className="p-5 flex flex-col gap-3 justify-between">
