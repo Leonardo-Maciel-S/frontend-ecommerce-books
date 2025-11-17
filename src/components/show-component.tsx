@@ -1,11 +1,11 @@
 import { type ReactNode } from "react";
 
 interface ShowComponentProps {
-  condition: boolean;
+  when: boolean;
   children: ReactNode;
 }
-const ShowComponent = ({ condition, children }: ShowComponentProps) => {
-  return <>{condition && children}</>;
+const ShowComponent = ({ when, children }: ShowComponentProps) => {
+  return <>{when && children}</>;
 };
 
 export default ShowComponent;
