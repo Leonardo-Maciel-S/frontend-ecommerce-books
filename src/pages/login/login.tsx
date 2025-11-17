@@ -33,7 +33,7 @@ const Login = () => {
           </ShowComponent>
 
           <ShowComponent when={!signIn}>
-            <Register />
+            <Register setSignIn={setSignIn} />
           </ShowComponent>
         </div>
       </div>

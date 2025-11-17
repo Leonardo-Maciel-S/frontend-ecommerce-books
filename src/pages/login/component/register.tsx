@@ -8,27 +8,26 @@ import {
   InputGroupButton,
   InputGroupInput,
 } from "@/components/ui/input-group";
-
-import useLogin, { type FormRegisterSchemaType } from "@/hooks/use-register";
+import useRegister from "@/hooks/use-register";
 
 import { Label } from "@radix-ui/react-label";
 import { Eye, EyeClosed } from "lucide-react";
 import { useState } from "react";
 
-const Register = () => {
+const Register = ({ setSignIn }: { setSignIn: React.Dispatch<boolean> }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useLogin();
-
-  const submitLogin = (data: FormRegisterSchemaType) => {};
+    submitRegister,
+    isPending,
+  } = useRegister(setSignIn);
 
   return (
     <form
-      onSubmit={handleSubmit(submitLogin)}
+      onSubmit={handleSubmit(submitRegister)}
       className="flex flex-col gap-2 z-20 bg-white rounded-xl py-5 px-6 shadow-xl/50 min-w-[270px] md:w-[400px]"
     >
       <h2 className="text-center font-semibold font-primary  text-2xl leading-normal">
@@ -91,7 +90,9 @@ const Register = () => {
         </div>
       </div>
 
-      <Button className="cursor-pointer md:text-lg p-6">Cadastrar</Button>
+      <Button disabled={isPending} className="cursor-pointer md:text-lg p-6">
+        Cadastrar
+      </Button>
     </form>
   );
 };
