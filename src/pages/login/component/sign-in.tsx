@@ -9,12 +9,11 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group";
 
-import useLogin, { type FormSchemaType } from "@/hooks/useLogin";
+import useLogin from "@/hooks/useLogin";
 
 import { Label } from "@radix-ui/react-label";
 import { Eye, EyeClosed } from "lucide-react";
 import { useState } from "react";
-import type { UseFormReturn } from "react-hook-form";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -23,11 +22,8 @@ const SignIn = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useLogin({ login: true }) as UseFormReturn<FormSchemaType>;
-
-  const submitLogin = (data: FormSchemaType) => {
-    console.log(data);
-  };
+    submitLogin,
+  } = useLogin();
 
   return (
     <form

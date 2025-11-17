@@ -9,12 +9,11 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group";
 
-import useLogin, { type FormRegisterSchemaType } from "@/hooks/useLogin";
+import useLogin, { type FormRegisterSchemaType } from "@/hooks/useRegister";
 
 import { Label } from "@radix-ui/react-label";
 import { Eye, EyeClosed } from "lucide-react";
 import { useState } from "react";
-import type { UseFormReturn } from "react-hook-form";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -23,7 +22,7 @@ const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useLogin({ login: false }) as UseFormReturn<FormRegisterSchemaType>;
+  } = useLogin();
 
   const submitLogin = (data: FormRegisterSchemaType) => {
     console.log(data);
