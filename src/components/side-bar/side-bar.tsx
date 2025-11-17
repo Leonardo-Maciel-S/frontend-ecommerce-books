@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 import Button from "../button";
+import useGetUserAuth from "@/hooks/use-get-user-auth";
+import { useNavigate } from "react-router";
 
 interface SideBarProps {
   isOpen: boolean;
@@ -9,6 +11,15 @@ interface SideBarProps {
 
 const SideBar = ({ isOpen, isProfileBar, setIsOpen }: SideBarProps) => {
   const sideBar = useRef<HTMLDivElement>(null);
+
+  const { user } = useGetUserAuth();
+
+  const navigate = useNavigate();
+
+  const navigateToHome = () => {
+    navigate("/login");
+    setIsOpen(false);
+  };
 
   useEffect(() => {
     const handleClick = (e: Event) => {
@@ -35,15 +46,23 @@ const SideBar = ({ isOpen, isProfileBar, setIsOpen }: SideBarProps) => {
       }`}
     >
       <div className="border-b-2 p-5 pb-2 border-zinc-300">
-        <h3 className="font-semibold font-primary text-lg">Óla, Leonardo</h3>
+        <h3 className="font-semibold font-primary text-lg">
+          {user ? `Óla, ${user.name}` : "Faça login"}
+        </h3>
       </div>
 
       <div className="p-4 flex flex-col justify-between h-[93%] ">
         <div className="space-y-5">
           {isProfileBar && (
             <>
-              <Button>Editar Conta</Button>
-              <Button>Criar Livro</Button>
+              {user ? (
+                <>
+                  <Button>Editar Conta</Button>
+                  <Button>Criar Livro</Button>
+                </>
+              ) : (
+                <Button onClick={navigateToHome}>Fazer Login</Button>
+              )}
             </>
           )}
         </div>
