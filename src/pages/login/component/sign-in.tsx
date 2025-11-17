@@ -23,6 +23,7 @@ const SignIn = () => {
     handleSubmit,
     formState: { errors },
     submitLogin,
+    isPending,
   } = useLogin();
 
   return (
@@ -75,8 +76,11 @@ const SignIn = () => {
         </div>
       </div>
 
-      <Button className="cursor-pointer md:text-md font-semibold p-6">
-        Entrar
+      <Button
+        disabled={isPending}
+        className="cursor-pointer md:text-md font-semibold p-6"
+      >
+        {isPending ? "Carregando" : "Entrar"}
       </Button>
     </form>
   );

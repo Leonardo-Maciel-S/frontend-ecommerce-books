@@ -1,5 +1,6 @@
 import { Outlet } from "react-router";
 import HomeBar from "./components/home-bar/home-bar";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -8,6 +9,8 @@ function App() {
         <HomeBar />
 
         <Outlet />
+
+        <ToastContainer />
       </div>
     </div>
   );

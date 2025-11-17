@@ -14,6 +14,8 @@ const SideBar = ({ isOpen, isProfileBar, setIsOpen }: SideBarProps) => {
 
   const { user } = useGetUserAuth();
 
+  console.log("side", user);
+
   const navigate = useNavigate();
 
   const navigateToHome = () => {
