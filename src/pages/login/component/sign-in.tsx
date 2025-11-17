@@ -28,7 +28,7 @@ const SignIn = () => {
   return (
     <form
       onSubmit={handleSubmit(submitLogin)}
-      className="flex flex-col gap-2 z-20 bg-white rounded-xl py-5 px-6 shadow-xl/50 min-w-[270px]"
+      className="flex flex-col gap-2 z-20 bg-white rounded-xl py-5 px-6 shadow-xl/50 min-w-[270px] md:w-[400px]"
     >
       <h2 className="text-center font-semibold font-primary  text-2xl leading-normal">
         Login

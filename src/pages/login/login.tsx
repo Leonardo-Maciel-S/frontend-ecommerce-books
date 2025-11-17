@@ -25,7 +25,7 @@ const Login = () => {
             className="w-min self-end cursor-pointer"
             onClick={toggleSignIn}
           >
-            {signIn ? "Register" : "Login"}
+            {signIn ? "Cadastrar" : "Logar"}
           </Button>
 
           <ShowComponent when={signIn}>
