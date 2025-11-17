@@ -38,7 +38,7 @@ const useLogin = () => {
         navigate("/");
         return response.user;
       } catch (error) {
-        toast.error((error as Error).message);
+        toast.error((error as Error).message || "Erro inesperado");
         return null;
       }
     },

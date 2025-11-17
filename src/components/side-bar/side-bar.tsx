@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import Button from "../button";
 import useGetUserAuth from "@/hooks/use-get-user-auth";
 import { useNavigate } from "react-router";
+import { useLogout } from "@/hooks/use-logout";
+import ShowComponent from "../show-component";
 
 interface SideBarProps {
   isOpen: boolean;
@@ -11,16 +13,20 @@ interface SideBarProps {
 
 const SideBar = ({ isOpen, isProfileBar, setIsOpen }: SideBarProps) => {
   const sideBar = useRef<HTMLDivElement>(null);
+  const { mutate } = useLogout();
 
   const { user } = useGetUserAuth();
-
-  console.log("side", user);
 
   const navigate = useNavigate();
 
   const navigateToHome = () => {
     navigate("/login");
     setIsOpen(false);
+  };
+
+  const logout = () => {
+    setIsOpen(false);
+    mutate();
   };
 
   useEffect(() => {
@@ -69,9 +75,14 @@ const SideBar = ({ isOpen, isProfileBar, setIsOpen }: SideBarProps) => {
           )}
         </div>
 
-        <button className="p-4 bg-red-500 rounded-2xl cursor-pointer font-bold text-white hover:bg-red-600 w-full">
-          Sair
-        </button>
+        <ShowComponent when={!!user}>
+          <button
+            onClick={() => logout()}
+            className="p-4 bg-red-500 rounded-2xl cursor-pointer font-bold text-white hover:bg-red-600 w-full"
+          >
+            Sair
+          </button>
+        </ShowComponent>
       </div>
     </div>
   );

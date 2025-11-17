@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 interface AuthContextType {
   user: User | null;
   setUserAuth: (data: User) => void;
+  removeUserAuth: () => void;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(
@@ -19,13 +20,19 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(defaultUser);
 
   const setUserAuth = (data: User) => {
-    Cookies.set("user", JSON.stringify(data));
+    Cookies.set("user", JSON.stringify(data), { expires: 7 });
 
     setUser(data);
   };
 
+  const removeUserAuth = () => {
+    Cookies.remove("user");
+
+    setUser(null);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, setUserAuth }}>
+    <AuthContext.Provider value={{ user, setUserAuth, removeUserAuth }}>
       {children}
     </AuthContext.Provider>
   );

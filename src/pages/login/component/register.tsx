@@ -24,9 +24,7 @@ const Register = () => {
     formState: { errors },
   } = useLogin();
 
-  const submitLogin = (data: FormRegisterSchemaType) => {
-    console.log(data);
-  };
+  const submitLogin = (data: FormRegisterSchemaType) => {};
 
   return (
     <form
