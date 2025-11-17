@@ -16,7 +16,7 @@ const BookPreview = ({ book }: BookPreviewProps) => {
           <p className="font-secondary font-normal tracking-[1px] text-sm text-gray-600 ">
             {book.author}
           </p>
-          <h2 className="font-bold text-2xl font-primary text-secondary  ">
+          <h2 className="font-bold text-2xl font-primary text-private-secondary ">
             {book.title}
           </h2>
           <Box component="fieldset" borderColor="transparent">
@@ -37,8 +37,8 @@ const BookPreview = ({ book }: BookPreviewProps) => {
           {convertPriceInCentsToReal(book.priceInCents)}
         </p>
 
-        <button className="group cursor-pointer border border-secondary relative  h-14 transition-all duration-300 overflow-hidden">
-          <div className="group-hover:translate-x-0 transition-all duration-300 bg-secondary w-full h-14 -z-10 -translate-x-full absolute top-0" />
+        <button className="group cursor-pointer border border-private-secondary relative  h-14 transition-all duration-300 overflow-hidden">
+          <div className="group-hover:translate-x-0 transition-all duration-300 bg-private-secondary w-full h-14 -z-10 -translate-x-full absolute top-0" />
           <span className="group-hover:text-white transition-all duration-300  z-20">
             BUY NOW
           </span>
