@@ -9,7 +9,7 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group";
 
-import useLogin, { type FormRegisterSchemaType } from "@/hooks/useRegister";
+import useLogin, { type FormRegisterSchemaType } from "@/hooks/use-register";
 
 import { Label } from "@radix-ui/react-label";
 import { Eye, EyeClosed } from "lucide-react";
