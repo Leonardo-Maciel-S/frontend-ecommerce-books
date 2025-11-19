@@ -19,8 +19,8 @@ const SideBar = ({ isOpen, isProfileBar, setIsOpen }: SideBarProps) => {
 
   const navigate = useNavigate();
 
-  const navigateToHome = () => {
-    navigate("/login");
+  const navigateTo = (route: string) => {
+    navigate(route);
     setIsOpen(false);
   };
 
@@ -66,10 +66,14 @@ const SideBar = ({ isOpen, isProfileBar, setIsOpen }: SideBarProps) => {
               {user ? (
                 <>
                   <Button>Editar Conta</Button>
-                  <Button>Criar Livro</Button>
+                  <Button onClick={() => navigateTo("/create-book")}>
+                    Criar Livro
+                  </Button>
                 </>
               ) : (
-                <Button onClick={navigateToHome}>Fazer Login</Button>
+                <Button onClick={() => navigateTo("/login")}>
+                  Fazer Login
+                </Button>
               )}
             </>
           )}
