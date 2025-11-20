@@ -3,9 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as y from "yup";
 import { useMutation } from "@tanstack/react-query";
 import { authService } from "@/services/auth";
-import useGetUserAuth from "./use-get-user-auth";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router";
 
 const formRegisterSchema = y.object({
   name: y
