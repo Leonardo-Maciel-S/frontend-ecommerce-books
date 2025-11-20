@@ -5,6 +5,7 @@ import { useState } from "react";
 import useGetUserAuth from "@/hooks/use-get-user-auth";
 import UserSideBar from "../side-bar/user-side-bar";
 import SideBar from "../side-bar/side-bar";
+import CartSideBar from "../side-bar/cart-side-bar";
 
 const HomeBar = () => {
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
@@ -72,12 +73,16 @@ const HomeBar = () => {
       <SideBar isOpen={isSideBarOpen} setIsOpen={setIsSideBarOpen}>
         {isProfileBar ? (
           <UserSideBar
-            setIsOpen={setIsSideBarOpen}
             user={user}
+            setIsOpen={setIsSideBarOpen}
             navigateTo={navigateTo}
           />
         ) : (
-          <h1>teste</h1>
+          <CartSideBar
+            user={user}
+            setIsOpen={setIsSideBarOpen}
+            navigateTo={navigateTo}
+          />
         )}
       </SideBar>
     </>
