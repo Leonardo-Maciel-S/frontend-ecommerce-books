@@ -1,12 +1,16 @@
 import { Handbag, Search, User } from "lucide-react";
 import ButtonWithMarkBook from "./button-with-mark-book";
 import { Link } from "react-router";
-import SideBar from "../side-bar/side-bar";
 import { useState } from "react";
+import useGetUserAuth from "@/hooks/use-get-user-auth";
+import UserSideBar from "../side-bar/user-side-bar";
+import SideBar from "../side-bar/side-bar";
 
 const HomeBar = () => {
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
   const [isProfileBar, setIsProfileBar] = useState(false);
+
+  const { user, navigate } = useGetUserAuth();
 
   const openSideBar = () => setIsSideBarOpen(true);
 
@@ -18,6 +22,11 @@ const HomeBar = () => {
   const openCartBar = () => {
     openSideBar();
     setIsProfileBar(false);
+  };
+
+  const navigateTo = (route: string) => {
+    navigate(route);
+    setIsSideBarOpen(false);
   };
 
   return (
@@ -60,11 +69,17 @@ const HomeBar = () => {
         </div>
       </nav>
 
-      <SideBar
-        isOpen={isSideBarOpen}
-        isProfileBar={isProfileBar}
-        setIsOpen={setIsSideBarOpen}
-      />
+      <SideBar isOpen={isSideBarOpen} setIsOpen={setIsSideBarOpen}>
+        {isProfileBar ? (
+          <UserSideBar
+            setIsOpen={setIsSideBarOpen}
+            user={user}
+            navigateTo={navigateTo}
+          />
+        ) : (
+          <h1>teste</h1>
+        )}
+      </SideBar>
     </>
   );
 };

@@ -1,33 +1,16 @@
-import { useEffect, useRef } from "react";
-import Button from "../button";
+import { useEffect, useRef, type ReactNode } from "react";
 import useGetUserAuth from "@/hooks/use-get-user-auth";
-import { useNavigate } from "react-router";
-import { useLogout } from "@/hooks/use-logout";
-import ShowComponent from "../show-component";
 
 interface SideBarProps {
   isOpen: boolean;
-  isProfileBar: boolean;
   setIsOpen: React.Dispatch<boolean>;
+  children: ReactNode;
 }
 
-const SideBar = ({ isOpen, isProfileBar, setIsOpen }: SideBarProps) => {
+const SideBar = ({ isOpen, setIsOpen, children }: SideBarProps) => {
   const sideBar = useRef<HTMLDivElement>(null);
-  const { mutate } = useLogout();
 
   const { user } = useGetUserAuth();
-
-  const navigate = useNavigate();
-
-  const navigateTo = (route: string) => {
-    navigate(route);
-    setIsOpen(false);
-  };
-
-  const logout = () => {
-    setIsOpen(false);
-    mutate();
-  };
 
   useEffect(() => {
     const handleClick = (e: Event) => {
@@ -60,27 +43,7 @@ const SideBar = ({ isOpen, isProfileBar, setIsOpen }: SideBarProps) => {
       </div>
 
       <div className="p-4 flex flex-col justify-between h-[93%] ">
-        <div className="space-y-5">
-          <ShowComponent when={isProfileBar && !!user}>
-            <Button>Editar Conta</Button>
-            <Button onClick={() => navigateTo("/create-book")}>
-              Criar Livro
-            </Button>
-          </ShowComponent>
-
-          <ShowComponent when={!user}>
-            <Button onClick={() => navigateTo("/login")}>Fazer Login</Button>
-          </ShowComponent>
-        </div>
-
-        <ShowComponent when={!!user}>
-          <button
-            onClick={() => logout()}
-            className="p-4 bg-red-500 rounded-2xl cursor-pointer font-bold text-white hover:bg-red-600 w-full"
-          >
-            Sair
-          </button>
-        </ShowComponent>
+        {children}
       </div>
     </div>
   );
