@@ -61,22 +61,16 @@ const SideBar = ({ isOpen, isProfileBar, setIsOpen }: SideBarProps) => {
 
       <div className="p-4 flex flex-col justify-between h-[93%] ">
         <div className="space-y-5">
-          {isProfileBar && (
-            <>
-              {user ? (
-                <>
-                  <Button>Editar Conta</Button>
-                  <Button onClick={() => navigateTo("/create-book")}>
-                    Criar Livro
-                  </Button>
-                </>
-              ) : (
-                <Button onClick={() => navigateTo("/login")}>
-                  Fazer Login
-                </Button>
-              )}
-            </>
-          )}
+          <ShowComponent when={isProfileBar && !!user}>
+            <Button>Editar Conta</Button>
+            <Button onClick={() => navigateTo("/create-book")}>
+              Criar Livro
+            </Button>
+          </ShowComponent>
+
+          <ShowComponent when={!user}>
+            <Button onClick={() => navigateTo("/login")}>Fazer Login</Button>
+          </ShowComponent>
         </div>
 
         <ShowComponent when={!!user}>
