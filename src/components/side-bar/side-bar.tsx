@@ -19,8 +19,8 @@ const SideBar = ({ isOpen, isProfileBar, setIsOpen }: SideBarProps) => {
 
   const navigate = useNavigate();
 
-  const navigateToHome = () => {
-    navigate("/login");
+  const navigateTo = (route: string) => {
+    navigate(route);
     setIsOpen(false);
   };
 
@@ -61,18 +61,16 @@ const SideBar = ({ isOpen, isProfileBar, setIsOpen }: SideBarProps) => {
 
       <div className="p-4 flex flex-col justify-between h-[93%] ">
         <div className="space-y-5">
-          {isProfileBar && (
-            <>
-              {user ? (
-                <>
-                  <Button>Editar Conta</Button>
-                  <Button>Criar Livro</Button>
-                </>
-              ) : (
-                <Button onClick={navigateToHome}>Fazer Login</Button>
-              )}
-            </>
-          )}
+          <ShowComponent when={isProfileBar && !!user}>
+            <Button>Editar Conta</Button>
+            <Button onClick={() => navigateTo("/create-book")}>
+              Criar Livro
+            </Button>
+          </ShowComponent>
+
+          <ShowComponent when={!user}>
+            <Button onClick={() => navigateTo("/login")}>Fazer Login</Button>
+          </ShowComponent>
         </div>
 
         <ShowComponent when={!!user}>

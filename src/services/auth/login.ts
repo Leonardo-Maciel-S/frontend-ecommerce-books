@@ -11,7 +11,9 @@ export const login = async (data: FormSchemaType) => {
   }
 
   try {
-    const res = await api.post<LoginResponse>("/user/login", data);
+    const res = await api.post<LoginResponse>("/user/login", data, {
+      withCredentials: true,
+    });
     return res.data;
   } catch (error) {
     const axiosError = error as AxiosError<{ message: string }>;
