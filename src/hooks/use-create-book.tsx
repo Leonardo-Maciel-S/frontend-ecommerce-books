@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as yup from "yup";
 import useGetUserAuth from "./use-get-user-auth";
+import { queryClient } from "./../main";
 
 const createBookSchema = yup.object({
   title: yup
@@ -46,6 +47,10 @@ const useCreateBook = () => {
       toast.success("Livro criado com sucesso.");
 
       form.reset();
+
+      queryClient.invalidateQueries({
+        queryKey: ["all-books"],
+      });
     },
   });
 
