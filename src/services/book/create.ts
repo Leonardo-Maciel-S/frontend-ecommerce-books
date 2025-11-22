@@ -1,5 +1,5 @@
 import type { Book } from "@/@types/books";
-import type { CreateBookFormType } from "@/hooks/use-create-book";
+import type { CreateBookFormType } from "@/hooks/books/use-create-book";
 import { api } from "@/lib/axios";
 import type { AxiosError } from "axios";
 

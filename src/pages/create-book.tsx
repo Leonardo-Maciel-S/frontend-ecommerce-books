@@ -3,7 +3,7 @@ import ShowComponent from "@/components/show-component";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import useCreateBook from "@/hooks/use-create-book";
+import useCreateBook from "@/hooks/books/use-create-book";
 const CreateBook = () => {
   const {
     register,

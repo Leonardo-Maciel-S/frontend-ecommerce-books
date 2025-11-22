@@ -4,8 +4,8 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as yup from "yup";
-import useGetUserAuth from "./use-get-user-auth";
-import { queryClient } from "./../main";
+import useGetUserAuth from "../user/use-get-user-auth";
+import { queryClient } from "@/main";
 
 const createBookSchema = yup.object({
   title: yup

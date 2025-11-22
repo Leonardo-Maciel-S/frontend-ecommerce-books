@@ -1,7 +1,7 @@
 import ShowComponent from "../show-component";
 import type { User } from "@/@types/user";
-import { useLogout } from "@/hooks/use-logout";
 import Button from "../button";
+import { useLogout } from "@/hooks/user/use-logout";
 
 interface UserSideBarProps {
   setIsOpen: React.Dispatch<boolean>;
