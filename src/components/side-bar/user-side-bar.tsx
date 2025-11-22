@@ -21,7 +21,8 @@ const UserSideBar = ({ user, setIsOpen, navigateTo }: UserSideBarProps) => {
     <>
       <div className="space-y-5">
         <ShowComponent when={!!user}>
-          <Button>Editar Conta</Button>
+          {/* <Button>Editar Conta</Button> */}
+          <Button onClick={() => navigateTo("/my-books")}>Meus Livros</Button>
           <Button onClick={() => navigateTo("/create-book")}>
             Criar Livro
           </Button>
