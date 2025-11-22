@@ -2,7 +2,12 @@ import type { Book } from "@/@types/books";
 import { api } from "@/lib/axios";
 import type { AxiosError } from "axios";
 
-const getAll = async (id?: string) => {
+interface GetAllParams {
+  id?: string;
+  search: string;
+}
+
+const getAll = async ({ id, search }: GetAllParams) => {
   try {
     if (id) {
       const res = await api.get<{ books: Book[] }>("/book/" + id);
@@ -10,7 +15,7 @@ const getAll = async (id?: string) => {
       return res.data.books;
     }
 
-    const res = await api.get<{ books: Book[] }>("/book");
+    const res = await api.get<{ books: Book[] }>(`/book?search=${search}`);
 
     return res.data.books;
   } catch (error) {
