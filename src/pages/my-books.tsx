@@ -11,14 +11,14 @@ const MyBooks = () => {
         Meus livros
       </h2>
 
-      <ShowComponent when={!!books}>
-        <BooksList books={books} />
-      </ShowComponent>
-
-      <ShowComponent when={!books}>
+      <ShowComponent when={books?.length === 0}>
         <p className="text-center w-full text-zinc-500 text-lg font-semibold">
           Você não possui livros cadastrados.
         </p>
+      </ShowComponent>
+
+      <ShowComponent when={!!books}>
+        <BooksList books={books} />
       </ShowComponent>
     </div>
   );

@@ -1,7 +1,6 @@
 import { AuthContext } from "@/context/auth";
 import { useContext } from "react";
 import { useNavigate } from "react-router";
-import { toast } from "react-toastify";
 
 const useGetUserAuth = () => {
   const context = useContext(AuthContext);
@@ -13,7 +12,6 @@ const useGetUserAuth = () => {
 
   const isUserLogged = () => {
     if (!context.user) {
-      toast.error("Usuário não logado!");
       throw navigate("/");
     }
   };

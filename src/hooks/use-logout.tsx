@@ -3,6 +3,8 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import useGetUserAuth from "./use-get-user-auth";
 
+import { queryClient } from "@/main";
+
 export const useLogout = () => {
   const { removeUserAuth, navigate } = useGetUserAuth();
 
@@ -16,6 +18,11 @@ export const useLogout = () => {
       }
     },
     onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["all-books-by-id"],
+        refetchType: "all",
+      });
+
       toast.success('Deslogado com sucesso"');
       removeUserAuth();
       navigate("/");
