@@ -7,7 +7,7 @@ const useGetAllBooksByUserId = () => {
   const { isUserLogged, user } = useGetUserAuth();
 
   const query = useQuery({
-    queryKey: ["all-books-by-id"],
+    queryKey: ["all-books-by-id", user?.id],
     queryFn: async () => {
       isUserLogged();
 
