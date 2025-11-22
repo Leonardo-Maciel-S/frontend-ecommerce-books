@@ -1,11 +1,11 @@
-import { Handbag, Search, User } from "lucide-react";
+import { Handbag, User } from "lucide-react";
 import ButtonWithMarkBook from "./button-with-mark-book";
 import { Link } from "react-router";
 import { useState } from "react";
-import useGetUserAuth from "@/hooks/use-get-user-auth";
 import UserSideBar from "../side-bar/user-side-bar";
 import SideBar from "../side-bar/side-bar";
 import CartSideBar from "../side-bar/cart-side-bar";
+import useGetUserAuth from "@/hooks/user/use-get-user-auth";
 
 const HomeBar = () => {
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
@@ -53,13 +53,6 @@ const HomeBar = () => {
           >
             <User />
           </button>
-
-          <Link
-            to=""
-            className="hover:bg-primary-light p-2 cursor-pointer transition-all duration-100 rounded-md"
-          >
-            <Search />
-          </Link>
 
           <button
             onClick={openCartBar}
