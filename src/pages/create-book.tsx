@@ -65,7 +65,7 @@ const CreateBook = () => {
             <Input
               {...register("priceInCents")}
               type="number"
-              step="0.1"
+              step="0.01"
               className="font-secondary md:text-md font-semibold"
               placeholder="Preço"
             />
