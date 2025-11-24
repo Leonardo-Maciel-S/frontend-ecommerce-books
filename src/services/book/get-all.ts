@@ -10,7 +10,7 @@ interface GetAllParams {
 const getAll = async ({ id, search }: GetAllParams) => {
   try {
     if (id) {
-      const res = await api.get<{ books: Book[] }>("/book/" + id);
+      const res = await api.get<{ books: Book[] }>("/book/user/" + id);
 
       return res.data.books;
     }
