@@ -18,7 +18,7 @@ const MyBooks = () => {
       </ShowComponent>
 
       <ShowComponent when={!!books}>
-        <BooksList books={books} />
+        <BooksList books={books} isMyBooks={true} />
       </ShowComponent>
     </div>
   );
