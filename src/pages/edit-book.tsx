@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import useEditBook from "@/hooks/books/use-edit-book";
 import useGetById from "@/hooks/books/use-get-by-id";
+import { useState } from "react";
 
 import { useParams } from "react-router";
 
@@ -17,8 +18,11 @@ const EditBook = () => {
     register,
     formState: { errors },
     handleSubmit,
+    isPending,
     editBook,
   } = useEditBook(book);
+
+  const [imgUrl, setImgUrl] = useState("");
 
   return (
     <div className="h-full py-10 flex">
@@ -96,8 +100,14 @@ const EditBook = () => {
             </ShowComponent>
           </div>
 
-          <Button className="text-lg py-5 font-semibold w-full cursor-pointer hover:bg-red">
-            Criar
+          <img src={imgUrl} alt="" />
+
+          <Button
+            className="text-lg py-5 font-semibold w-full cursor-pointer hover:bg-red-700 disabled:bg-red-400"
+            onClick={() => setImgUrl("")}
+            disabled={isPending}
+          >
+            Editar
           </Button>
         </div>
       </form>

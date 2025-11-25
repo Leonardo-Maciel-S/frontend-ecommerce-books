@@ -4,13 +4,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import useCreateBook from "@/hooks/books/use-create-book";
+import { useState } from "react";
 const CreateBook = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
+    isPending,
     createBook,
   } = useCreateBook();
+
+  const [imgUrl, setImgUrl] = useState("");
 
   return (
     <div className="h-full py-10 flex">
@@ -79,6 +83,7 @@ const CreateBook = () => {
             <Input
               {...register("coverImg")}
               type="text"
+              onChange={(e) => setImgUrl(e.target.value)}
               className="font-secondary md:text-md font-semibold"
               placeholder="URL da capa"
             />
@@ -88,7 +93,13 @@ const CreateBook = () => {
             </ShowComponent>
           </div>
 
-          <Button className="text-lg py-5 font-semibold w-full cursor-pointer hover:bg-red">
+          <img src={imgUrl} alt="" />
+
+          <Button
+            className="text-lg py-5 font-semibold w-full cursor-pointer hover:bg-red-700 disabled:bg-red-400"
+            onClick={() => setImgUrl("")}
+            disabled={isPending}
+          >
             Criar
           </Button>
         </div>
