@@ -12,9 +12,9 @@ import { useState } from "react";
 import Loading from "@/components/loading";
 
 const Home = () => {
-  const [search, setSearch] = useState("");
+  // const [search, setSearch] = useState("");
 
-  const { data: books, isLoading } = useGetAllBooks(search);
+  // const { data: books, isLoading } = useGetAllBooks(search);
 
   // const { register, handleSubmit } = useForm<{ search: string }>();
 
