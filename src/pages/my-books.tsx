@@ -7,7 +7,7 @@ const MyBooks = () => {
 
   return (
     <div>
-      <h2 className="font-semibold font-primary text-primary text-3xl scroll-py-48 text-center">
+      <h2 className="font-semibold font-primary text-private-secondary text-4xl py-5 text-center">
         Meus livros
       </h2>
 

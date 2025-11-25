@@ -8,7 +8,7 @@ interface BooksListProps {
 
 const BooksList = ({ books, isMyBooks }: BooksListProps) => {
   return (
-    <div className="flex gap-10 flex-wrap justify-start py-4 px-5">
+    <div className="gap-5 gap-y-10 justify-center items-center grid grid-cols-1 lg:grid-cols-2 pb-10">
       {books?.map((book) => (
         <BookPreview key={book.id} book={book} isMyBooks={isMyBooks} />
       ))}

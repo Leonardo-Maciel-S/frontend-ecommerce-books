@@ -93,6 +93,14 @@ const EditBook = () => {
             </ShowComponent>
           </div>
 
+          {imgUrl && (
+            <img
+              src={imgUrl}
+              alt=""
+              className="rounded-2xl shadow-xl shadow-black/50 my-4 mx-auto"
+            />
+          )}
+
           <div className="flex flex-col gap-0  ">
             <Input
               {...register("coverImg")}
@@ -106,8 +114,6 @@ const EditBook = () => {
               <ErrorMessage>{errors.coverImg?.message}</ErrorMessage>
             </ShowComponent>
           </div>
-
-          <img src={imgUrl} alt="" className="mx-auto" />
 
           <Button
             className="text-lg py-5 font-semibold w-full cursor-pointer hover:bg-red-700 disabled:bg-red-400"

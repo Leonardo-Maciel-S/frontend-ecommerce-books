@@ -17,8 +17,12 @@ const BookPreview = ({ book, isMyBooks = false }: BookPreviewProps) => {
   };
 
   return (
-    <div className="grid grid-cols-2 max-w-[550px] ">
-      <img src={book.coverImg} alt="" className="w-full h-full" />
+    <div className="grid grid-cols-2 gap-5 px-5">
+      <img
+        src={book.coverImg}
+        alt=""
+        className="w-full h-full object-fill rounded-lg shadow-2xl shadow-black/70 cursor-pointer hover:scale-105 transition-all duration-200 hover:shadow-black"
+      />
 
       <div className="p-5 flex flex-col gap-3 justify-between">
         <div className="space-y-1">
@@ -36,38 +40,40 @@ const BookPreview = ({ book, isMyBooks = false }: BookPreviewProps) => {
               size="small"
             />
           </Box>
+
+          <p className="font-medium font-secondary text-gray-600 h-[100px] overflow-clip text-start italic">
+            {book.synopsis}
+          </p>
         </div>
 
-        <p className="font-normal font-secondary text-gray-600 h-[100px] overflow-clip text-start">
-          {book.synopsis}
-        </p>
+        <div className="w-full flex flex-col gap-3">
+          <p className="font-bold text-xl">
+            {convertPriceInCentsToReal(book.priceInCents)}
+          </p>
 
-        <p className="font-bold text-xl">
-          {convertPriceInCentsToReal(book.priceInCents)}
-        </p>
+          <ShowComponent when={!isMyBooks}>
+            <button className="group cursor-pointer border border-private-secondary relative  h-14 transition-all duration-300 overflow-hidden rounded-xl">
+              <div className="group-hover:translate-x-0 transition-all duration-300 rounded-lg bg-private-secondary w-full h-14 -z-10 -translate-x-full absolute top-0" />
 
-        <ShowComponent when={!isMyBooks}>
-          <button className="group cursor-pointer border border-private-secondary relative  h-14 transition-all duration-300 overflow-hidden">
-            <div className="group-hover:translate-x-0 transition-all duration-300 bg-private-secondary w-full h-14 -z-10 -translate-x-full absolute top-0" />
+              <span className="group-hover:text-white transition-all duration-300 z-20 font-semibold">
+                BUY NOW
+              </span>
+            </button>
+          </ShowComponent>
 
-            <span className="group-hover:text-white transition-all duration-300  z-20">
-              BUY NOW
-            </span>
-          </button>
-        </ShowComponent>
+          <ShowComponent when={isMyBooks}>
+            <button
+              className="group cursor-pointer border border-private-secondary relative h-14 transition-all duration-300 overflow-hidden rounded-xl"
+              onClick={handleEditBook}
+            >
+              <div className="group-hover:translate-x-0 transition-all duration-300 rounded-lg bg-private-secondary w-full h-14 -z-10 -translate-x-full absolute top-0" />
 
-        <ShowComponent when={isMyBooks}>
-          <button
-            className="group cursor-pointer border border-private-secondary relative  h-14 transition-all duration-300 overflow-hidden"
-            onClick={handleEditBook}
-          >
-            <div className="group-hover:translate-x-0 transition-all duration-300 bg-private-secondary w-full h-14 -z-10 -translate-x-full absolute top-0" />
-
-            <span className="group-hover:text-white transition-all duration-300 font-semibold font-primary z-20">
-              Editar Livro
-            </span>
-          </button>
-        </ShowComponent>
+              <span className="group-hover:text-white transition-all duration-300 font-semibold font-primary z-20 font-semibold">
+                Editar Livro
+              </span>
+            </button>
+          </ShowComponent>
+        </div>
       </div>
     </div>
   );
