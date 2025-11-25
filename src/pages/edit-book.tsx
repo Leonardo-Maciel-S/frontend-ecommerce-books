@@ -4,15 +4,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import useEditBook from "@/hooks/books/use-edit-book";
-import useGetById from "@/hooks/books/use-get-by-id";
-import { useState } from "react";
+import { bookStore } from "@/store/books";
+import { useEffect, useState } from "react";
 
 import { useParams } from "react-router";
 
 const EditBook = () => {
   const { id } = useParams();
 
-  const { data: book } = useGetById(id);
+  const { books } = bookStore();
+
+  const book = books.find((data) => data.id === id);
 
   const {
     register,
@@ -22,7 +24,11 @@ const EditBook = () => {
     editBook,
   } = useEditBook(book);
 
-  const [imgUrl, setImgUrl] = useState("");
+  const [imgUrl, setImgUrl] = useState(book?.coverImg);
+
+  useEffect(() => {
+    setImgUrl(book?.coverImg);
+  }, [book]);
 
   return (
     <div className="h-full py-10 flex">
@@ -91,6 +97,7 @@ const EditBook = () => {
             <Input
               {...register("coverImg")}
               type="text"
+              onChange={(e) => setImgUrl(e.target.value)}
               className="font-secondary md:text-md font-semibold"
               placeholder="URL da capa"
             />
@@ -100,12 +107,12 @@ const EditBook = () => {
             </ShowComponent>
           </div>
 
-          <img src={imgUrl} alt="" />
+          <img src={imgUrl} alt="" className="mx-auto" />
 
           <Button
             className="text-lg py-5 font-semibold w-full cursor-pointer hover:bg-red-700 disabled:bg-red-400"
             onClick={() => setImgUrl("")}
-            disabled={isPending}
+            disabled={isPending || !book}
           >
             Editar
           </Button>
