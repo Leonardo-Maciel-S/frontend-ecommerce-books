@@ -1,7 +1,9 @@
 import { Box, Rating } from "@mui/material";
-import type { Book } from "../@types/books";
-import ShowComponent from "./show-component";
+import type { Book } from "../../@types/books";
+import ShowComponent from "../show-component";
 import { useNavigate } from "react-router";
+
+import PreviewButton from "./preview-button";
 import { convertPriceInCentsToReal } from "@/utils/convert-price-in-cent-to-real";
 
 interface BookPreviewProps {
@@ -17,11 +19,11 @@ const BookPreview = ({ book, isMyBooks = false }: BookPreviewProps) => {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-5 px-5">
+    <div className="grid grid-cols-2 gap-5 p-8 bg-white/30 rounded-4xl shadow-lg shadow-black/5">
       <img
         src={book.coverImg}
         alt=""
-        className="w-full h-full object-fill rounded-lg shadow-2xl shadow-black/70 cursor-pointer hover:scale-105 transition-all duration-200 hover:shadow-black"
+        className="w-full h-full object-fill rounded-lg shadow-lg shadow-black/70 cursor-pointer transition-all duration-200 hover:shadow-black"
       />
 
       <div className="p-5 flex flex-col gap-3 justify-between">
@@ -52,26 +54,11 @@ const BookPreview = ({ book, isMyBooks = false }: BookPreviewProps) => {
           </p>
 
           <ShowComponent when={!isMyBooks}>
-            <button className="group cursor-pointer border border-private-secondary relative  h-14 transition-all duration-300 overflow-hidden rounded-xl">
-              <div className="group-hover:translate-x-0 transition-all duration-300 rounded-lg bg-private-secondary w-full h-14 -z-10 -translate-x-full absolute top-0" />
-
-              <span className="group-hover:text-white transition-all duration-300 z-20 font-semibold">
-                BUY NOW
-              </span>
-            </button>
+            <PreviewButton>COMPRAR</PreviewButton>
           </ShowComponent>
 
           <ShowComponent when={isMyBooks}>
-            <button
-              className="group cursor-pointer border border-private-secondary relative h-14 transition-all duration-300 overflow-hidden rounded-xl"
-              onClick={handleEditBook}
-            >
-              <div className="group-hover:translate-x-0 transition-all duration-300 rounded-lg bg-private-secondary w-full h-14 -z-10 -translate-x-full absolute top-0" />
-
-              <span className="group-hover:text-white transition-all duration-300 font-semibold font-primary z-20 font-semibold">
-                Editar Livro
-              </span>
-            </button>
+            <PreviewButton onClick={handleEditBook}>Editar Livro</PreviewButton>
           </ShowComponent>
         </div>
       </div>
