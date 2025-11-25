@@ -1,73 +1,27 @@
-# React + TypeScript + Vite
+# Bookstore
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Esse projeto é um ecommerce de livros, onde para aprimorar minhas habilidades desenvolvi tanto o front-end quanto o back-end.
 
-Currently, two official plugins are available:
+A ideia inicial é fazer uma interface simples, apenas para demonstrar as funcionalidades implementadas.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Funcionalidades
 
-## React Compiler
+### Home
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Temos uma home onde podemos ver os todos os livros cadastrados separado por uma paginação ao final da tela.
 
-## Expanding the ESLint configuration
+### Login
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Tela de login e register onde o usuário pode criar sua conta e fazer o login em seguida.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Criar Livros - Meus livros
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Qualquer usuário pode criar livros no sistema e com essa funcionalidades conseguimos filtrar os livros por usuário.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Então cada usuário tem uma tela onde pode ver/editar os livros que ele cadastrou.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Adicionar ao carrinho
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Na home, podemos clicar para "adicionar ao carrinho" em qualquer livro, e o mesmo será alocado ao carrinho que pode ser acessar pela barra lateral.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+No carrinho, podemos ver um resumo do pedido e o botão de comprar onde vai mandar o usuário para uma tela onde pode acessar os dados de pagamento e endereço.
