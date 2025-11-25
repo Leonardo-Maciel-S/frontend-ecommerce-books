@@ -1,5 +1,5 @@
 import type { User } from "@/@types/user";
-import type { FormRegisterSchemaType } from "@/hooks/use-register";
+import type { FormRegisterSchemaType } from "@/hooks/user/use-register";
 import { api } from "@/lib/axios";
 import { AxiosError } from "axios";
 
