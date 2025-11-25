@@ -1,5 +1,5 @@
 import type { User } from "@/@types/user";
-import type { FormSchemaType } from "@/hooks/use-login";
+import type { FormSchemaType } from "@/hooks/user/use-login";
 import { api } from "@/lib/axios";
 import { AxiosError } from "axios";
 

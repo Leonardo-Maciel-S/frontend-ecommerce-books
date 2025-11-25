@@ -23,6 +23,10 @@ export const useLogout = () => {
         refetchType: "all",
       });
 
+      queryClient.removeQueries({
+        queryKey: ["all-books-by-id"],
+      });
+
       toast.success('Deslogado com sucesso"');
       removeUserAuth();
       navigate("/");

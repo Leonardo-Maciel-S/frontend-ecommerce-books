@@ -2,14 +2,14 @@ import { bookService } from "@/services/book";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-const useGetAllBooks = () => {
+const useGetById = (id?: string) => {
   const query = useQuery({
-    queryKey: ["all-books"],
+    queryKey: ["book-by-id", id],
     queryFn: async () => {
       try {
-        const books = await bookService.getAll();
+        const book = await bookService.getById(id);
 
-        return books;
+        return book;
       } catch (error) {
         toast.error((error as Error).message);
       }
@@ -19,4 +19,4 @@ const useGetAllBooks = () => {
   return { ...query };
 };
 
-export default useGetAllBooks;
+export default useGetById;

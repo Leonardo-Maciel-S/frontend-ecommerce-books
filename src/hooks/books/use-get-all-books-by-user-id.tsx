@@ -1,18 +1,18 @@
 import { bookService } from "@/services/book";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import useGetUserAuth from "./use-get-user-auth";
+import useGetUserAuth from "../user/use-get-user-auth";
 
 const useGetAllBooksByUserId = () => {
   const { isUserLogged, user } = useGetUserAuth();
 
   const query = useQuery({
-    queryKey: ["all-books-by-id"],
+    queryKey: ["all-books-by-id", user?.id],
     queryFn: async () => {
       isUserLogged();
 
       try {
-        const books = await bookService.getAll(user?.id);
+        const books = await bookService.getAll({ id: user?.id, search: "" });
 
         return books;
       } catch (error) {

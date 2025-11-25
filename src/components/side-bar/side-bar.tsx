@@ -1,5 +1,5 @@
+import useGetUserAuth from "@/hooks/user/use-get-user-auth";
 import { useEffect, useRef, type ReactNode } from "react";
-import useGetUserAuth from "@/hooks/use-get-user-auth";
 
 interface SideBarProps {
   isOpen: boolean;

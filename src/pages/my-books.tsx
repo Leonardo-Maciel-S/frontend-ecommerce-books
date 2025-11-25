@@ -1,6 +1,6 @@
 import BooksList from "@/components/books-list";
 import ShowComponent from "@/components/show-component";
-import useGetAllBooksByUserId from "@/hooks/use-get-all-books-by-user-id";
+import useGetAllBooksByUserId from "@/hooks/books/use-get-all-books-by-user-id";
 
 const MyBooks = () => {
   const { data: books } = useGetAllBooksByUserId();
@@ -18,7 +18,7 @@ const MyBooks = () => {
       </ShowComponent>
 
       <ShowComponent when={!!books}>
-        <BooksList books={books} />
+        <BooksList books={books} isMyBooks={true} />
       </ShowComponent>
     </div>
   );

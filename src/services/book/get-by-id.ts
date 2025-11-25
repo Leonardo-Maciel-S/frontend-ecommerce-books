@@ -1,19 +1,20 @@
 import type { Book } from "@/@types/books";
-import type { CreateBookFormType } from "@/hooks/books/use-create-book";
 import { api } from "@/lib/axios";
 import type { AxiosError } from "axios";
 
-const create = async (data: CreateBookFormType) => {
+const getById = async (id?: string) => {
+  if (!id) null;
+
   try {
-    const response = await api.post<Book>("/book", data, {
+    const res = await api.get<{ book: Book }>(`/book/${id}`, {
       withCredentials: true,
     });
 
-    if (response.data) return response.data;
+    return res.data.book;
   } catch (error) {
     const axiosError = error as AxiosError<{ message: string }>;
     throw new Error(axiosError.response?.data.message);
   }
 };
 
-export default create;
+export default getById;
