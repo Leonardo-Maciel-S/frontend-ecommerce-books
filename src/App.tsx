@@ -15,9 +15,9 @@ function App() {
 
   return (
     <div className="max-w-screen min-h-dvh border bg-linear-to-r from-white to-zinc-200">
-      <div className="max-w-7xl mx-auto px-10 overflow-hidden ">
-        <HomeBar />
+      <HomeBar />
 
+      <div className="max-w-7xl mx-auto px-10 overflow-hidden ">
         <Outlet />
 
         <ToastContainer />

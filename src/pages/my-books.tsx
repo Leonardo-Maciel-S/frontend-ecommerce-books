@@ -8,7 +8,7 @@ const MyBooks = () => {
   return (
     <div>
       <h2 className="font-semibold font-primary text-private-secondary text-4xl py-5 text-center">
-        Meus livros
+        Meus Livros
       </h2>
 
       <ShowComponent when={books?.length === 0}>
