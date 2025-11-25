@@ -1,8 +1,8 @@
 import { Box, Rating } from "@mui/material";
 import type { Book } from "../@types/books";
-import { convertPriceInCentsToReal } from "../utils/convert-price-incent-to-real";
 import ShowComponent from "./show-component";
 import { useNavigate } from "react-router";
+import { convertPriceInCentsToReal } from "@/utils/convert-price-in-cent-to-real";
 
 interface BookPreviewProps {
   book: Book;

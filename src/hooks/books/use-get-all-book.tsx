@@ -2,10 +2,14 @@ import { bookService } from "@/services/book";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-const useGetAllBooks = (search: string) => {
+const useGetAllBooks = (search?: string) => {
   const query = useQuery({
     queryKey: ["all-books", search],
     queryFn: async () => {
+      if (!search) {
+        search = "";
+      }
+
       try {
         const books = await bookService.getAll({ search });
 
