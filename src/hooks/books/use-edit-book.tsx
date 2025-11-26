@@ -7,7 +7,7 @@ import * as yup from "yup";
 import useGetUserAuth from "../user/use-get-user-auth";
 import { queryClient } from "@/main";
 import type { Book } from "@/@types/books";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const editBookForm = yup.object({
   id: yup.string().required(),
@@ -20,9 +20,11 @@ const editBookForm = yup.object({
     .min(2, "Autor precisa ter pelo menos 2 caracteres")
     .required("Autor é obrigatório"),
   synopsis: yup.string().required("Sinopse é obrigatório"),
-  priceInCents: yup.number().required("Preço é obrigatório"),
+  priceInCents: yup
+    .number()
+    .typeError("Preço é obrigatório")
+    .required("Preço é obrigatório"),
   coverImg: yup.string().required("Imagem é obrigatório"),
-  evaluation: yup.number().required(),
   userId: yup.string().required(),
 });
 
@@ -35,11 +37,12 @@ const emptyBook: EditBookFormType = {
   synopsis: "",
   priceInCents: 0,
   coverImg: "",
-  evaluation: 0,
   userId: "",
 };
 
 const useEditBook = (book?: Book) => {
+  const [imgUrl, setImgUrl] = useState(book?.coverImg);
+
   const { isUserLogged } = useGetUserAuth();
 
   const form = useForm<EditBookFormType>({
@@ -53,7 +56,7 @@ const useEditBook = (book?: Book) => {
       isUserLogged();
 
       try {
-        const book = await bookService.create(data);
+        const book = await bookService.edit(data);
 
         return book;
       } catch (error) {
@@ -61,9 +64,7 @@ const useEditBook = (book?: Book) => {
       }
     },
     onSuccess: () => {
-      toast.success("Livro criado com sucesso.");
-
-      form.reset();
+      toast.success("Livro editado com sucesso.");
 
       queryClient.invalidateQueries({
         queryKey: ["all-books"],
@@ -81,13 +82,17 @@ const useEditBook = (book?: Book) => {
         ...book,
         priceInCents: book.priceInCents / 100,
       });
+
+      setImgUrl(book?.coverImg);
     }
   }, [book]);
 
   return {
     ...form,
     ...mutation,
+    imgUrl,
     editBook,
+    setImgUrl,
   };
 };
 

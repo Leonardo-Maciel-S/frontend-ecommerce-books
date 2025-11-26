@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import useEditBook from "@/hooks/books/use-edit-book";
 import { bookStore } from "@/store/books";
-import { useEffect, useState } from "react";
 
 import { useParams } from "react-router";
 
@@ -22,19 +21,15 @@ const EditBook = () => {
     handleSubmit,
     isPending,
     editBook,
+    imgUrl,
+    setImgUrl,
   } = useEditBook(book);
-
-  const [imgUrl, setImgUrl] = useState(book?.coverImg);
-
-  useEffect(() => {
-    setImgUrl(book?.coverImg);
-  }, [book]);
 
   return (
     <div className="h-full py-10 flex">
       <form
         onSubmit={handleSubmit(editBook)}
-        className="min-w-[300px] w-1/3   mx-auto p-5 rounded-2xl shadow-lg shadow-zinc-500/50 space-y-2"
+        className="min-w-[300px] w-1/3   mx-auto p-5 rounded-2xl shadow-lg shadow-zinc-500/50 space-y-2 bg-white/30"
       >
         <h2 className="text-xl font-semibold font-primary text-center">
           Livro
@@ -117,7 +112,7 @@ const EditBook = () => {
 
           <Button
             className="text-lg py-5 font-semibold w-full cursor-pointer hover:bg-red-700 disabled:bg-red-400"
-            onClick={() => setImgUrl("")}
+            type="submit"
             disabled={isPending || !book}
           >
             Editar
