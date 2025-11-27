@@ -4,14 +4,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import useEditBook from "@/hooks/books/use-edit-book";
-import useFindBookById from "@/hooks/books/use-find-book-by-id";
+import { bookStore } from "@/store/books";
 
 import { useParams } from "react-router";
 
 const EditBook = () => {
   const { id } = useParams();
 
-  const { book } = useFindBookById(id);
+  const { books } = bookStore();
+
+  const book = books.find((data) => data.id === id);
 
   const {
     register,

@@ -6,6 +6,7 @@ import CreateBook from "@/pages/create-book";
 import { authLoader } from "./loaders/auth";
 import MyBooks from "@/pages/my-books";
 import EditBook from "@/pages/edit-book";
+import BookDetails from "@/pages/BookDetails/BookDetails";
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
         Component: Login,
       },
 
+      {
+        path: "book-details/:id",
+        Component: BookDetails,
+      },
       {
         path: "/create-book",
         loader: authLoader,

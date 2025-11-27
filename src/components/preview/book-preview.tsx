@@ -1,7 +1,7 @@
 import { Box, Rating } from "@mui/material";
 import type { Book } from "../../@types/books";
 import ShowComponent from "../show-component";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 import PreviewButton from "./preview-button";
 import { convertPriceInCentsToReal } from "@/utils/convert-price-in-cent-to-real";
@@ -20,11 +20,13 @@ const BookPreview = ({ book, isMyBooks = false }: BookPreviewProps) => {
 
   return (
     <div className="grid grid-cols-2 gap-5 p-8 bg-white/30 rounded-4xl shadow-lg shadow-black/5">
-      <img
-        src={book.coverImg}
-        alt=""
-        className="w-full h-full object-fill rounded-lg shadow-lg shadow-black/70 cursor-pointer transition-all duration-200 hover:shadow-black"
-      />
+      <Link to={`/book-details/${book.id}`}>
+        <img
+          src={book.coverImg}
+          alt=""
+          className="w-full h-full object-fill rounded-lg shadow-lg shadow-black/70 cursor-pointer transition-all duration-200 hover:shadow-black"
+        />
+      </Link>
 
       <div className="p-5 flex flex-col gap-3 justify-between">
         <div className="space-y-1">
