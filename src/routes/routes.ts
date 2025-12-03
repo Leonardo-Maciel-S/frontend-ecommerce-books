@@ -7,6 +7,7 @@ import { authLoader } from "./loaders/auth";
 import MyBooks from "@/pages/my-books";
 import EditBook from "@/pages/edit-book";
 import BookDetails from "@/pages/BookDetails/BookDetails";
+import Addresses from "@/pages/addresses/addresses";
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +44,12 @@ export const router = createBrowserRouter([
         path: "/my-books",
         loader: authLoader,
         Component: MyBooks,
+      },
+
+      {
+        path: "/my-addresses",
+        loader: authLoader,
+        Component: Addresses,
       },
     ],
   },

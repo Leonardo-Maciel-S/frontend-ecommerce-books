@@ -32,7 +32,7 @@ const SideBar = ({ isOpen, setIsOpen, children }: SideBarProps) => {
   return (
     <div
       ref={sideBar}
-      className={`w-[300px] h-screen fixed right-0 top-0 rounded-tl-4xl rounded-bl-4xl shadow-2xl shadow-black  bg-white z-10 ${
+      className={`w-[300px] h-screen fixed right-0 top-0 rounded-tl-4xl rounded-bl-4xl shadow-2xl shadow-black  bg-white z-20 ${
         isOpen ? "translate-x-0" : "translate-x-[300px]"
       }`}
     >
