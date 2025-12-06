@@ -21,7 +21,7 @@ const AddressCard = ({ address }: { address: Address }) => {
         <p className="text-lg font-semibold text-zinc-400">{`${address.recipientName} - ${address.phone}`}</p>
       </div>
 
-      <Button className="cursor-pointer hover:bg-private-secondary bg-private-secondary hover:shadow-lg hover:shadow-black/30">
+      <Button className="cursor-pointer hover:bg-private-secondary bg-private-secondary shadow-lg shadow-black/10 hover:shadow-black/30 hover:scale-110 transition-all duration-300">
         <Pen />
       </Button>
     </div>
