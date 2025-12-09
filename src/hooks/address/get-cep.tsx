@@ -19,7 +19,6 @@ const useGetCep = () => {
         const cepInfo = await cepService.search(cep);
 
         if (cepInfo) {
-          console.log(cepInfo);
           toast.success("Cep encontrado");
           return cepInfo;
         }
