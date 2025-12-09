@@ -6,7 +6,7 @@ export const userAddressSchema = yup.object({
   id: yup.string(),
   userId: yup.string(),
   number: yup.string().required("Número é obrigatório"),
-  street: yup.string().required("Rua é obrigatório."),
+  street: yup.string().required("Logradouro é obrigatório."),
   complement: yup.string(),
   neighborhood: yup.string().required("Bairro é obrigatório."),
   city: yup.string().required("Cidade é obrigatório."),
