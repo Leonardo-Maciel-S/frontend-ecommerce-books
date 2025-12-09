@@ -15,13 +15,7 @@ export type CepInfo = {
 };
 
 const search = async (cep: string) => {
-  const cleanCep = cep.replace(/\D/g, "");
-
-  if (!cleanCep || cleanCep.length !== 8) {
-    throw new Error("CEP Inválido");
-  }
-
-  const url = `https://viacep.com.br/ws/${cleanCep}/json/`;
+  const url = `https://viacep.com.br/ws/${cep}/json/`;
 
   const cepInfo = await fetch(url).then((data) => data.json());
 
