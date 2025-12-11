@@ -1,13 +1,17 @@
-import { userAddressSchema } from "@/schemas/address";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+import { addressService } from "@/services/address";
+import { useMutation } from "@tanstack/react-query";
 
 const useCreateAddress = () => {
-  const form = useForm({
-    resolver: yupResolver(userAddressSchema),
+  const mutation = useMutation({
+    mutationKey: ["create-address"],
+    mutationFn: async () => {
+      const address = await addressService.createAddress();
+
+      return address;
+    },
   });
 
-  return { ...form };
+  return { ...mutation };
 };
 
 export default useCreateAddress;

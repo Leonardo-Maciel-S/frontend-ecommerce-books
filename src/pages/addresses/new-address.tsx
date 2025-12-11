@@ -8,7 +8,7 @@ import {
   InputGroupButton,
   InputGroupInput,
 } from "@/components/ui/input-group";
-import useCreateAddress from "@/hooks/address/create-address";
+import useAddressForm from "@/hooks/address/address-form";
 import useGetCep from "@/hooks/address/get-cep";
 import type { UserAddressBody } from "@/schemas/address";
 import { Loader2, Search } from "lucide-react";
@@ -28,7 +28,7 @@ const NewAddress = ({ setIsModalOpen }: NewAddressProps) => {
     setValue,
     getValues,
     formState: { errors },
-  } = useCreateAddress();
+  } = useAddressForm();
 
   const { mutate: mutateGetCep, isPending } = useGetCep();
 
