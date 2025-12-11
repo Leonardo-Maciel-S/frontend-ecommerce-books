@@ -55,9 +55,10 @@ const NewAddress = ({ setIsModalOpen }: NewAddressProps) => {
   };
 
   const createAddress = (data: UserAddressBody) => {
-    const cleanCep = data.zipCode.replace(/\D/g, "");
-    const cleanCpf = data.cpfOrCnpj.replace(/\D/g, "");
-    const cleanPhone = data.phone.replace(/\D/g, "");
+    console.log(data);
+    // const cleanCep = data.zipCode.replace(/\D/g, "");
+    // const cleanCpf = data.cpfOrCnpj.replace(/\D/g, "");
+    // const cleanPhone = data.phone.replace(/\D/g, "");
   };
 
   useEffect(() => {
