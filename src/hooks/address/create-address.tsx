@@ -11,9 +11,17 @@ export const userAddressSchema = yup.object({
   neighborhood: yup.string().required("Bairro é obrigatório."),
   city: yup.string().required("Cidade é obrigatório."),
   state: yup.string().required("Estado é obrigatório."),
-  phone: yup.string().required("Telefone é obrigatório."),
+  zipCode: yup.string().required("Cep é obrigatório.").min(8, "CEP inválido"),
+  phone: yup
+    .string()
+    .required("Telefone é obrigatório.")
+    .min(11, "Telefone incompleto"),
+
   recipientName: yup.string().required("Nome de quem receberá é obrigatório."),
-  cpfOrCnpj: yup.string().required("Cpf ou CNPJ é obrigatório."),
+  cpfOrCnpj: yup
+    .string()
+    .required("CPF é obrigatório.")
+    .min(11, "CPF incompleto"),
 });
 
 export type UserAddress = yup.InferType<typeof userAddressSchema>;
