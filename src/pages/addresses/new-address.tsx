@@ -8,10 +8,9 @@ import {
   InputGroupButton,
   InputGroupInput,
 } from "@/components/ui/input-group";
-import useCreateAddress, {
-  type UserAddressBody,
-} from "@/hooks/address/create-address";
+import useCreateAddress from "@/hooks/address/create-address";
 import useGetCep from "@/hooks/address/get-cep";
+import type { UserAddressBody } from "@/schemas/address";
 import { Loader2, Search } from "lucide-react";
 import { useEffect, useRef, type Dispatch } from "react";
 
@@ -31,13 +30,13 @@ const NewAddress = ({ setIsModalOpen }: NewAddressProps) => {
     formState: { errors },
   } = useCreateAddress();
 
-  const { mutate, isPending } = useGetCep();
+  const { mutate: mutateGetCep, isPending } = useGetCep();
 
   const getCep = () => {
     const cepField = getValues("zipCode");
 
     if (cepField) {
-      mutate(cepField, {
+      mutateGetCep(cepField, {
         onSuccess: (data) => {
           setValue("street", data.logradouro, { shouldValidate: true });
           setValue("neighborhood", data.bairro, { shouldValidate: true });
@@ -56,7 +55,9 @@ const NewAddress = ({ setIsModalOpen }: NewAddressProps) => {
   };
 
   const createAddress = (data: UserAddressBody) => {
-    console.log({ ...data });
+    const cleanCep = data.zipCode.replace(/\D/g, "");
+    const cleanCpf = data.cpfOrCnpj.replace(/\D/g, "");
+    const cleanPhone = data.phone.replace(/\D/g, "");
   };
 
   useEffect(() => {
