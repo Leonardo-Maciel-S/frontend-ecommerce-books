@@ -1,8 +1,8 @@
-import type { Address } from "@/@types/address";
 import { Button } from "@/components/ui/button";
+import type { UserAddress } from "@/schemas/address";
 import { Pen } from "lucide-react";
 
-const AddressCard = ({ address }: { address: Address }) => {
+const AddressCard = ({ address }: { address: UserAddress }) => {
   return (
     <div className="bg-white/30 p-5 rounded-lg shadow-lg shadow-black/5 flex justify-between items-start ">
       <div>

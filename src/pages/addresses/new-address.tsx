@@ -12,7 +12,7 @@ import useAddressForm from "@/hooks/address/address-form";
 import useCreateAddress from "@/hooks/address/create-address";
 import useGetCep from "@/hooks/address/get-cep";
 import type { UserAddressBody } from "@/schemas/address";
-import { Loader2, Search, ZoomOut } from "lucide-react";
+import { Loader2, Search } from "lucide-react";
 import { useEffect, useRef, type Dispatch } from "react";
 import { toast } from "react-toastify";
 
