@@ -7,7 +7,9 @@ const AddressCard = ({ address }: { address: UserAddress }) => {
     <div className="bg-white/30 p-5 rounded-lg shadow-lg shadow-black/5 flex justify-between items-start ">
       <div>
         <h3 className="font-primary font-bold text-xl">
-          {`${address.street} - ${address.number} - ${address.complement}`}
+          {`${address.street} - ${address.number}  ${
+            address.complement && "- " + address.complement
+          }`}
         </h3>
 
         <p className="font-medium text-lg text-zinc-800">

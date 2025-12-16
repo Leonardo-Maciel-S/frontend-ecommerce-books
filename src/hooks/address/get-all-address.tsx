@@ -13,6 +13,7 @@ const useGetAllAddress = () => {
 
       return [];
     },
+    staleTime: 1000 * 60 * 5,
   });
 };
 
