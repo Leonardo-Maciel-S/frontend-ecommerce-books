@@ -63,8 +63,6 @@ const NewAddress = ({ setIsModalOpen }: NewAddressProps) => {
     const cpfOrCnpj = data.cpfOrCnpj.replace(/\D/g, "");
     const phone = data.phone.replace(/\D/g, "");
 
-    console.log({ ...data, zipCode, cpfOrCnpj, phone });
-
     mutate(
       { ...data, zipCode, cpfOrCnpj, phone },
       {

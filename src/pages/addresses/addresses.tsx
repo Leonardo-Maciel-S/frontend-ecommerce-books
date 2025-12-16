@@ -10,8 +10,6 @@ const Addresses = () => {
 
   const { data: addresses } = useGetAllAddress();
 
-  console.log(addresses);
-
   return (
     <div className="mt-10 overflow-hidden h-full">
       <div className="flex items-center justify-between py-2">
