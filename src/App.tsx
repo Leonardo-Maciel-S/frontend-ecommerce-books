@@ -17,7 +17,7 @@ function App() {
   }, []);
 
   return (
-    <div className="w-screen overflow-hidden min-h-dvh border bg-linear-to-r from-white to-zinc-200">
+    <div className="w-dvw overflow-hidden min-h-dvh border bg-linear-to-r from-white to-zinc-200">
       <HomeBar />
 
       <div className="max-w-7xl mx-auto px-10 overflow-hidden ">

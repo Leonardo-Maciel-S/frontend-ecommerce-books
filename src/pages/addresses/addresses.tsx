@@ -39,7 +39,7 @@ const Addresses = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="mt-10">
+    <div className="mt-10 overflow-hidden h-full">
       <div className="flex items-center justify-between py-2">
         <h2 className="text-3xl font-semibold font-primary">Endereços</h2>
 
