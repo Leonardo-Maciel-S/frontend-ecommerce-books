@@ -1,13 +1,15 @@
-import type { Address } from "@/@types/address";
 import { Button } from "@/components/ui/button";
+import type { UserAddress } from "@/schemas/address";
 import { Pen } from "lucide-react";
 
-const AddressCard = ({ address }: { address: Address }) => {
+const AddressCard = ({ address }: { address: UserAddress }) => {
   return (
     <div className="bg-white/30 p-5 rounded-lg shadow-lg shadow-black/5 flex justify-between items-start ">
       <div>
         <h3 className="font-primary font-bold text-xl">
-          {`${address.street} - ${address.number} - ${address.complement}`}
+          {`${address.street} - ${address.number}  ${
+            address.complement && "- " + address.complement
+          }`}
         </h3>
 
         <p className="font-medium text-lg text-zinc-800">

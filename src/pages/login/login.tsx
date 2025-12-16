@@ -15,14 +15,14 @@ const Login = () => {
       <img
         src={libraryBg}
         alt="imagem de uma biblioteca"
-        className="-z-10 w-[200%] object-contain border-4 blur-[2.5px]  absolute top-0 left-0"
+        className="z-0 w-[200%] object-contain border-4 blur-[2.5px]  absolute top-0 left-0"
       />
 
       <div className="w-full flex justify-center items-center ">
         <div className="h-min flex flex-col gap-2 md:w-/3">
           <Button
             variant="secondary"
-            className="w-min self-end cursor-pointer"
+            className="w-min self-end cursor-pointer z-20"
             onClick={toggleSignIn}
           >
             {signIn ? "Cadastrar" : "Logar"}
