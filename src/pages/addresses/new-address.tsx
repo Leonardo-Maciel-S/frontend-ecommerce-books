@@ -9,10 +9,12 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group";
 import useAddressForm from "@/hooks/address/address-form";
+import useCreateAddress from "@/hooks/address/create-address";
 import useGetCep from "@/hooks/address/get-cep";
 import type { UserAddressBody } from "@/schemas/address";
-import { Loader2, Search } from "lucide-react";
+import { Loader2, Search, ZoomOut } from "lucide-react";
 import { useEffect, useRef, type Dispatch } from "react";
+import { toast } from "react-toastify";
 
 interface NewAddressProps {
   setIsModalOpen: Dispatch<boolean>;
@@ -31,6 +33,8 @@ const NewAddress = ({ setIsModalOpen }: NewAddressProps) => {
   } = useAddressForm();
 
   const { mutate: mutateGetCep, isPending } = useGetCep();
+
+  const { mutate } = useCreateAddress();
 
   const getCep = () => {
     const cepField = getValues("zipCode");
@@ -55,10 +59,22 @@ const NewAddress = ({ setIsModalOpen }: NewAddressProps) => {
   };
 
   const createAddress = (data: UserAddressBody) => {
-    console.log(data);
-    // const cleanCep = data.zipCode.replace(/\D/g, "");
-    // const cleanCpf = data.cpfOrCnpj.replace(/\D/g, "");
-    // const cleanPhone = data.phone.replace(/\D/g, "");
+    const zipCode = data.zipCode.replace(/\D/g, "");
+    const cpfOrCnpj = data.cpfOrCnpj.replace(/\D/g, "");
+    const phone = data.phone.replace(/\D/g, "");
+
+    console.log({ ...data, zipCode, cpfOrCnpj, phone });
+
+    mutate(
+      { ...data, zipCode, cpfOrCnpj, phone },
+      {
+        onSuccess: () => {
+          toast.success("Endereço criado com sucesso.");
+
+          setIsModalOpen(false);
+        },
+      }
+    );
   };
 
   useEffect(() => {
