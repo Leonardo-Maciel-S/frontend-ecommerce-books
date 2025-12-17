@@ -4,11 +4,12 @@ import { useState } from "react";
 import NewAddress from "./new-address";
 import ShowComponent from "@/components/show-component";
 import useGetAllAddress from "@/hooks/address/get-all-address";
+import Loading from "@/components/loading";
 
 const Addresses = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { data: addresses } = useGetAllAddress();
+  const { data: addresses, isLoading } = useGetAllAddress();
 
   return (
     <div className="mt-10 overflow-hidden h-full">
@@ -23,12 +24,18 @@ const Addresses = () => {
         </Button>
       </div>
 
-      <div className="py-5 flex flex-col gap-5">
-        {addresses &&
-          addresses.map((address) => (
-            <AddressCard key={address.id} address={address} />
-          ))}
-      </div>
+      <ShowComponent when={isLoading}>
+        <Loading />
+      </ShowComponent>
+
+      <ShowComponent when={!isLoading}>
+        <div className="py-5 flex flex-col gap-5">
+          {addresses &&
+            addresses.map((address) => (
+              <AddressCard key={address.id} address={address} />
+            ))}
+        </div>
+      </ShowComponent>
 
       <ShowComponent when={isModalOpen}>
         <NewAddress setIsModalOpen={setIsModalOpen} />

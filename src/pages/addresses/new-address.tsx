@@ -24,6 +24,10 @@ const NewAddress = ({ setIsModalOpen }: NewAddressProps) => {
   const form = useRef<HTMLFormElement | null>(null);
   const div = useRef<HTMLDivElement | null>(null);
 
+  const { mutate: mutateGetCep, isPending } = useGetCep();
+
+  const { mutate, isPending: isCreateLoading } = useCreateAddress();
+
   const {
     register,
     handleSubmit,
@@ -31,10 +35,6 @@ const NewAddress = ({ setIsModalOpen }: NewAddressProps) => {
     getValues,
     formState: { errors },
   } = useAddressForm();
-
-  const { mutate: mutateGetCep, isPending } = useGetCep();
-
-  const { mutate } = useCreateAddress();
 
   const getCep = () => {
     const cepField = getValues("zipCode");
@@ -306,7 +306,12 @@ const NewAddress = ({ setIsModalOpen }: NewAddressProps) => {
             </div>
           </div>
 
-          <Button className="py-5 text-xl w-full">Criar</Button>
+          <Button
+            disabled={isCreateLoading}
+            className="py-5 text-xl w-full cursor-pointer"
+          >
+            {isCreateLoading ? <Loader2 className="animate-spin" /> : "Criar"}
+          </Button>
         </form>
       </div>
     </>
