@@ -34,6 +34,28 @@ const EditBook = () => {
         </h2>
 
         <div className="space-y-3">
+          {imgUrl && (
+            <img
+              src={imgUrl}
+              alt=""
+              className="rounded-2xl shadow-lg shadow-black/10 my-4 mx-auto"
+            />
+          )}
+
+          <div className="flex flex-col gap-0  ">
+            <Input
+              {...register("coverImg")}
+              type="text"
+              onChange={(e) => setImgUrl(e.target.value)}
+              className="font-secondary md:text-md font-semibold"
+              placeholder="URL da capa"
+            />
+
+            <ShowComponent when={errors.coverImg !== undefined}>
+              <ErrorMessage>{errors.coverImg?.message}</ErrorMessage>
+            </ShowComponent>
+          </div>
+
           <div className="flex flex-col gap-0  ">
             <Input
               {...register("title")}
@@ -83,28 +105,6 @@ const EditBook = () => {
 
             <ShowComponent when={errors.priceInCents !== undefined}>
               <ErrorMessage>{errors.priceInCents?.message}</ErrorMessage>
-            </ShowComponent>
-          </div>
-
-          {imgUrl && (
-            <img
-              src={imgUrl}
-              alt=""
-              className="rounded-2xl shadow-xl shadow-black/50 my-4 mx-auto"
-            />
-          )}
-
-          <div className="flex flex-col gap-0  ">
-            <Input
-              {...register("coverImg")}
-              type="text"
-              onChange={(e) => setImgUrl(e.target.value)}
-              className="font-secondary md:text-md font-semibold"
-              placeholder="URL da capa"
-            />
-
-            <ShowComponent when={errors.coverImg !== undefined}>
-              <ErrorMessage>{errors.coverImg?.message}</ErrorMessage>
             </ShowComponent>
           </div>
 
