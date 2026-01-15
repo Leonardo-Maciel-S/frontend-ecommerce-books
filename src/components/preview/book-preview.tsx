@@ -19,7 +19,7 @@ const BookPreview = ({ book, isMyBooks = false }: BookPreviewProps) => {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-5 p-8 bg-white/30 rounded-4xl shadow-lg shadow-black/5">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 p-8 bg-white/30 rounded-4xl shadow-lg shadow-black/5">
       <Link to={`/book-details/${book.id}`}>
         <img
           src={book.coverImg}
