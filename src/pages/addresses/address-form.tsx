@@ -10,31 +10,47 @@ import {
 } from "@/components/ui/input-group";
 import useAddressForm from "@/hooks/address/address-form";
 import useCreateAddress from "@/hooks/address/create-address";
+import useEditAddress from "@/hooks/address/edit-address";
 import useGetCep from "@/hooks/address/get-cep";
-import type { UserAddressBody } from "@/schemas/address";
+import type { UserAddress, UserAddressBody } from "@/schemas/address";
 import { Loader2, Search } from "lucide-react";
 import { useEffect, useRef, type Dispatch } from "react";
 import { toast } from "react-toastify";
 
-interface NewAddressProps {
+interface AddressFormProps {
   setIsModalOpen: Dispatch<boolean>;
+  addressToEdit: UserAddress | null;
+  setAddressToEdit: Dispatch<UserAddress | null>;
 }
 
-const NewAddress = ({ setIsModalOpen }: NewAddressProps) => {
+const AddressForm = ({
+  setIsModalOpen,
+  addressToEdit,
+  setAddressToEdit,
+}: AddressFormProps) => {
   const form = useRef<HTMLFormElement | null>(null);
   const div = useRef<HTMLDivElement | null>(null);
+
+  const { mutate: mutateGetCep, isPending } = useGetCep();
+
+  const { mutate: createAddress, isPending: isCreateLoading } =
+    useCreateAddress();
+
+  const { mutate: editAddress, isPending: isEditLoading } = useEditAddress();
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setAddressToEdit(null);
+  };
 
   const {
     register,
     handleSubmit,
     setValue,
     getValues,
+    reset,
     formState: { errors },
   } = useAddressForm();
-
-  const { mutate: mutateGetCep, isPending } = useGetCep();
-
-  const { mutate } = useCreateAddress();
 
   const getCep = () => {
     const cepField = getValues("zipCode");
@@ -58,18 +74,36 @@ const NewAddress = ({ setIsModalOpen }: NewAddressProps) => {
     }
   };
 
-  const createAddress = (data: UserAddressBody) => {
+  const handleSubmitClick = (data: UserAddressBody) => {
     const zipCode = data.zipCode.replace(/\D/g, "");
     const cpfOrCnpj = data.cpfOrCnpj.replace(/\D/g, "");
     const phone = data.phone.replace(/\D/g, "");
 
-    mutate(
+    if (addressToEdit) {
+      editAddress(
+        {
+          body: { ...data, zipCode, cpfOrCnpj, phone },
+          id: addressToEdit.id!,
+        },
+        {
+          onSuccess: () => {
+            toast.success("Endereço editado com sucesso.");
+
+            closeModal();
+          },
+        }
+      );
+
+      return;
+    }
+
+    createAddress(
       { ...data, zipCode, cpfOrCnpj, phone },
       {
         onSuccess: () => {
           toast.success("Endereço criado com sucesso.");
 
-          setIsModalOpen(false);
+          closeModal();
         },
       }
     );
@@ -78,7 +112,7 @@ const NewAddress = ({ setIsModalOpen }: NewAddressProps) => {
   useEffect(() => {
     const handleOutClick = (e: MouseEvent) => {
       if (!(e.target as HTMLElement).contains(form.current)) {
-        setIsModalOpen(false);
+        closeModal();
       }
     };
 
@@ -89,6 +123,10 @@ const NewAddress = ({ setIsModalOpen }: NewAddressProps) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (addressToEdit) reset(addressToEdit);
+  }, [addressToEdit]);
+
   return (
     <>
       <div
@@ -98,7 +136,7 @@ const NewAddress = ({ setIsModalOpen }: NewAddressProps) => {
       <div className="w-full max-w-screen min-h-screen absolute top-0 left-0 flex justify-center items-center py-10">
         <form
           ref={form}
-          onSubmit={handleSubmit(createAddress)}
+          onSubmit={handleSubmit(handleSubmitClick)}
           className="bg-white z-20 p-5 rounded-2xl space-y-3 lg:w-[600px]"
         >
           <h2 className="text-3xl font-primary font-semibold">Novo Endereço</h2>
@@ -306,11 +344,20 @@ const NewAddress = ({ setIsModalOpen }: NewAddressProps) => {
             </div>
           </div>
 
-          <Button className="py-5 text-xl w-full">Criar</Button>
+          <Button
+            disabled={isCreateLoading || isEditLoading}
+            className="py-5 text-xl w-full cursor-pointer"
+          >
+            {isCreateLoading || isEditLoading ? (
+              <Loader2 className="animate-spin" />
+            ) : (
+              "Criar"
+            )}
+          </Button>
         </form>
       </div>
     </>
   );
 };
 
-export default NewAddress;
+export default AddressForm;

@@ -1,14 +1,17 @@
 import { Button } from "@/components/ui/button";
 import AddressCard from "./address-card";
 import { useState } from "react";
-import NewAddress from "./new-address";
+import AddressForm from "./address-form";
 import ShowComponent from "@/components/show-component";
 import useGetAllAddress from "@/hooks/address/get-all-address";
+import Loading from "@/components/loading";
+import type { UserAddress } from "@/schemas/address";
 
 const Addresses = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [addressToEdit, setAddressToEdit] = useState<UserAddress | null>(null);
 
-  const { data: addresses } = useGetAllAddress();
+  const { data: addresses, isLoading } = useGetAllAddress();
 
   return (
     <div className="mt-10 overflow-hidden h-full">
@@ -23,15 +26,30 @@ const Addresses = () => {
         </Button>
       </div>
 
-      <div className="py-5 flex flex-col gap-5">
-        {addresses &&
-          addresses.map((address) => (
-            <AddressCard key={address.id} address={address} />
-          ))}
-      </div>
+      <ShowComponent when={isLoading}>
+        <Loading />
+      </ShowComponent>
+
+      <ShowComponent when={!isLoading}>
+        <div className="p-5 flex flex-col gap-5">
+          {addresses &&
+            addresses.map((address) => (
+              <AddressCard
+                key={address.id}
+                address={address}
+                setAddressToEdit={setAddressToEdit}
+                setIsModalOpen={setIsModalOpen}
+              />
+            ))}
+        </div>
+      </ShowComponent>
 
       <ShowComponent when={isModalOpen}>
-        <NewAddress setIsModalOpen={setIsModalOpen} />
+        <AddressForm
+          setIsModalOpen={setIsModalOpen}
+          addressToEdit={addressToEdit}
+          setAddressToEdit={setAddressToEdit}
+        />
       </ShowComponent>
     </div>
   );

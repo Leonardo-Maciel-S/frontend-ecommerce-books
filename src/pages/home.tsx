@@ -11,7 +11,7 @@ const Home = () => {
       <img
         src={library}
         alt="ilustração de biblioteca"
-        className="object-cover w-full max-h-[800px] rounded-2xl shadow-lg shadow-black/50"
+        className="hidden md:block object-cover w-full max-h-[800px] rounded-2xl shadow-lg shadow-black/50"
       />
 
       {isLoading && <Loading />}

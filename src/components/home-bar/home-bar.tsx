@@ -1,5 +1,5 @@
 import { Handbag, User } from "lucide-react";
-import ButtonWithMarkBook from "./button-with-mark-book";
+// import ButtonWithMarkBook from "./button-with-mark-book";
 import { Link } from "react-router";
 import { useState } from "react";
 import UserSideBar from "../side-bar/user-side-bar";
@@ -40,11 +40,11 @@ const HomeBar = () => {
           Bookstore
         </Link>
 
-        <div className="flex justify-between gap-8">
+        {/* <div className="flex justify-between gap-8">
           <ButtonWithMarkBook to="/">BOOKS</ButtonWithMarkBook>
           <ButtonWithMarkBook to="/">AUTHORS</ButtonWithMarkBook>
           <ButtonWithMarkBook to="/">CATEGORIES</ButtonWithMarkBook>
-        </div>
+        </div> */}
 
         <div className="flex justify-between items-center gap-5 ">
           <button
