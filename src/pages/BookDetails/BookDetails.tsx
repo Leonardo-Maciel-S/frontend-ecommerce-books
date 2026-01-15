@@ -1,7 +1,7 @@
 import { Box, Rating } from "@mui/material";
 
 import { convertPriceInCentsToReal } from "@/utils/convert-price-in-cent-to-real";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import PreviewButton from "@/components/preview/preview-button";
 import useGetById from "@/hooks/books/use-get-by-id";
 import Loading from "@/components/loading";
@@ -104,38 +104,42 @@ const BookDetails = () => {
           </div>
         </div>
 
-        <div className="relative w-fit">
+        <div className="">
           <h3 className="text-2xl font-primary font-semibold">
             Ultimas postagens.
           </h3>
 
           <ShowComponent when={!!book}>
-            <Carousel
-              className="flex gap-10 ml-10"
-              opts={{
-                align: "start",
-              }}
-            >
-              <CarouselPrevious />
+            <div className="p-5 rounded-2xl ">
+              <Carousel
+                className="w-full "
+                opts={{
+                  align: "start",
+                }}
+              >
+                <CarouselPrevious />
 
-              {books.map((book) => (
-                <CarouselContent className="p-3 bg-white/50 rounded-2xl">
-                  <CarouselItem key={book.id}>
-                    <div className="p-3 bg-white/80  space-y-3 rounded-lg shadow-lg shadow-black/30">
-                      <img
-                        src={book?.coverImg}
-                        alt=""
-                        className="w-30 object-fill cursor-pointer transition-all duration-200 mx-auto"
-                      />
+                <CarouselContent className="p-3 -ml-4 bg-white/50 rounded-2xl w-60 ">
+                  {books.map((book) => (
+                    <CarouselItem key={book.id} className="pl-4">
+                      <Link to={`/book-details/${book.id}`}>
+                        <div className="p-3 bg-white/80 h-full  space-y-3 rounded-lg shadow-lg shadow-black/5">
+                          <img
+                            src={book?.coverImg}
+                            alt=""
+                            className="w-30 object-fill cursor-pointer transition-all duration-200 mx-auto"
+                          />
 
-                      <p className="font-semibold">{book.title}</p>
-                    </div>
-                  </CarouselItem>
+                          <p className="font-semibold">{book.title}</p>
+                        </div>
+                      </Link>
+                    </CarouselItem>
+                  ))}
                 </CarouselContent>
-              ))}
 
-              <CarouselNext />
-            </Carousel>
+                <CarouselNext />
+              </Carousel>
+            </div>
           </ShowComponent>
         </div>
 
