@@ -11,9 +11,13 @@ function App() {
   useGetAllBooks();
 
   useEffect(() => {
-    window.alert(
-      'Devido a utilização do render no deploy da api, a mesma fica inativa depois de um tempo sem requisições, por esse motivo a primeira busca dos livros demora um pouco esperando a api subir novamente, após sumir a mensagem de "carregando" fica normal'
-    );
+    const environment = import.meta.env.ENVIRONMENT;
+
+    if (environment === "prod") {
+      window.alert(
+        'Devido a utilização do render no deploy da api, a mesma fica inativa depois de um tempo sem requisições, por esse motivo a primeira busca dos livros demora um pouco esperando a api subir novamente, após sumir a mensagem de "carregando" fica normal'
+      );
+    }
   }, []);
 
   return (

@@ -22,7 +22,7 @@ const AddressCard = ({
   return (
     <div className="bg-white/30 p-5 rounded-lg shadow-lg shadow-black/10 flex justify-between items-start hover:bg-white/60 ">
       <div>
-        <h3 className="font-primary font-bold text-xl">
+        <h3 className="font-primary font-bold text-lg md:text-xl">
           {`${address.street} - ${address.number}  ${
             address.complement && "- " + address.complement
           }`}

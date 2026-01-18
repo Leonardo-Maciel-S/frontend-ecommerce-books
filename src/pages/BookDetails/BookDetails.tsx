@@ -114,7 +114,7 @@ const BookDetails = () => {
               <Carousel
                 className="w-full "
                 opts={{
-                  align: "start",
+                  align: "center",
                 }}
               >
                 <CarouselPrevious />
