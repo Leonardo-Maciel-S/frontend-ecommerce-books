@@ -11,13 +11,15 @@ function App() {
   useGetAllBooks();
 
   useEffect(() => {
-    const environment = import.meta.env.ENVIRONMENT;
+    const environment: string = import.meta.env.MODE;
 
-    if (environment === "prod") {
-      window.alert(
-        'Devido a utilização do render no deploy da api, a mesma fica inativa depois de um tempo sem requisições, por esse motivo a primeira busca dos livros demora um pouco esperando a api subir novamente, após sumir a mensagem de "carregando" fica normal'
-      );
+    if (environment === "development") {
+      return;
     }
+
+    window.alert(
+      'Devido a utilização do render no deploy da api, a mesma fica inativa depois de um tempo sem requisições, por esse motivo a primeira busca dos livros demora um pouco esperando a api subir novamente, após sumir a mensagem de "carregando" fica normal'
+    );
   }, []);
 
   return (
