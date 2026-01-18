@@ -15,12 +15,12 @@ const Addresses = () => {
 
   return (
     <div className="lg:mt-10 overflow-hidden h-full mb-4">
-      <div className="flex flex-col md:flex-row md:items-center gap-2 justify-between py-2">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2 justify-between py-2">
         <h2 className="text-3xl font-semibold font-primary">Endereços</h2>
 
         <Button
           onClick={() => setIsModalOpen(true)}
-          className="hidden lg:flex text-lg py-6 px-10 rounded-2xl font-semibold hover:cursor-pointer shadow-lg shadow-black/10 hover:shadow-black/30  transition-all duration-300 font-secondary bg-private-secondary/90 hover:bg-private-secondary "
+          className="hidden sm:flex text-lg py-6 px-10 rounded-2xl font-semibold hover:cursor-pointer shadow-lg shadow-black/10 hover:shadow-black/30  transition-all duration-300 font-secondary bg-private-secondary/90 hover:bg-private-secondary "
         >
           Criar endereço
         </Button>
@@ -54,7 +54,7 @@ const Addresses = () => {
 
       <Button
         onClick={() => setIsModalOpen(true)}
-        className="lg:hidden w-full text-lg py-6 px-10 rounded-2xl font-semibold hover:cursor-pointer shadow-lg shadow-black/10 hover:shadow-black/30  transition-all duration-300 font-secondary bg-private-secondary/90 hover:bg-private-secondary "
+        className="sm:hidden w-full text-lg py-6 px-10 rounded-2xl font-semibold hover:cursor-pointer shadow-lg shadow-black/10 hover:shadow-black/30  transition-all duration-300 font-secondary bg-private-secondary/90 hover:bg-private-secondary "
       >
         Criar endereço
       </Button>

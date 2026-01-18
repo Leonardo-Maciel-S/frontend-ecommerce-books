@@ -13,7 +13,7 @@ import useCreateAddress from "@/hooks/address/create-address";
 import useEditAddress from "@/hooks/address/edit-address";
 import useGetCep from "@/hooks/address/get-cep";
 import type { UserAddress, UserAddressBody } from "@/schemas/address";
-import { Loader2, Search } from "lucide-react";
+import { Loader2, Search, X } from "lucide-react";
 import { useEffect, useRef, type Dispatch } from "react";
 import { toast } from "react-toastify";
 
@@ -133,24 +133,37 @@ const AddressForm = ({
         ref={div}
         className="fixed w-screen h-[1200px] top-0 left-0 bg-black/40 z-10"
       />
-      <div className="w-full max-w-screen min-h-screen absolute top-0 left-0 flex justify-center items-center py-10">
+      <div className="w-full max-w-screen min-h-screen absolute top-0 left-0 flex justify-center items-center p-5">
         <form
           ref={form}
           onSubmit={handleSubmit(handleSubmitClick)}
           className="bg-white z-20 p-5 rounded-2xl space-y-3 lg:w-[600px]"
         >
-          <h2 className="text-3xl font-primary font-semibold">Novo Endereço</h2>
+          <div className="flex justify-between">
+            <h2 className="text-xl sm:text-2xl font-primary font-semibold">
+              Novo Endereço
+            </h2>
+
+            <Button
+              variant={"ghost"}
+              type="button"
+              onClick={closeModal}
+              className="hover:bg-red-500 hover:text-white cursor-pointer transition-all duration-200"
+            >
+              <X strokeWidth={4} />
+            </Button>
+          </div>
 
           <div className="flex flex-col gap-1 p-4 rounded-lg border-2 border-black/20">
             <h3 className="font-bold text-base text-zinc-500">Endereço</h3>
 
             <div className="">
-              <p className="font-semibold text-lg">
+              <p className="font-semibold text-md sm:text-lg">
                 Cep <span className="text-red-500 font-bold text-base">*</span>
               </p>
 
               <div className="flex gap-2 items-center flex-wrap">
-                <InputGroup className="max-w-52 border-zinc-700">
+                <InputGroup className="sm:max-w-52 border-zinc-700">
                   <InputGroupInput
                     {...register("zipCode")}
                     inputMode="numeric"
@@ -189,7 +202,7 @@ const AddressForm = ({
             </div>
 
             <label className="flex flex-col gap-1  ">
-              <p className="font-semibold text-lg">Logradouro</p>
+              <p className="font-semibold text-md sm:text-lg">Logradouro</p>
 
               <Input
                 {...register("street")}
@@ -203,10 +216,10 @@ const AddressForm = ({
               </ShowComponent>
             </label>
 
-            <div className="flex gap-4 ">
-              <label className="space-y-1 min-w-40">
-                <p className="font-semibold text-lg">
-                  Número{" "}
+            <div className="flex gap-4 flex-wrap">
+              <label className="flex-1 space-y-1 min-w-20">
+                <p className="font-semibold text-md sm:text-lg">
+                  Número
                   <span className="text-red-500 font-bold text-base">*</span>
                 </p>
 
@@ -222,7 +235,7 @@ const AddressForm = ({
               </label>
 
               <label className="space-y-1 flex-1 min-w-46">
-                <p className="font-semibold text-lg">Bairro</p>
+                <p className="font-semibold text-md sm:text-lg">Bairro</p>
 
                 <Input
                   {...register("neighborhood")}
@@ -238,7 +251,7 @@ const AddressForm = ({
             </div>
 
             <label className="space-y-1 flex-1">
-              <p className="font-semibold text-lg text-nowrap">
+              <p className="font-semibold text-md sm:text-lg text-nowrap">
                 Complemento (opcional)
               </p>
 
@@ -255,7 +268,9 @@ const AddressForm = ({
 
             <div className="flex gap-4 ">
               <label className="space-y-1 flex-1">
-                <p className="font-semibold text-lg text-nowrap">Cidade</p>
+                <p className="font-semibold text-md sm:text-lg text-nowrap">
+                  Cidade
+                </p>
 
                 <Input
                   {...register("city")}
@@ -270,7 +285,9 @@ const AddressForm = ({
               </label>
 
               <label className="space-y-1 flex-1">
-                <p className="font-semibold text-lg text-nowrap">Estado</p>
+                <p className="font-semibold text-md sm:text-lg text-nowrap">
+                  Estado
+                </p>
 
                 <Input
                   {...register("state")}
@@ -292,7 +309,7 @@ const AddressForm = ({
             </h3>
 
             <label className="space-y-1 flex-1">
-              <p className="font-semibold text-lg text-nowrap">
+              <p className="font-semibold text-md sm:text-lg text-nowrap">
                 Nome <span className="text-red-500 font-bold text-base">*</span>
               </p>
 
@@ -307,10 +324,10 @@ const AddressForm = ({
               </ShowComponent>
             </label>
 
-            <div className="flex gap-4 mt-2">
-              <label className="space-y-1 flex-1">
-                <p className="font-semibold text-lg text-nowrap">
-                  CPF{" "}
+            <div className="flex gap-4 mt-2 flex-wrap">
+              <label className="space-y-1 flex-1 min-w-36">
+                <p className="font-semibold text-md sm:text-lg text-nowrap">
+                  CPF
                   <span className="text-red-500 font-bold text-base">*</span>
                 </p>
 
@@ -325,9 +342,9 @@ const AddressForm = ({
                 </ShowComponent>
               </label>
 
-              <label className="space-y-1 flex-1">
-                <p className="font-semibold text-lg text-nowrap">
-                  Telefone{" "}
+              <label className="space-y-1 flex-1 min-w-36">
+                <p className="font-semibold text-md sm:text-lg text-nowrap">
+                  Telefone
                   <span className="text-red-500 font-bold text-base">*</span>
                 </p>
 
