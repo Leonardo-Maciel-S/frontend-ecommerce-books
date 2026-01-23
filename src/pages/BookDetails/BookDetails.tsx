@@ -6,7 +6,7 @@ import PreviewButton from "@/components/preview/preview-button";
 import useGetById from "@/hooks/books/use-get-by-id";
 import Loading from "@/components/loading";
 import ShowComponent from "@/components/show-component";
-import CommentList from "./comment-list";
+import CommentList from "./comment/comment-list";
 import { bookStore } from "@/store/books";
 
 import {
@@ -16,6 +16,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import AddComment from "./comment/add-comment";
+import { useContext } from "react";
+import { AuthContext } from "@/context/auth";
 
 const comments = [
   {
@@ -46,7 +49,7 @@ const BookDetails = () => {
 
   const { books } = bookStore();
 
-  console.log(books);
+  const context = useContext(AuthContext);
 
   if (isLoading) {
     return <Loading />;
@@ -145,6 +148,10 @@ const BookDetails = () => {
 
         <div className="space-y-3">
           <h3 className="text-2xl font-primary font-semibold">Avaliações</h3>
+
+          {context?.user && (
+            <AddComment userId={context?.user.id} bookId={book?.id} />
+          )}
 
           <CommentList bookComments={comments} />
         </div>
