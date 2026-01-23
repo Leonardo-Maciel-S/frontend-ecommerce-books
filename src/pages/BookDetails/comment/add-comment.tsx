@@ -46,12 +46,11 @@ const AddComment = ({ bookId, userId }: AddCommentProps) => {
       onSubmit={handleSubmit(handleForm)}
       className="bg-white/30 rounded-2xl shadow-lg shadow-black/5 p-4 space-y-2 "
     >
-      <h2 className="text-lg md:text-xl font-secondary font-semibold">
-        O que você achou desse livro?
-      </h2>
-
       <div className="flex gap-2 items-center">
-        <p className="md:text-lg font-secondary font-semibold">Avalie</p>
+        <h2 className="text-lg md:text-xl font-secondary font-semibold">
+          Qual nota você daria para esse livro?
+        </h2>
+
         <Rating
           name="half-rating"
           defaultValue={2.5}
