@@ -22,7 +22,7 @@ const BookComment = ({ comment }: BookCommentProps) => {
         readOnly
         size="small"
       />
-      <p className="font-secondary font-medium">{comment.message}</p>
+      <p className="font-secondary font-medium">{comment.text}</p>
     </div>
   );
 };
