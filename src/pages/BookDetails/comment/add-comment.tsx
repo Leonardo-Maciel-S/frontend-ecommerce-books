@@ -1,25 +1,32 @@
+import type { CommentBody } from "@/@types/comment";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import useCreateComment from "@/hooks/comment/create";
 import { commentFormSchema, type CommentSchema } from "@/schemas/comment";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Rating } from "@mui/material";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 interface AddCommentProps {
   bookId?: string;
   userId?: string;
+  username?: string;
 }
 
-const AddComment = ({ bookId, userId }: AddCommentProps) => {
+const AddComment = ({ bookId, userId, username }: AddCommentProps) => {
   const [rate, setRate] = useState<null | number>(null);
   const [rateError, setRateError] = useState("");
+
+  const { mutate, isPending } = useCreateComment();
 
   const {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm<CommentSchema>({
     resolver: yupResolver(commentFormSchema),
   });
@@ -30,14 +37,28 @@ const AddComment = ({ bookId, userId }: AddCommentProps) => {
       return;
     }
 
-    if (bookId || userId) {
+    if (!bookId || !userId || !username) {
       return;
     }
 
-    console.log({
-      ...data,
+    const commentBody: CommentBody = {
       bookId,
-      userId,
+      userName: username,
+      evaluation: rate,
+      text: data.text,
+    };
+
+    mutate(commentBody, {
+      onSuccess: () => {
+        toast.success("Comentário adicionado com sucesso!");
+        setRate(null);
+        setRateError("");
+        reset();
+      },
+
+      onError: (error) => {
+        toast.error(error.message);
+      },
     });
   };
 
@@ -83,8 +104,11 @@ const AddComment = ({ bookId, userId }: AddCommentProps) => {
             </p>
           )}
         </div>
-        <Button className="h-14 font-bold text-lg px-10 cursor-pointer hover:bg-rose-700">
-          Enviar
+        <Button
+          disabled={isPending}
+          className="h-14 font-bold text-lg px-10 cursor-pointer hover:bg-rose-700"
+        >
+          {isPending ? "Carregando" : "Enviar"}
         </Button>
       </Label>
     </form>
