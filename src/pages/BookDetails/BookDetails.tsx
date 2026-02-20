@@ -19,26 +19,7 @@ import {
 import AddComment from "./comment/add-comment";
 import { useContext } from "react";
 import { AuthContext } from "@/context/auth";
-
-const comments = [
-  {
-    id: "1",
-    userName: "Leonardo",
-    evaluation: 3.5,
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare mattis turpis, sed ultrices dolor finibus ac. Sed vel libero ut orci congue mollis. Cras tincidunt arcu eu lorem blandit finibus. Pellentesque sit amet velit diam. Fusce et vestibulum massa, nec auctor turpis. Etiam euismod tempus est, a consequat erat vehicula in. Praesent ac rhoncus purus. Phasellus non luctus diam. Maecenas tincidunt justo ut massa mollis dictum. Cras euismod tellus diam, id interdum justo facilisis sed. Phasellus elit tellus, finibus et efficitur ut, ultrices at erat.",
-    userId: "c98075dd-b09a-4c12-ba97-34aa67e9ebc6",
-    bookId: "",
-  },
-
-  {
-    id: "2",
-    userName: "Lucas",
-    evaluation: 3.5,
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare mattis turpis, sed ultrices dolor finibus ac. Sed vel libero ut orci congue mollis. Cras tincidunt arcu eu lorem blandit finibus. ",
-    userId: "",
-    bookId: "",
-  },
-];
+import useGetAllCommentByBookId from "@/hooks/comment/get-all-by-book-id";
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -48,6 +29,8 @@ const BookDetails = () => {
   const { books } = bookStore();
 
   const context = useContext(AuthContext);
+
+  const { data: commentsResponse } = useGetAllCommentByBookId(id);
 
   if (isLoading) {
     return <Loading />;
@@ -155,7 +138,7 @@ const BookDetails = () => {
             />
           )}
 
-          <CommentList bookComments={comments} />
+          <CommentList bookComments={commentsResponse?.comments} />
         </div>
       </ShowComponent>
     </div>
