@@ -14,14 +14,24 @@ Temos uma home onde podemos ver os todos os livros cadastrados separado por uma 
 
 Tela de login e register onde o usuário pode criar sua conta e fazer o login em seguida.
 
-### Criar Livros - Meus livros
+### Criar Livros
 
 Qualquer usuário pode criar livros no sistema e com essa funcionalidades conseguimos filtrar os livros por usuário.
 
+### Meus livros
+
 Então cada usuário tem uma tela onde pode ver/editar os livros que ele cadastrou.
 
-### Adicionar ao carrinho
+### Ver detalhes
+
+Clicando na capa de algum livro na home te encaminha para uma pagina com o detalhes do livro, onde você consegue ver os comentários sobre aquele livro e (se estiver logado) adicionar seu próprio comentário com sua nota que pode ser de 1 até 5 estrelas.
+
+### Endereços
+
+Nessa tela você pode listar, criar, editar e deletar seus endereços.
+
+<!-- ### Adicionar ao carrinho
 
 Na home, podemos clicar para "adicionar ao carrinho" em qualquer livro, e o mesmo será alocado ao carrinho que pode ser acessar pela barra lateral.
 
-No carrinho, podemos ver um resumo do pedido e o botão de comprar onde vai mandar o usuário para uma tela onde pode acessar os dados de pagamento e endereço.
+No carrinho, podemos ver um resumo do pedido e o botão de comprar onde vai mandar o usuário para uma tela onde pode acessar os dados de pagamento e endereço. -->

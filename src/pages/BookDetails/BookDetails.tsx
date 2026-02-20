@@ -6,7 +6,7 @@ import PreviewButton from "@/components/preview/preview-button";
 import useGetById from "@/hooks/books/use-get-by-id";
 import Loading from "@/components/loading";
 import ShowComponent from "@/components/show-component";
-import CommentList from "./comment-list";
+import CommentList from "./comment/comment-list";
 import { bookStore } from "@/store/books";
 
 import {
@@ -16,28 +16,10 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-
-const comments = [
-  {
-    id: "1",
-    userName: "Leonardo",
-    evaluation: 3.5,
-    message:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare mattis turpis, sed ultrices dolor finibus ac. Sed vel libero ut orci congue mollis. Cras tincidunt arcu eu lorem blandit finibus. Pellentesque sit amet velit diam. Fusce et vestibulum massa, nec auctor turpis. Etiam euismod tempus est, a consequat erat vehicula in. Praesent ac rhoncus purus. Phasellus non luctus diam. Maecenas tincidunt justo ut massa mollis dictum. Cras euismod tellus diam, id interdum justo facilisis sed. Phasellus elit tellus, finibus et efficitur ut, ultrices at erat.",
-    userId: "",
-    bookId: "",
-  },
-
-  {
-    id: "2",
-    userName: "Lucas",
-    evaluation: 3.5,
-    message:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare mattis turpis, sed ultrices dolor finibus ac. Sed vel libero ut orci congue mollis. Cras tincidunt arcu eu lorem blandit finibus. ",
-    userId: "",
-    bookId: "",
-  },
-];
+import AddComment from "./comment/add-comment";
+import { useContext } from "react";
+import { AuthContext } from "@/context/auth";
+import useGetAllCommentByBookId from "@/hooks/comment/get-all-by-book-id";
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -46,7 +28,9 @@ const BookDetails = () => {
 
   const { books } = bookStore();
 
-  console.log(books);
+  const context = useContext(AuthContext);
+
+  const { data: commentsResponse } = useGetAllCommentByBookId(id);
 
   if (isLoading) {
     return <Loading />;
@@ -146,7 +130,15 @@ const BookDetails = () => {
         <div className="space-y-3">
           <h3 className="text-2xl font-primary font-semibold">Avaliações</h3>
 
-          <CommentList bookComments={comments} />
+          {context?.user && (
+            <AddComment
+              userId={context?.user.id}
+              bookId={book?.id}
+              username={context.user.name}
+            />
+          )}
+
+          <CommentList bookComments={commentsResponse?.comments} />
         </div>
       </ShowComponent>
     </div>
