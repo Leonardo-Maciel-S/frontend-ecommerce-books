@@ -15,8 +15,6 @@ const BookComment = ({ comment }: BookCommentProps) => {
 
   const user = context?.user;
 
-  console.log(user?.id);
-
   return (
     <div className="bg-white/30 rounded-2xl shadow-lg shadow-black/5 p-4 space-y-2">
       <div className="flex items-center justify-between">

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import useCreateComment from "@/hooks/comment/create";
+import { queryClient } from "@/main";
 import { commentFormSchema, type CommentSchema } from "@/schemas/comment";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Rating } from "@mui/material";
@@ -54,6 +55,11 @@ const AddComment = ({ bookId, userId, username }: AddCommentProps) => {
         setRate(null);
         setRateError("");
         reset();
+
+        queryClient.invalidateQueries({
+          queryKey: ["all-comment"],
+          refetchType: "active",
+        });
       },
 
       onError: (error) => {
