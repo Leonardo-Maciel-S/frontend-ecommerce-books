@@ -93,7 +93,7 @@ const BookDetails = () => {
             Ultimas postagens.
           </h3>
 
-          <ShowComponent when={!!book}>
+          <ShowComponent when={!!books}>
             <div className="p-5 rounded-2xl ">
               <Carousel
                 className="w-full "
@@ -128,7 +128,14 @@ const BookDetails = () => {
         </div>
 
         <div className="space-y-3">
-          <h3 className="text-2xl font-primary font-semibold">Avaliações</h3>
+          <div className="space-y-1">
+            <h3 className="text-2xl font-primary font-semibold">Avaliações</h3>
+            {!context?.user && (
+              <p className="font-bold text-base italic text-zinc-500">
+                Faça login para fazer uma avaliação.
+              </p>
+            )}
+          </div>
 
           {context?.user && (
             <AddComment
