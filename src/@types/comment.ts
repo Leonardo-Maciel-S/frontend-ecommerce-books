@@ -5,6 +5,7 @@ export interface Comment {
   text: string;
   userId: string;
   bookId: string;
+  createdAt: Date;
 }
 
-export type CommentBody = Omit<Comment, "id" | "userId">;
+export type CommentBody = Omit<Comment, "id" | "userId" | "createdAt">;
