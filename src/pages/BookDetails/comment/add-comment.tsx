@@ -73,9 +73,9 @@ const AddComment = ({ bookId, userId, username }: AddCommentProps) => {
       onSubmit={handleSubmit(handleForm)}
       className="bg-white/30 rounded-2xl shadow-lg shadow-black/5 p-4 space-y-2 "
     >
-      <div className="flex gap-2 items-center">
-        <h2 className="text-lg md:text-xl font-secondary font-semibold">
-          Qual nota você daria para esse livro?
+      <div className="flex gap-2  md:items-center flex-wrap">
+        <h2 className="align-top text-base md:text-xl font-secondary font-semibold w-fit">
+          Qual sua nota?
         </h2>
 
         <Rating
@@ -96,12 +96,12 @@ const AddComment = ({ bookId, userId, username }: AddCommentProps) => {
         )}
       </div>
 
-      <Label className="flex gap-4 flex-wrap pb-4">
+      <Label className="flex gap-4 flex-wrap pb-4 ">
         <div className="flex-1 relative">
           <Input
             {...register("text")}
             placeholder="Descreva sua experiência"
-            className="font-secondary  md:text-lg font-semibold px-3 py-6"
+            className="font-secondary  md:text-lg font-semibold px-3 py-6 min-w-60"
           />
 
           {errors.text?.message && (
@@ -112,7 +112,7 @@ const AddComment = ({ bookId, userId, username }: AddCommentProps) => {
         </div>
         <Button
           disabled={isPending}
-          className="h-14 font-bold text-lg px-10 cursor-pointer hover:bg-rose-700"
+          className="flex-1 h-14 font-bold text-lg px-10 cursor-pointer hover:bg-rose-700 sm:max-w-1/4"
         >
           {isPending ? "Carregando" : "Enviar"}
         </Button>
