@@ -146,7 +146,6 @@ const BookDetails = () => {
           </div>
         </ShowComponent>
       </div>
-      ;
     </>
   );
 };
