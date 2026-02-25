@@ -2,7 +2,7 @@ import { bookService } from "@/services/book";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-const useGetById = (id?: string) => {
+const useGetBookById = (id?: string) => {
   const query = useQuery({
     queryKey: ["book-by-id", id],
     queryFn: async () => {
@@ -19,4 +19,4 @@ const useGetById = (id?: string) => {
   return { ...query };
 };
 
-export default useGetById;
+export default useGetBookById;

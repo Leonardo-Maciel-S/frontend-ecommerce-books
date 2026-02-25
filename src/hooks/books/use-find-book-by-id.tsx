@@ -1,12 +1,12 @@
-import { bookStore } from "@/store/books";
 import { useEffect } from "react";
+import useGetAllBooks from "./use-get-all-book";
 
 const useFindBookById = (id?: string) => {
-  const { books } = bookStore();
+  const { data: books } = useGetAllBooks();
 
-  const book = books.find((data) => data.id === id);
+  const book = books?.find((data) => data.id === id);
 
-  useEffect(()=> {}, [book, id])
+  useEffect(() => {}, [book, id]);
 
   return { book };
 };

@@ -4,16 +4,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import useEditBook from "@/hooks/books/use-edit-book";
-import { bookStore } from "@/store/books";
 
 import { useParams } from "react-router";
+import useGetAllBooks from "./use-get-all-book";
 
 const EditBook = () => {
   const { id } = useParams();
 
-  const { books } = bookStore();
+  const { data: books } = useGetAllBooks();
 
-  const book = books.find((data) => data.id === id);
+  const book = books?.find((data) => data.id === id);
 
   const {
     register,
