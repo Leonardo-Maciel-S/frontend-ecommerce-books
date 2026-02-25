@@ -31,7 +31,7 @@ const CreateBook = () => {
             <img
               src={imgUrl}
               alt=""
-              className="rounded-2xl shadow-xl shadow-black/50 my-4 mx-auto"
+              className="rounded-2xl shadow shadow-black/50 my-4 mx-auto"
             />
           )}
 
@@ -47,6 +47,21 @@ const CreateBook = () => {
             <ShowComponent when={errors.coverImg !== undefined}>
               <ErrorMessage>{errors.coverImg?.message}</ErrorMessage>
             </ShowComponent>
+
+            {!imgUrl && (
+              <p className="mt-2 font-primary italic text-zinc-600 font-semibold">
+                Acesse esse{" "}
+                <a
+                  href="https://br.pinterest.com/search/pins/?q=capa%20de%20livros&rs=typed"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <strong>link</strong>
+                </a>{" "}
+                clique na capa que gostou, então clique com o botão direito e
+                copie a endereço da imagem e veja se vai aparecer o preview.
+              </p>
+            )}
           </div>
 
           <div className="flex flex-col gap-0  ">
