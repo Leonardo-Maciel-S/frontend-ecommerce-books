@@ -5,7 +5,8 @@ import { AuthContext } from "@/context/auth";
 import useCommentDelete from "@/hooks/comment/delete";
 import { Rating } from "@mui/material";
 import { Pen, Trash2, UserRound } from "lucide-react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import EditComment from "./edit-comment";
 
 export interface BookCommentProps {
   comment: Comment;
@@ -14,8 +15,11 @@ export interface BookCommentProps {
 const BookComment = ({ comment }: BookCommentProps) => {
   const context = useContext(AuthContext);
   const user = context?.user;
+  const isCommentOwner = user?.id === comment.userId;
 
-  const { mutate } = useCommentDelete();
+  const [editComment, setEditComment] = useState(false);
+
+  const { mutate, isPending } = useCommentDelete();
 
   const handleDelete = (id: string) => {
     if (!id) {
@@ -23,6 +27,10 @@ const BookComment = ({ comment }: BookCommentProps) => {
     }
 
     mutate(id);
+  };
+
+  const handleEditComment = () => {
+    setEditComment(!editComment);
   };
 
   return (
@@ -43,11 +51,12 @@ const BookComment = ({ comment }: BookCommentProps) => {
           </div>
         </div>
 
-        <ShowComponent when={user?.id === comment.userId}>
+        <ShowComponent when={isCommentOwner}>
           <div className="flex gap-2">
             <Button
               variant={"outline"}
               className="cursor-pointer bg-white/30 hover:bg-rose-500 hover:text-white hover:scale-105 transition-all duration-250"
+              onClick={handleEditComment}
             >
               <Pen strokeWidth={3} />
             </Button>
@@ -56,20 +65,36 @@ const BookComment = ({ comment }: BookCommentProps) => {
               variant={"outline"}
               className="cursor-pointer bg-white/30 hover:bg-rose-500 hover:text-white hover:scale-105 transition-all duration-250"
               onClick={() => handleDelete(comment.id)}
+              disabled={isPending}
             >
               <Trash2 strokeWidth={3} />
             </Button>
           </div>
         </ShowComponent>
       </div>
-      <Rating
-        name="half-rating-read"
-        defaultValue={comment.evaluation}
-        precision={0.5}
-        readOnly
-        size="small"
-      />
-      <p className="font-secondary font-medium">{comment.text}</p>
+
+      {editComment ? (
+        <EditComment
+          commentId={comment.id}
+          commentText={comment.text}
+          evaluation={comment.evaluation}
+          userId={comment.userId}
+          bookId={comment.bookId}
+          username={comment.userName}
+          setEditComment={setEditComment}
+        />
+      ) : (
+        <>
+          <Rating
+            name="half-rating-read"
+            value={comment.evaluation}
+            precision={0.5}
+            readOnly
+            size="small"
+          />
+          <p className="font-secondary font-medium">{comment.text}</p>
+        </>
+      )}
     </div>
   );
 };

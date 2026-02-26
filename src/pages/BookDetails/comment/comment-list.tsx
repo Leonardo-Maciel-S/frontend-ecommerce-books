@@ -1,13 +1,15 @@
-import type { Comment } from "@/@types/comment";
 import BookComment from "./comment";
 import ShowComponent from "@/components/show-component";
+import useGetAllCommentByBookId from "@/hooks/comment/get-all-by-book-id";
 
 interface CommentListProps {
-  bookComments?: Comment[];
+  id: string;
 }
 
-const CommentList = ({ bookComments }: CommentListProps) => {
-  const isEmptyList = bookComments?.length === 0;
+const CommentList = ({ id }: CommentListProps) => {
+  const { data } = useGetAllCommentByBookId(id);
+
+  const isEmptyList = data?.comments.length === 0;
 
   return (
     <div className="flex flex-col gap-4">
@@ -18,7 +20,7 @@ const CommentList = ({ bookComments }: CommentListProps) => {
       </ShowComponent>
 
       <ShowComponent when={!isEmptyList}>
-        {bookComments?.map((comment) => (
+        {data?.comments?.map((comment) => (
           <BookComment key={comment.id} comment={comment} />
         ))}
       </ShowComponent>
