@@ -14,7 +14,6 @@ export const register = async (data: FormRegisterSchemaType) => {
     const res = await api.post<LoginResponse>("/user/register", data);
     return res.data;
   } catch (error) {
-    console.log(error);
     const axiosError = error as AxiosError<{ message: string }>;
     throw new Error(axiosError.response?.data.message);
   }

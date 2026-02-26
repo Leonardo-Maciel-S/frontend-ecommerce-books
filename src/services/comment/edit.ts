@@ -13,8 +13,6 @@ export async function editComment({ id, data }: EditCommentParams) {
       withCredentials: true,
     });
 
-    console.log(response);
-
     if (response.data) {
       return response.data;
     }
