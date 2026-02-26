@@ -12,23 +12,25 @@ import { Box, Rating } from "@mui/material";
 
 import AddComment from "./comment/add-comment";
 import CommentList from "./comment/comment-list";
-import { Link, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import { useContext } from "react";
 import { AuthContext } from "@/context/auth";
-import useGetAllCommentByBookId from "@/hooks/comment/get-all-by-book-id";
 import useGetAllBooks from "@/hooks/books/use-get-all-book";
 import useGetBookById from "@/hooks/books/use-get-by-id";
 import LoadingDetails from "./loading-details";
 
 const BookDetails = () => {
   const { id } = useParams();
-
-  const { data: book, isLoading } = useGetBookById(id);
-  const { data: books, isLoading: loading } = useGetAllBooks();
-
   const context = useContext(AuthContext);
 
-  const { data: commentsResponse } = useGetAllCommentByBookId(id);
+  const navigate = useNavigate();
+
+  const { data: book, isLoading, isError } = useGetBookById(id);
+  const { data: books, isLoading: loading } = useGetAllBooks();
+
+  if (isError) {
+    navigate(-1);
+  }
 
   return (
     <>
@@ -142,7 +144,7 @@ const BookDetails = () => {
               />
             )}
 
-            <CommentList bookComments={commentsResponse?.comments} />
+            <CommentList id={id!} />
           </div>
         </ShowComponent>
       </div>

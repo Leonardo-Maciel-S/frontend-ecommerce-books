@@ -3,9 +3,10 @@ import ShowComponent from "@/components/show-component";
 import { Button } from "@/components/ui/button";
 import { AuthContext } from "@/context/auth";
 import useCommentDelete from "@/hooks/comment/delete";
-import { Rating } from "@mui/material";
+import { Box, Modal, Rating, Typography } from "@mui/material";
 import { Pen, Trash2, UserRound } from "lucide-react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import EditComment from "./edit-comment";
 
 export interface BookCommentProps {
   comment: Comment;
@@ -14,8 +15,16 @@ export interface BookCommentProps {
 const BookComment = ({ comment }: BookCommentProps) => {
   const context = useContext(AuthContext);
   const user = context?.user;
+  const isCommentOwner = user?.id === comment.userId;
 
-  const { mutate } = useCommentDelete();
+  const [editComment, setEditComment] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { mutate, isPending } = useCommentDelete();
+
+  const handleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
 
   const handleDelete = (id: string) => {
     if (!id) {
@@ -25,52 +34,100 @@ const BookComment = ({ comment }: BookCommentProps) => {
     mutate(id);
   };
 
+  const handleEditComment = () => {
+    setEditComment(!editComment);
+  };
+
   return (
-    <div className="bg-white/30 rounded-2xl shadow-lg shadow-black/5 p-4 space-y-2">
-      <div className="flex items-center justify-between">
-        <div className="flex gap-2 items-center">
-          <div className="bg-zinc-200 p-2 rounded-full w-fit">
-            <UserRound />
+    <>
+      <div className="bg-white/30 rounded-2xl shadow-lg shadow-black/5 p-4 space-y-2">
+        <div className="flex items-center justify-between">
+          <div className="flex gap-2 items-center">
+            <div className="bg-zinc-200 p-2 rounded-full w-fit">
+              <UserRound />
+            </div>
+            <div>
+              <p className="font-semibold font-primary">{comment.userName}</p>
+              <p className="text-sm font-semibold text-zinc-500 ">
+                {new Date(comment.createdAt).toLocaleDateString("pt-BR", {
+                  dateStyle: "medium",
+                  timeZone: "UTC",
+                })}
+              </p>
+            </div>
           </div>
-          <div>
-            <p className="font-semibold font-primary">{comment.userName}</p>
-            <p className="text-sm font-semibold text-zinc-500 ">
-              {new Date(comment.createdAt).toLocaleDateString("pt-BR", {
-                dateStyle: "medium",
-                timeZone: "UTC",
-              })}
-            </p>
-          </div>
+
+          <ShowComponent when={isCommentOwner}>
+            <div className="flex gap-2">
+              <Button
+                variant={"outline"}
+                className="cursor-pointer bg-white/30 hover:bg-rose-500 hover:text-white hover:scale-105 transition-all duration-250"
+                onClick={handleEditComment}
+              >
+                <Pen strokeWidth={3} />
+              </Button>
+
+              <Button
+                variant={"outline"}
+                className="cursor-pointer bg-white/30 hover:bg-rose-500 hover:text-white hover:scale-105 transition-all duration-250"
+                onClick={handleModal}
+              >
+                <Trash2 strokeWidth={3} />
+              </Button>
+            </div>
+          </ShowComponent>
         </div>
 
-        <ShowComponent when={user?.id === comment.userId}>
-          <div className="flex gap-2">
-            <Button
-              variant={"outline"}
-              className="cursor-pointer bg-white/30 hover:bg-rose-500 hover:text-white hover:scale-105 transition-all duration-250"
-            >
-              <Pen strokeWidth={3} />
-            </Button>
-
-            <Button
-              variant={"outline"}
-              className="cursor-pointer bg-white/30 hover:bg-rose-500 hover:text-white hover:scale-105 transition-all duration-250"
-              onClick={() => handleDelete(comment.id)}
-            >
-              <Trash2 strokeWidth={3} />
-            </Button>
-          </div>
-        </ShowComponent>
+        {editComment ? (
+          <EditComment
+            commentId={comment.id}
+            commentText={comment.text}
+            evaluation={comment.evaluation}
+            userId={comment.userId}
+            bookId={comment.bookId}
+            username={comment.userName}
+            setEditComment={setEditComment}
+          />
+        ) : (
+          <>
+            <Rating
+              name="half-rating-read"
+              value={comment.evaluation}
+              precision={0.5}
+              readOnly
+              size="small"
+            />
+            <p className="font-secondary font-medium">{comment.text}</p>
+          </>
+        )}
       </div>
-      <Rating
-        name="half-rating-read"
-        defaultValue={comment.evaluation}
-        precision={0.5}
-        readOnly
-        size="small"
-      />
-      <p className="font-secondary font-medium">{comment.text}</p>
-    </div>
+
+      <Modal
+        className="flex justify-center items-center"
+        open={isModalOpen}
+        onClose={handleModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box className="w-fit py-8 px-10 rounded-lg bg-zinc-800 text-zinc-300 flex flex-col gap-4">
+          <Typography id="modal-modal-title" variant="h5" component="h1">
+            Excluir comentário
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ fontSize: 18 }}>
+            Tem certeza? Essa ação não pode ser desfeita
+          </Typography>
+
+          <Button
+            variant={"outline"}
+            className=" cursor-pointer border-none bg-rose-700 hover:bg-rose-500 hover:text-white hover:scale-105 transition-all duration-250"
+            onClick={() => handleDelete(comment.id)}
+            disabled={isPending}
+          >
+            <Trash2 strokeWidth={3} />
+          </Button>
+        </Box>
+      </Modal>
+    </>
   );
 };
 
