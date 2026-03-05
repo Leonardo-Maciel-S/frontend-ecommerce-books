@@ -35,7 +35,7 @@ const HomeBar = () => {
       <nav className="flex justify-between items-center py-5 px-10">
         <Link
           to="/"
-          className="text-4xl font-semibold cursor-pointer font-primary"
+          className="text-4xl font-semibold cursor-pointer font-primary text-primary italic"
         >
           Bookstore
         </Link>

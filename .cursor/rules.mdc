@@ -1,0 +1,49 @@
+---
+description: Regras e convenções do frontend e-commerce de livros (React, TypeScript, Vite)
+alwaysApply: true
+---
+
+# Frontend E-commerce Books – Regras do Projeto
+
+## Stack e ferramentas
+
+- **React 19** com **TypeScript**, build com **Vite**
+- **React Router 7** para rotas; **TanStack React Query** para dados remotos
+- **Zustand** para estado global; **React Hook Form** + **Yup** para formulários
+- **Tailwind CSS 4** + **CVA** (class-variance-authority) + **Radix UI** para UI
+- **Axios** para HTTP; **Lucide React** para ícones
+- Use o alias **`@/`** para importar de `src/` (ex.: `@/components/ui/button`, `@/lib/utils`)
+
+## Estrutura de pastas
+
+- **`src/components/`** – componentes reutilizáveis (ex.: `ui/`, `home-bar/`, `side-bar/`)
+- **`src/hooks/`** – custom hooks (por domínio: `user/`, `books/`, `address/`, `comment/`)
+- **`src/pages/`** – páginas/rotas (ex.: `BookDetails/`, `login/`, `addresses/`)
+- **`src/routes/`** – definição de rotas e loaders
+- **`src/context/`** – contextos React (ex.: auth)
+- **`src/lib/`** – utilitários (ex.: `utils.ts` com `cn()`)
+
+## Componentes e UI
+
+- Preferir **componentes funcionais** e **hooks**; evitar classes
+- Componentes de UI em `components/ui/`: usar **CVA** para variantes e **`cn()`** para classes condicionais
+- Manter acessibilidade (Radix quando fizer sentido) e estados de foco/erro nos formulários
+
+## Formulários e dados
+
+- Formulários com **React Hook Form**; validação com **Yup** via `@hookform/resolvers`
+- Dados do servidor com **React Query** (hooks em `hooks/`); mutações com `useMutation` quando aplicável
+- Autenticação e estado de usuário via **context** em `context/auth.tsx` e hooks em `hooks/user/`
+
+## Estilo e nomes
+
+- Estilos via **Tailwind**; evitar CSS-in-JS inline exceto quando MUI/Emotion forem necessários
+- Nomes em **camelCase** para funções/variáveis; **PascalCase** para componentes e tipos
+- Nomes de arquivos: **kebab-case** para pastas e arquivos de componente (ex.: `home-bar.tsx`, `use-get-all-book.ts`)
+
+## Boas práticas
+
+- Manter componentes e hooks **focados**; extrair lógica complexa para hooks ou `lib/`
+- Tratar loading e erro nas telas que consomem React Query
+- Usar **TypeScript** de forma estrita: tipar props, retornos de hooks e payloads de API
+- Não commitar chaves ou segredos; usar `import.meta.env` para variáveis de ambiente
