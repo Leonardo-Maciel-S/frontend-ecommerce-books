@@ -1,0 +1,73 @@
+---
+alwaysApply: true
+description: Regras de design para o frontend do e-commerce de livros
+---
+
+## 1. Paleta de cores (Modern & Warm)
+
+**Princípios gerais**
+- Fundo neutro e suave para reduzir cansaço visual.
+- Superfície branca para destacar capas e cards.
+- Texto com alto contraste para legibilidade.
+- Acento quente e marcante para CTAs.
+
+**Tokens de cor**
+- **Fundo (Background)**: `#FAFAFA`
+  - Uso: fundo principal da aplicação, áreas de listagem, sections amplas.
+- **Superfície/Cards (Surface)**: `#FFFFFF`
+  - Uso: cards de livros, modais, header fixo, containers principais.
+- **Texto Principal (Headline/Body)**: `#1A1A1A`
+  - Uso: títulos, corpo de texto, descrições principais.
+- **Texto Secundário (Captions/Meta)**: `#757575`
+  - Uso: nomes de autores, categorias, datas, meta-informações.
+- **Cor de Acento (Primary/CTA)**: `#D35400`
+  - Uso: botões principais (ex: "Comprar", "Adicionar ao carrinho", "Salvar"), ícones de ação, links de destaque, badges importantes.
+- **Bordas/Divisores**: `#E0E0E0`
+  - Uso: divisores sutis entre cards, bordas de inputs, linhas de separação em listas e grids.
+
+**Diretrizes de uso**
+- **CTAs principais** devem sempre usar `#D35400` com texto em branco (`#FFFFFF`).
+- Evitar usar a cor de acento em textos longos; reservar para ações e estados importantes.
+- Manter contraste mínimo AA entre texto e fundo (não usar `#757575` sobre fundos muito claros para textos longos).
+
+## 2. Tipografia (Editorial & Serifada)
+
+O visual editorial vem do contraste entre uma fonte serifada para títulos e uma sans-serif para corpo e interface.
+
+### 2.1. Títulos e logo (Serifada)
+
+- **Fontes recomendadas**: `Playfair Display` ou `Lora`.
+- **Uso principal**:
+  - Logo da marca.
+  - Títulos de seções (ex: "Últimos Lançamentos", "Recomendados para você").
+  - Título do livro na página de detalhes.
+- **Peso e estilo**:
+  - Títulos grandes: peso `600` (semibold) ou equivalente.
+  - Logo: peso `400` (regular) para manter elegância.
+- **Cores**:
+  - Texto padrão: `#1A1A1A`.
+  - Destaques suaves (por exemplo, em sobreposições de banner): pode combinar com opacidade reduzida sobre fundos claros.
+
+### 2.2. Corpo de texto e interface (Sans-Serif)
+
+- **Fontes recomendadas**: `Inter` ou `Montserrat`.
+- **Uso principal**:
+  - Nomes de autores, preços, categorias.
+  - Botões, labels de campos de formulário, textos de inputs e placeholders.
+  - Sinopse, descrições e textos de apoio.
+- **Peso e estilo**:
+  - Corpo de texto para leitura: peso `400` (regular).
+  - Preços, valores e botões: peso `500–600` (medium/semibold).
+- **Cores**:
+  - Corpo principal: `#1A1A1A`.
+  - Meta-informações (autor, data, categoria): `#757575`.
+
+### 2.3. Combinações e hierarquia
+
+- **Hierarquia recomendada**:
+  - H1 (ex: título da página): serifada (`Playfair Display`/`Lora`), `#1A1A1A`, peso `600`.
+  - H2/H3 (ex: seções internas): serifada, peso `500–600`.
+  - Textos de apoio e sinopse: sans-serif (`Inter`/`Montserrat`), peso `400`.
+  - Labels de UI, botões e chips: sans-serif, peso `500–600`.
+- Evitar usar serifada em textos muito longos; reservar para títulos e pequenos blocos.
+- Manter espaçamento de linha generoso (\(1.4–1.6\)) em blocos de texto para reforçar a sensação editorial.
