@@ -18,15 +18,15 @@ function App() {
     }
 
     window.alert(
-      'Devido a utilização do render no deploy da api, a mesma fica inativa depois de um tempo sem requisições, por esse motivo a primeira busca dos livros demora um pouco esperando a api subir novamente, após sumir a mensagem de "carregando" fica normal'
+      'Devido a utilização do render no deploy da api, a mesma fica inativa depois de um tempo sem requisições, por esse motivo a primeira busca dos livros demora um pouco esperando a api subir novamente, após sumir a mensagem de "carregando" fica normal',
     );
   }, []);
 
   return (
-    <div className="max-w-dvw overflow-hidden min-h-dvh border bg-linear-to-r from-white to-zinc-200">
+    <div className="max-w-dvw overflow-hidden min-h-dvh border bg-linear-to-r bg-background">
       <HomeBar />
 
-      <div className="max-w-7xl mx-auto px-10 overflow-hidden ">
+      <div className="container mx-auto px-10 overflow-hidden ">
         <Outlet />
 
         <ToastContainer />

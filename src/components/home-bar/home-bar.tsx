@@ -32,7 +32,7 @@ const HomeBar = () => {
 
   return (
     <>
-      <nav className="flex justify-between items-center py-5 px-10">
+      <nav className="container mx-auto px-10 flex justify-between items-center py-5 ">
         <Link
           to="/"
           className="text-4xl font-semibold cursor-pointer font-primary text-primary italic"
