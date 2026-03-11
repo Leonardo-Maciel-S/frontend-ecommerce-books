@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
-import libraryBg from "./../../assets/login.svg";
 import SignIn from "./component/sign-in";
 import { useState } from "react";
 import ShowComponent from "@/components/show-component";
 import Register from "./component/register";
+import { BookOpenText } from "lucide-react";
 
 const Login = () => {
   const [signIn, setSignIn] = useState(true);
@@ -11,31 +11,31 @@ const Login = () => {
   const toggleSignIn = () => setSignIn(!signIn);
 
   return (
-    <div className="relative w-full h-min py-20 px-5 md:min-h-[600px] ">
-      <img
-        src={libraryBg}
-        alt="imagem de uma biblioteca"
-        className="z-0 w-[200%] object-contain border-4 blur-[2.5px]  absolute top-0 left-0"
-      />
-
-      <div className="w-full flex justify-center items-center ">
-        <div className="h-min flex flex-col gap-2 md:w-/3">
-          <Button
-            variant="secondary"
-            className="w-min self-end cursor-pointer z-20"
-            onClick={toggleSignIn}
-          >
-            {signIn ? "Cadastrar" : "Logar"}
-          </Button>
-
-          <ShowComponent when={signIn}>
-            <SignIn />
-          </ShowComponent>
-
-          <ShowComponent when={!signIn}>
-            <Register setSignIn={setSignIn} />
-          </ShowComponent>
+    <div className="w-full h-max flex flex-col justify-start items-center py-5 ">
+      <div className="flex flex-col items-center gap-2">
+        <div className="bg-primary p-4 rounded-lg">
+          <BookOpenText size={30} color="white" />
         </div>
+
+        <h2 className="font-bold text-2xl">BookStore</h2>
+      </div>
+
+      <div className="flex flex-col gap-2 md:w-/3">
+        <Button
+          variant="outline"
+          className="w-min self-end cursor-pointer z-20 bg-white"
+          onClick={toggleSignIn}
+        >
+          {signIn ? "Cadastrar" : "Logar"}
+        </Button>
+
+        <ShowComponent when={signIn}>
+          <SignIn />
+        </ShowComponent>
+
+        <ShowComponent when={!signIn}>
+          <Register setSignIn={setSignIn} />
+        </ShowComponent>
       </div>
     </div>
   );

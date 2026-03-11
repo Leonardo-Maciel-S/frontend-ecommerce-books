@@ -12,7 +12,7 @@ import {
 import useLogin from "@/hooks/user/use-login";
 
 import { Label } from "@radix-ui/react-label";
-import { Eye, EyeClosed } from "lucide-react";
+import { Eye, EyeClosed, LockKeyhole, Mail } from "lucide-react";
 import { useState } from "react";
 
 const SignIn = () => {
@@ -29,43 +29,63 @@ const SignIn = () => {
   return (
     <form
       onSubmit={handleSubmit(submitLogin)}
-      className="flex flex-col gap-2 z-20 bg-white rounded-xl py-5 px-6 shadow-xl/50 min-w-[270px] md:w-[400px]"
+      className="flex flex-col gap-2 z-20 bg-white rounded-xl py-5 px-6  min-w-[270px] md:w-[400px] border border-zinc-200"
     >
-      <h2 className="text-center font-semibold font-primary  text-2xl leading-normal">
+      <h2 className="text-center font-extrabold text-3xl leading-normal">
         Login
       </h2>
-      <div className="flex flex-col gap-2 mb-5">
-        <div className="flex flex-col gap-2  ">
-          <Label className="font-secondary text-md font-semibold">Email:</Label>
-          <Input
-            {...register("email")}
-            type="text"
-            className="font-secondary md:text-md font-semibold"
-            placeholder="email@email.com"
-          />
+      <div className="flex flex-col gap-6 mb-5  ">
+        <div className="flex flex-col gap-2 ">
+          <Label className="text-lg font-semibold text-zinc-500">Email</Label>
+          <InputGroup className="h-12 bg-background">
+            <InputGroupInput
+              {...register("email")}
+              type="text"
+              className=" md:text-lg placeholder:text-zinc-400 text-zinc-600 font-medium  "
+              placeholder="email@email.com"
+            />
+            <InputGroupAddon>
+              <Mail className="text-zinc-400 text-4xl size-5" />
+            </InputGroupAddon>
+          </InputGroup>
 
           <ShowComponent when={errors.email !== undefined}>
             <ErrorMessage>{errors.email?.message}</ErrorMessage>
           </ShowComponent>
         </div>
 
-        <div className="flex flex-col gap-2 font-secondary">
-          <Label className=" font-secondary text-md font-semibold">
-            Senha:
-          </Label>
-          <InputGroup>
+        <div className="flex flex-col gap-2">
+          <div className="flex justify-between">
+            <Label className="text-lg font-semibold text-zinc-500">Senha</Label>
+
+            <a
+              href=""
+              className="text-sm text-primary font-medium hover:underline"
+            >
+              Esqueceu a senha?
+            </a>
+          </div>
+          <InputGroup className="h-12 bg-background">
+            <InputGroupAddon>
+              <LockKeyhole className="text-zinc-400 text-4xl size-5" />
+            </InputGroupAddon>
+
             <InputGroupInput
               {...register("password")}
               type={showPassword ? "text" : "password"}
-              className="font-secondary md:text-md font-semibold"
-              placeholder="digite sua senha."
+              className=" md:text-lg text-zinc-600 font-medium "
+              placeholder="●●●●●●●●"
             />
             <InputGroupAddon align="inline-end">
               <InputGroupButton
                 className="cursor-pointer"
                 onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? <Eye /> : <EyeClosed />}
+                {showPassword ? (
+                  <Eye className="text-zinc-400 text-4xl size-5" />
+                ) : (
+                  <EyeClosed className="text-zinc-400 text-4xl size-5" />
+                )}
               </InputGroupButton>
             </InputGroupAddon>
           </InputGroup>
@@ -78,7 +98,7 @@ const SignIn = () => {
 
       <Button
         disabled={isPending}
-        className="cursor-pointer md:text-md font-semibold p-6"
+        className="cursor-pointer md:text-lg font-semibold p-6"
       >
         {isPending ? "Carregando" : "Entrar"}
       </Button>
