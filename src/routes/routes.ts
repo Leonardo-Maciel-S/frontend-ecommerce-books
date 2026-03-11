@@ -8,6 +8,7 @@ import MyBooks from "@/pages/my-books";
 import EditBook from "@/pages/edit-book";
 import BookDetails from "@/pages/BookDetails/BookDetails";
 import Addresses from "@/pages/addresses/addresses";
+import { redirectHome } from "./loaders/redirect-home";
 
 export const router = createBrowserRouter([
   {
@@ -20,7 +21,6 @@ export const router = createBrowserRouter([
       },
       {
         path: "/login",
-
         Component: Login,
       },
 
@@ -52,5 +52,9 @@ export const router = createBrowserRouter([
         Component: Addresses,
       },
     ],
+  },
+  {
+    path: "*",
+    loader: redirectHome,
   },
 ]);
