@@ -32,34 +32,36 @@ const HomeBar = () => {
 
   return (
     <>
-      <nav className="container mx-auto px-10 flex justify-between items-center py-5 ">
-        <Link
-          to="/"
-          className="text-4xl font-semibold cursor-pointer font-primary text-primary italic"
-        >
-          Bookstore
-        </Link>
+      <nav className="border border-primary/10 w-screen bg-background backdrop-brightness-">
+        <div className="container mx-auto px-10 flex justify-between items-center py-5 ">
+          <Link
+            to="/"
+            className="text-4xl font-semibold cursor-pointer font-primary text-primary italic"
+          >
+            Bookstore
+          </Link>
 
-        {/* <div className="flex justify-between gap-8">
+          {/* <div className="flex justify-between gap-8">
           <ButtonWithMarkBook to="/">BOOKS</ButtonWithMarkBook>
           <ButtonWithMarkBook to="/">AUTHORS</ButtonWithMarkBook>
           <ButtonWithMarkBook to="/">CATEGORIES</ButtonWithMarkBook>
         </div> */}
 
-        <div className="flex justify-between items-center gap-5 ">
-          <button
-            className="hover:bg-primary-light p-2 cursor-pointer transition-all duration-100 rounded-md"
-            onClick={openProfileBar}
-          >
-            <User />
-          </button>
+          <div className="flex justify-between items-center gap-5 ">
+            <button
+              className="hover:bg-primary/80 hover:text-white p-2 cursor-pointer transition-all duration-100 rounded-md"
+              onClick={openProfileBar}
+            >
+              <User />
+            </button>
 
-          <button
-            onClick={openCartBar}
-            className="hover:bg-primary-light p-2 cursor-pointer transition-all duration-100 rounded-md"
-          >
-            <Handbag />
-          </button>
+            <button
+              onClick={openCartBar}
+              className="hover:bg-primary/80 hover:text-white p-2 cursor-pointer transition-all duration-100 rounded-md"
+            >
+              <Handbag />
+            </button>
+          </div>
         </div>
       </nav>
 
