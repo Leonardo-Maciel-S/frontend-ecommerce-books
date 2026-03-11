@@ -1,16 +1,16 @@
 import type { Book } from "@/@types/books";
-import BookPreview from "./preview/book-preview";
+
+import PreviewCard from "./preview-card";
 
 interface BooksListProps {
   books?: Book[];
-  isMyBooks?: boolean;
 }
 
-const BooksList = ({ books, isMyBooks }: BooksListProps) => {
+const BooksList = ({ books }: BooksListProps) => {
   return (
-    <div className="gap-5 justify-center items-center grid grid-cols-1 lg:grid-cols-2 pb-10 ">
+    <div className="flex justify-evenly  items-stretch flex-wrap pb-10 gap-10">
       {books?.map((book) => (
-        <BookPreview key={book.id} book={book} isMyBooks={isMyBooks} />
+        <PreviewCard key={book.id} book={book} />
       ))}
     </div>
   );
