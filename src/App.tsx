@@ -5,6 +5,7 @@ import useCheckIsLogged from "./hooks/user/use-check-is-logged";
 import { useEffect } from "react";
 import useGetAllBooks from "./hooks/books/use-get-all-book";
 import { Github } from "lucide-react";
+import Footer from "./components/Footer";
 
 function App() {
   useCheckIsLogged();
@@ -25,33 +26,17 @@ function App() {
 
   return (
     <>
-      <div className="max-w-dvw overflow-hidden min-h-dvh border bg-linear-to-r bg-background">
+      <div className="max-w-dvw overflow-hidden min-h-screen flex flex-col justify-between">
         <HomeBar />
 
-        <div className="container mx-auto px-10 overflow-hidden ">
+        <div className="container mx-auto px-10 overflow-hidden bg-linear-to-r bg-background ">
           <Outlet />
-
-          <ToastContainer />
         </div>
+
+        <Footer />
       </div>
 
-      <footer className="bg-[#0F172A] text-white  p-10">
-        <div className="container mx-auto px-10 overflow-hidden flex justify-between ">
-          <p>© 2025 BookStore Editions. All rights reserved.</p>
-
-          <p className="flex gap-2">
-            Desenvolvido por{" "}
-            <a
-              href="https://github.com/Leonardo-Maciel-S"
-              className="flex gap-2 items-center hover:underline "
-              target="_blank"
-            >
-              <span>@Leonardo-maciel-s</span>
-              <Github />
-            </a>
-          </p>
-        </div>
-      </footer>
+      <ToastContainer />
     </>
   );
 }
