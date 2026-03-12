@@ -13,7 +13,7 @@ const Footer = () => {
             className="flex gap-2 items-center hover:underline "
             target="_blank"
           >
-            <span>@Leonardo-maciel-s</span>
+            <span>@Leonardo-Maciel-S</span>
             <Github />
           </a>
         </p>
