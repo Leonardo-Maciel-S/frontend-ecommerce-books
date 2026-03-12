@@ -4,7 +4,6 @@ import { ToastContainer } from "react-toastify";
 import useCheckIsLogged from "./hooks/user/use-check-is-logged";
 import { useEffect } from "react";
 import useGetAllBooks from "./hooks/books/use-get-all-book";
-import { Github } from "lucide-react";
 import Footer from "./components/Footer";
 
 function App() {
