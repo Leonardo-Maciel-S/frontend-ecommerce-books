@@ -12,7 +12,7 @@ import { Box, Rating } from "@mui/material";
 import AddComment from "./comment/add-comment";
 import CommentList from "./comment/comment-list";
 import { Link, useNavigate, useParams } from "react-router";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "@/context/auth";
 import useGetAllBooks from "@/hooks/books/use-get-all-book";
 import useGetBookById from "@/hooks/books/use-get-by-id";
@@ -23,6 +23,12 @@ import { ShoppingCart } from "lucide-react";
 const BookDetails = () => {
   const { id } = useParams();
   const context = useContext(AuthContext);
+
+  const [showAddComment, setShowAddComment] = useState(false);
+
+  const handleModal = () => {
+    setShowAddComment(!showAddComment);
+  };
 
   const navigate = useNavigate();
 
@@ -147,24 +153,37 @@ const BookDetails = () => {
           </div>
 
           <div className="space-y-3 border-t border-primary/15 pt-8">
-            <div className="space-y-1">
-              <h3 className="text-2xl font-secondary font-semibold">
-                Avaliações
-              </h3>
-              {!context?.user && (
-                <p className="font-bold text-base italic text-zinc-500">
-                  Faça login para fazer uma avaliação.
-                </p>
+            <div className="flex items-center justify-between py-2">
+              <div className="space-y-1">
+                <h3 className="text-2xl font-secondary font-semibold">
+                  Avaliações
+                </h3>
+                {!context?.user && (
+                  <p className="font-bold text-base italic text-zinc-500">
+                    Faça login para fazer uma avaliação.
+                  </p>
+                )}
+              </div>
+
+              {context?.user && (
+                <PrimaryButton
+                  variant="secondary"
+                  className="text-md"
+                  onClick={handleModal}
+                >
+                  {showAddComment ? "Cancelar" : "Adicionar Comentário"}
+                </PrimaryButton>
               )}
             </div>
 
-            {context?.user && (
+            <ShowComponent when={showAddComment}>
               <AddComment
-                userId={context?.user.id}
+                userId={context?.user?.id}
                 bookId={book?.id}
-                username={context.user.name}
+                username={context?.user?.name}
+                handleModal={handleModal}
               />
-            )}
+            </ShowComponent>
 
             <CommentList id={id!} />
           </div>

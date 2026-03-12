@@ -1,12 +1,18 @@
 import type { CommentBody } from "@/@types/comment";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import PrimaryButton from "@/components/primary-button";
+
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@/components/ui/input-group";
 import { Label } from "@/components/ui/label";
 import useEditComment from "@/hooks/comment/edit-comment";
 import { queryClient } from "@/main";
 import { commentFormSchema, type CommentSchema } from "@/schemas/comment";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Rating } from "@mui/material";
+import { MessageSquareText } from "lucide-react";
 import { useState, type Dispatch } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -87,7 +93,7 @@ const EditComment = ({
   return (
     <form
       onSubmit={handleSubmit(handleForm)}
-      className="bg-white/30 rounded-2xl shadow-lg shadow-black/5 space-y-2 "
+      className=" rounded-2xl  space-y-2 "
     >
       <div className="flex gap-2  md:items-center flex-wrap">
         <Rating
@@ -110,12 +116,19 @@ const EditComment = ({
 
       <Label className="flex gap-4 flex-wrap pb-4 ">
         <div className="flex-1 relative">
-          <Input
-            {...register("text")}
-            placeholder="Descreva sua experiência"
-            className="font-secondary  md:text-base font-semibold px-3 py-6 min-w-60"
-            defaultValue={commentText}
-          />
+          <InputGroup className="h-12 bg-background">
+            <InputGroupInput
+              {...register("text")}
+              type="text"
+              className=" md:text-lg placeholder:text-zinc-400 text-zinc-600 font-medium  "
+              placeholder="Descreva sua experiência"
+              defaultValue={commentText}
+              autoFocus
+            />
+            <InputGroupAddon>
+              <MessageSquareText className="text-zinc-400 text-4xl size-5" />
+            </InputGroupAddon>
+          </InputGroup>
 
           {errors.text?.message && (
             <p className="text-base absolute font-semibold text-red-500 mt-1">
@@ -123,12 +136,9 @@ const EditComment = ({
             </p>
           )}
         </div>
-        <Button
-          disabled={isPending}
-          className="flex-1 h-14 font-bold text-lg px-10 cursor-pointer hover:bg-rose-700 sm:max-w-1/4"
-        >
+        <PrimaryButton disabled={isPending}>
           {isPending ? "Carregando" : "Enviar"}
-        </Button>
+        </PrimaryButton>
       </Label>
     </form>
   );
