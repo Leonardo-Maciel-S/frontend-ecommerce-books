@@ -37,7 +37,7 @@ const SideBar = ({ isOpen, setIsOpen, children }: SideBarProps) => {
       }`}
     >
       <div className="border-b-2 p-5 pb-2 border-zinc-300">
-        <h3 className="font-semibold font-primary text-lg">
+        <h3 className="font-semibold font-secondary text-lg">
           {user ? `Óla, ${user.name}` : "Faça login"}
         </h3>
       </div>

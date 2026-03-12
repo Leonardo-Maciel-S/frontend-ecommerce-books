@@ -1,4 +1,3 @@
-import PreviewButton from "@/components/preview/preview-button";
 import ShowComponent from "@/components/show-component";
 import {
   Carousel,
@@ -13,15 +12,23 @@ import { Box, Rating } from "@mui/material";
 import AddComment from "./comment/add-comment";
 import CommentList from "./comment/comment-list";
 import { Link, useNavigate, useParams } from "react-router";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "@/context/auth";
 import useGetAllBooks from "@/hooks/books/use-get-all-book";
 import useGetBookById from "@/hooks/books/use-get-by-id";
 import LoadingDetails from "./loading-details";
+import PrimaryButton from "@/components/primary-button";
+import { ShoppingCart } from "lucide-react";
 
 const BookDetails = () => {
   const { id } = useParams();
   const context = useContext(AuthContext);
+
+  const [showAddComment, setShowAddComment] = useState(false);
+
+  const handleModal = () => {
+    setShowAddComment(!showAddComment);
+  };
 
   const navigate = useNavigate();
 
@@ -44,18 +51,19 @@ const BookDetails = () => {
             <img
               src={book?.coverImg}
               alt=""
-              className="w-full sm:w-70 lg:w-96 max-w-96 object-fill rounded-lg shadow-lg shadow-black/30 cursor-pointer transition-all duration-200"
+              className="w-full sm:w-70 lg:w-96 object-fill rounded-lg shadow-lg shadow-black/40 cursor-pointer transition-all duration-200"
             />
 
             <div className="flex-1 p-5 flex flex-col gap-3 justify-between">
               <div className="flex flex-col gap-3">
                 <div className="space-y-1">
-                  <p className="font-secondary font-normal tracking-[1px] text-sm text-gray-600 ">
-                    {book?.author}
-                  </p>
-                  <h2 className="font-bold text-2xl font-primary text-private-secondary ">
+                  <h2 className="font-bold text-2xl lg:text-4xl font-secondary text-private-secondary ">
                     {book?.title}
                   </h2>
+
+                  <p className="font-secondary font-semibold tracking-[1px] text-md  text-primary ">
+                    {book?.author}
+                  </p>
                   <Box component="fieldset" borderColor="transparent">
                     <Rating
                       name="read-only"
@@ -65,55 +73,75 @@ const BookDetails = () => {
                     />
                   </Box>
 
-                  <p className="font-medium font-secondary text-gray-600 overflow-clip text-start italic">
+                  <p className="font-medium font-secondary text-gray-500 tracking-wider overflow-clip text-start ">
                     {book?.synopsis}
                   </p>
                 </div>
 
-                <p className="font-bold text-3xl">
-                  {book?.priceInCents
-                    ? convertPriceInCentsToReal(book?.priceInCents!)
-                    : ""}
-                </p>
+                <div className="text-3xl border-y py-4 border-primary/15 ">
+                  <p className="font-extrabold">
+                    {book?.priceInCents
+                      ? convertPriceInCentsToReal(book?.priceInCents!)
+                      : ""}
+                  </p>
+                </div>
               </div>
 
-              <div className="max-w-70 flex flex-col gap-3">
-                <PreviewButton>Comprar</PreviewButton>
+              <div className="flex gap-3 w-full">
+                <PrimaryButton>
+                  <ShoppingCart strokeWidth="3" />
+                  <p>Adicionar ao carrinho</p>
+                </PrimaryButton>
 
-                <PreviewButton>Adicionar ao carrinho </PreviewButton>
+                <PrimaryButton variant="outline" className="px-5">
+                  Comprar agora
+                </PrimaryButton>
               </div>
             </div>
           </div>
 
           <div className="">
-            <h3 className="text-2xl font-primary font-semibold">
-              Ultimas postagens.
+            <h3 className="text-2xl font-secondary font-semibold">
+              Ultimas postagens
             </h3>
 
             <ShowComponent when={!!books}>
-              <div className="p-5 rounded-2xl ">
+              <div className="p-5 pb-0 rounded-2xl ">
                 <Carousel
-                  className="w-full "
+                  className="w-full"
                   opts={{
-                    align: "center",
+                    align: "start",
                   }}
                 >
                   <CarouselPrevious />
 
-                  <CarouselContent className="p-3 -ml-4 bg-white/50 rounded-2xl w-60 ">
+                  <CarouselContent className="p-3 -ml-3 rounded-2xl w-60 ">
                     {books?.map((book) => (
                       <CarouselItem key={book.id} className="pl-4">
-                        <Link to={`/book-details/${book.id}`}>
-                          <div className="p-3 bg-white/80 h-full  space-y-3 rounded-lg shadow-lg shadow-black/5">
+                        <div className="p-3 w-52 h-full space-y-1  ">
+                          <Link
+                            to={`/book-details/${book.id}`}
+                            className="block"
+                          >
                             <img
                               src={book?.coverImg}
                               alt=""
-                              className="w-30 object-fill cursor-pointer transition-all duration-200 mx-auto"
+                              className=" object-fill hover:shadow-lg shadow-zinc-500/30 rounded-lg cursor-pointer transition-all duration-200 mx-auto"
                             />
+                          </Link>
 
-                            <p className="font-semibold">{book.title}</p>
+                          <div>
+                            <p className="font-bold font-secondary">
+                              {book.title}
+                            </p>
+                            <p className="text-xs font-secondary font-medium tracking-wider text-zinc-500">
+                              {book.author}
+                            </p>
                           </div>
-                        </Link>
+                          <p className="font-extrabold text-primary">
+                            {convertPriceInCentsToReal(book.priceInCents)}
+                          </p>
+                        </div>
                       </CarouselItem>
                     ))}
                   </CarouselContent>
@@ -124,25 +152,38 @@ const BookDetails = () => {
             </ShowComponent>
           </div>
 
-          <div className="space-y-3">
-            <div className="space-y-1">
-              <h3 className="text-2xl font-primary font-semibold">
-                Avaliações
-              </h3>
-              {!context?.user && (
-                <p className="font-bold text-base italic text-zinc-500">
-                  Faça login para fazer uma avaliação.
-                </p>
+          <div className="space-y-3 border-t border-primary/15 pt-8">
+            <div className="flex items-center justify-between py-2">
+              <div className="space-y-1">
+                <h3 className="text-2xl font-secondary font-semibold">
+                  Avaliações
+                </h3>
+                {!context?.user && (
+                  <p className="font-bold text-base italic text-zinc-500">
+                    Faça login para fazer uma avaliação.
+                  </p>
+                )}
+              </div>
+
+              {context?.user && (
+                <PrimaryButton
+                  variant="secondary"
+                  className="text-md"
+                  onClick={handleModal}
+                >
+                  {showAddComment ? "Cancelar" : "Adicionar Comentário"}
+                </PrimaryButton>
               )}
             </div>
 
-            {context?.user && (
+            <ShowComponent when={showAddComment}>
               <AddComment
-                userId={context?.user.id}
+                userId={context?.user?.id}
                 bookId={book?.id}
-                username={context.user.name}
+                username={context?.user?.name}
+                handleModal={handleModal}
               />
-            )}
+            </ShowComponent>
 
             <CommentList id={id!} />
           </div>

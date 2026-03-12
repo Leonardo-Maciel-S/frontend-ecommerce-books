@@ -1,12 +1,15 @@
 import type { Comment } from "@/@types/comment";
 import ShowComponent from "@/components/show-component";
-import { Button } from "@/components/ui/button";
 import { AuthContext } from "@/context/auth";
 import useCommentDelete from "@/hooks/comment/delete";
 import { Box, Modal, Rating, Typography } from "@mui/material";
-import { Pen, Trash2, UserRound } from "lucide-react";
+import { Loader2, Pen, Trash2, UserRound, X } from "lucide-react";
 import { useContext, useState } from "react";
 import EditComment from "./edit-comment";
+
+import { formatDistanceToNow } from "date-fns";
+import { ptBR } from "date-fns/locale";
+import PrimaryButton from "@/components/primary-button";
 
 export interface BookCommentProps {
   comment: Comment;
@@ -38,42 +41,56 @@ const BookComment = ({ comment }: BookCommentProps) => {
     setEditComment(!editComment);
   };
 
+  function tempoRelativo(date: Date): string {
+    return formatDistanceToNow(date, { addSuffix: true, locale: ptBR });
+  }
+
   return (
     <>
-      <div className="bg-white/30 rounded-2xl shadow-lg shadow-black/5 p-4 space-y-2">
+      <div className="bg-white rounded-lg shadow-lg shadow-black/5 px-8 py-5 space-y-2">
         <div className="flex items-center justify-between">
-          <div className="flex gap-2 items-center">
-            <div className="bg-zinc-200 p-2 rounded-full w-fit">
-              <UserRound />
+          <div className="flex gap-3 items-center">
+            <div className="bg-primary/30 p-2 rounded-full w-fit">
+              <UserRound className="text-primary" />
             </div>
             <div>
-              <p className="font-semibold font-primary">{comment.userName}</p>
-              <p className="text-sm font-semibold text-zinc-500 ">
-                {new Date(comment.createdAt).toLocaleDateString("pt-BR", {
-                  dateStyle: "medium",
-                  timeZone: "UTC",
-                })}
+              <p className="font-bold font-secondary tracking-wide ml-1">
+                {comment.userName}
               </p>
+
+              {!editComment && (
+                <Rating
+                  name="half-rating-read"
+                  value={comment.evaluation}
+                  precision={0.5}
+                  readOnly
+                  size="small"
+                />
+              )}
             </div>
           </div>
 
           <ShowComponent when={isCommentOwner}>
             <div className="flex gap-2">
-              <Button
+              <PrimaryButton
                 variant={"outline"}
-                className="cursor-pointer bg-white/30 hover:bg-rose-500 hover:text-white hover:scale-105 transition-all duration-250"
                 onClick={handleEditComment}
+                className="px-2 py-2"
               >
-                <Pen strokeWidth={3} />
-              </Button>
+                {editComment ? (
+                  <X size={20} strokeWidth={2} />
+                ) : (
+                  <Pen size={20} strokeWidth={2} />
+                )}
+              </PrimaryButton>
 
-              <Button
+              <PrimaryButton
                 variant={"outline"}
-                className="cursor-pointer bg-white/30 hover:bg-rose-500 hover:text-white hover:scale-105 transition-all duration-250"
+                className="px-3 py-2 text-red-500"
                 onClick={handleModal}
               >
-                <Trash2 strokeWidth={3} />
-              </Button>
+                <Trash2 size={15} strokeWidth={2} />
+              </PrimaryButton>
             </div>
           </ShowComponent>
         </div>
@@ -90,16 +107,15 @@ const BookComment = ({ comment }: BookCommentProps) => {
           />
         ) : (
           <>
-            <Rating
-              name="half-rating-read"
-              value={comment.evaluation}
-              precision={0.5}
-              readOnly
-              size="small"
-            />
-            <p className="font-secondary font-medium">{comment.text}</p>
+            <p className="font-secondary font-normal tracking-wider italic text-zinc-600">
+              "{comment.text}"
+            </p>
           </>
         )}
+
+        <p className="text-sm font-normal font-secondary text-zinc-500 italic">
+          {tempoRelativo(new Date(comment.createdAt))}
+        </p>
       </div>
 
       <Modal
@@ -109,22 +125,35 @@ const BookComment = ({ comment }: BookCommentProps) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box className="w-fit py-8 px-10 rounded-lg bg-zinc-800 text-zinc-300 flex flex-col gap-4">
-          <Typography id="modal-modal-title" variant="h5" component="h1">
-            Excluir comentário
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ fontSize: 18 }}>
-            Tem certeza? Essa ação não pode ser desfeita
-          </Typography>
+        <Box className="w-fit py-8 px-10 rounded-lg bg-white flex flex-col gap-6">
+          <div>
+            <Typography
+              id="modal-modal-title"
+              variant="h5"
+              component="h1"
+              className="text-red-500"
+            >
+              Excluir comentário
+            </Typography>
+            <Typography
+              id="modal-modal-description"
+              sx={{ fontSize: 18 }}
+              className="text-zinc-500"
+            >
+              Tem certeza? Essa ação não pode ser desfeita
+            </Typography>
+          </div>
 
-          <Button
-            variant={"outline"}
-            className=" cursor-pointer border-none bg-rose-700 hover:bg-rose-500 hover:text-white hover:scale-105 transition-all duration-250"
+          <PrimaryButton
             onClick={() => handleDelete(comment.id)}
             disabled={isPending}
           >
-            <Trash2 strokeWidth={3} />
-          </Button>
+            {isPending ? (
+              <Loader2 className="animate-spin" />
+            ) : (
+              <Trash2 strokeWidth={3} />
+            )}
+          </PrimaryButton>
         </Box>
       </Modal>
     </>

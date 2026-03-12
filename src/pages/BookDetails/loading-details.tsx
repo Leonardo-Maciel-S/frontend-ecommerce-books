@@ -10,12 +10,12 @@ const LoadingDetails = () => {
           <div className="flex flex-col gap-3">
             <div className="flex w-full max-w-xs flex-col gap-7">
               <div className="flex flex-col gap-3">
-                <Skeleton className="h-4 w-20 " />
                 <Skeleton className="h-8 w-full" />
+                <Skeleton className="h-4 w-20 " />
                 <Skeleton className="h-4 w-24" />
               </div>
-              <div className="flex flex-col gap-2">
-                <Skeleton className="h-8 w-full" />
+              <div className="flex flex-col gap-2 w-full">
+                <Skeleton className="h-24 w-full" />
                 <Skeleton className="h-8 w-24" />
               </div>
             </div>
@@ -23,10 +23,10 @@ const LoadingDetails = () => {
             <Skeleton className="font-bold text-3xl" />
           </div>
 
-          <div className="max-w-70 flex flex-col gap-3">
-            <Skeleton className="border h-14 rounded-xl z-10" />
+          <div className=" flex gap-3">
+            <Skeleton className="border h-14 rounded-xl z-10 w-1/3 " />
 
-            <Skeleton className="border h-14 rounded-xl z-10" />
+            <Skeleton className="border h-14 rounded-xl z-10 w-1/5" />
           </div>
         </div>
       </div>
