@@ -17,13 +17,13 @@ const Login = () => {
           <BookOpenText size={30} color="white" />
         </div>
 
-        <h2 className="font-bold text-2xl">BookStore</h2>
+        <h2 className="font-bold text-xl">BookStore</h2>
       </div>
 
       <div className="flex flex-col gap-2 md:w-/3">
         <Button
           variant="outline"
-          className="w-min self-end cursor-pointer z-20 bg-white"
+          className="w-min self-end cursor-pointer z-20 bg-white hover:bg-primary/90 hover:text-white"
           onClick={toggleSignIn}
         >
           {signIn ? "Cadastrar" : "Logar"}

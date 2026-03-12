@@ -12,7 +12,7 @@ import {
 import useLogin from "@/hooks/user/use-login";
 
 import { Label } from "@radix-ui/react-label";
-import { Eye, EyeClosed, LockKeyhole, Mail } from "lucide-react";
+import { Eye, EyeClosed, Loader2, LockKeyhole, Mail } from "lucide-react";
 import { useState } from "react";
 
 const SignIn = () => {
@@ -34,7 +34,8 @@ const SignIn = () => {
       <h2 className="text-center font-extrabold text-3xl leading-normal">
         Login
       </h2>
-      <div className="flex flex-col gap-6 mb-5  ">
+
+      <div className="flex flex-col gap-4 mb-5  ">
         <div className="flex flex-col gap-2 ">
           <Label className="text-lg font-semibold text-zinc-500">Email</Label>
           <InputGroup className="h-12 bg-background">
@@ -100,7 +101,7 @@ const SignIn = () => {
         disabled={isPending}
         className="cursor-pointer md:text-lg font-semibold p-6"
       >
-        {isPending ? "Carregando" : "Entrar"}
+        {isPending ? <Loader2 className="animate-spin" /> : "Entrar"}
       </Button>
     </form>
   );
