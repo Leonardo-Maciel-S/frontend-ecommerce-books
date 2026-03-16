@@ -12,7 +12,10 @@ const useGetAllBooksByUserId = () => {
       isUserLogged();
 
       try {
-        const books = await bookService.getAll({ id: user?.id, search: "" });
+        const books = await bookService.getAll({
+          id: user?.id,
+          queryParams: "",
+        });
 
         return books;
       } catch (error) {

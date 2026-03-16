@@ -2,16 +2,16 @@ import { bookService } from "@/services/book";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-const useGetAllBooks = (search?: string) => {
+const useGetAllBooks = (queryParams?: string) => {
   const query = useQuery({
-    queryKey: ["all-books", search],
+    queryKey: ["all-books", queryParams],
     queryFn: async () => {
-      if (!search) {
-        search = "";
+      if (!queryParams) {
+        queryParams = "";
       }
 
       try {
-        const books = await bookService.getAll({ search });
+        const books = await bookService.getAll({ queryParams });
 
         return books;
       } catch (error) {

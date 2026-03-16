@@ -25,10 +25,10 @@ function App() {
 
   return (
     <>
-      <div className="max-w-dvw overflow-hidden min-h-screen h-full flex flex-col justify-between">
+      <div className="max-w-dvw overflow-x-hidden min-h-svh flex flex-col justify-between">
         <HomeBar />
 
-        <div className="container mx-auto px-10 overflow-hidden bg-linear-to-r bg-background ">
+        <div className="container mx-auto px-10 overflow-hidden bg-linear-to-r flex-1">
           <Outlet />
         </div>
 

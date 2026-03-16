@@ -4,10 +4,10 @@ import type { AxiosError } from "axios";
 
 interface GetAllParams {
   id?: string;
-  search: string;
+  queryParams: string;
 }
 
-const getAll = async ({ id, search }: GetAllParams) => {
+const getAll = async ({ id, queryParams }: GetAllParams) => {
   try {
     if (id) {
       const res = await api.get<{ books: Book[] }>("/book/user/" + id);
@@ -15,7 +15,7 @@ const getAll = async ({ id, search }: GetAllParams) => {
       return res.data.books;
     }
 
-    const res = await api.get<{ books: Book[] }>(`/book?search=${search}`);
+    const res = await api.get<{ books: Book[] }>(`/book?${queryParams}`);
 
     return res.data.books;
   } catch (error) {
