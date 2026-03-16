@@ -14,7 +14,7 @@ const Addresses = () => {
   const { data: addresses, isLoading } = useGetAllAddress();
 
   return (
-    <div className="lg:mt-10 overflow-hidden h-full mb-4">
+    <div className="lg:mt-10 h-full mb-4 ">
       <div className="flex flex-col sm:flex-row sm:items-center gap-2 justify-between py-2">
         <h2 className="text-3xl font-semibold font-primary">Endereços</h2>
 

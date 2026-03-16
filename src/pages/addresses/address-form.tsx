@@ -91,7 +91,7 @@ const AddressForm = ({
 
             closeModal();
           },
-        }
+        },
       );
 
       return;
@@ -105,7 +105,7 @@ const AddressForm = ({
 
           closeModal();
         },
-      }
+      },
     );
   };
 
@@ -131,9 +131,9 @@ const AddressForm = ({
     <>
       <div
         ref={div}
-        className="fixed w-screen h-[1200px] top-0 left-0 bg-black/40 z-10"
+        className="fixed w-screen min-h-screen h-full top-0 left-0 bg-black/40 z-10"
       />
-      <div className="w-full max-w-screen min-h-screen absolute top-0 left-0 flex justify-center items-center p-5">
+      <div className="w-full max-w-screen h-screen overflow-y-auto absolute z-20 top-0 left-0 flex justify-center items-center p-5">
         <form
           ref={form}
           onSubmit={handleSubmit(handleSubmitClick)}
@@ -141,7 +141,7 @@ const AddressForm = ({
         >
           <div className="flex justify-between">
             <h2 className="text-xl sm:text-2xl font-primary font-semibold">
-              Novo Endereço
+              {addressToEdit ? "Editar Endereço" : "Novo Endereço"}
             </h2>
 
             <Button
@@ -367,6 +367,8 @@ const AddressForm = ({
           >
             {isCreateLoading || isEditLoading ? (
               <Loader2 className="animate-spin" />
+            ) : addressToEdit ? (
+              "Editar"
             ) : (
               "Criar"
             )}
