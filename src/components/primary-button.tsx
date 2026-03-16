@@ -5,6 +5,7 @@ import { tv } from "tailwind-variants";
 
 interface PrimaryButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "outline";
+  disabled?: boolean;
 }
 
 const button = tv({
@@ -12,7 +13,7 @@ const button = tv({
   variants: {
     variant: {
       primary:
-        "bg-primary text-white hover:bg-primary/90 shadow shadow-primary/60",
+        "bg-primary text-white hover:bg-primary/90 shadow shadow-primary/60 disabled:bg-primary/70",
       secondary: "bg-private-secondary text-white",
       outline: "border-2 border-primary/30 text-primary hover:border-primary ",
     },
@@ -26,10 +27,15 @@ const PrimaryButton = ({
   children,
   className,
   variant,
+  disabled,
   ...props
 }: PrimaryButtonProps) => {
   return (
-    <button className={cn(button({ variant }), className)} {...props}>
+    <button
+      {...props}
+      className={cn(button({ variant }), className)}
+      disabled={disabled}
+    >
       {children}
     </button>
   );

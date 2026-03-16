@@ -31,19 +31,21 @@ const SideBar = ({ isOpen, setIsOpen, children }: SideBarProps) => {
 
   return (
     <div
-      ref={sideBar}
-      className={`w-[300px] h-screen fixed right-0 top-0 rounded-tl-4xl rounded-bl-4xl shadow-2xl shadow-black  bg-white z-20 ${
-        isOpen ? "translate-x-0" : "translate-x-[300px]"
-      }`}
+      className={`w-screen h-screen bg-black/30 fixed right-0 top-0 ${isOpen ? "block" : "hidden"}`}
     >
-      <div className="border-b-2 p-5 pb-2 border-zinc-300">
-        <h3 className="font-semibold font-secondary text-lg">
-          {user ? `Óla, ${user.name}` : "Faça login"}
-        </h3>
-      </div>
+      <div
+        ref={sideBar}
+        className={`w-[300px] h-screen fixed right-[300px] top-0 rounded-tl-4xl rounded-bl-4xl shadow-2xl shadow-black  bg-white z-20 ${"translate-x-[300px]"}`}
+      >
+        <div className="border-b-2 p-5 pb-2 border-zinc-300">
+          <h3 className="font-semibold font-secondary text-lg">
+            {user ? `Óla, ${user.name}` : "Faça login"}
+          </h3>
+        </div>
 
-      <div className="p-4 flex flex-col justify-between h-[93%] ">
-        {children}
+        <div className="p-4 flex flex-col justify-between h-[93%] ">
+          {children}
+        </div>
       </div>
     </div>
   );

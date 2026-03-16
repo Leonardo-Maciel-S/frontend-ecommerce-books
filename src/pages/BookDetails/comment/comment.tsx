@@ -2,14 +2,15 @@ import type { Comment } from "@/@types/comment";
 import ShowComponent from "@/components/show-component";
 import { AuthContext } from "@/context/auth";
 import useCommentDelete from "@/hooks/comment/delete";
-import { Box, Modal, Rating, Typography } from "@mui/material";
-import { Loader2, Pen, Trash2, UserRound, X } from "lucide-react";
+import { Rating } from "@mui/material";
+import { Pen, Trash2, UserRound, X } from "lucide-react";
 import { useContext, useState } from "react";
 import EditComment from "./edit-comment";
 
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import PrimaryButton from "@/components/primary-button";
+import DeleteModal from "@/components/delete-modal";
 
 export interface BookCommentProps {
   comment: Comment;
@@ -29,7 +30,7 @@ const BookComment = ({ comment }: BookCommentProps) => {
     setIsModalOpen(!isModalOpen);
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id?: string) => {
     if (!id) {
       return;
     }
@@ -118,44 +119,14 @@ const BookComment = ({ comment }: BookCommentProps) => {
         </p>
       </div>
 
-      <Modal
-        className="flex justify-center items-center"
-        open={isModalOpen}
-        onClose={handleModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box className="w-fit py-8 px-10 rounded-lg bg-white flex flex-col gap-6">
-          <div>
-            <Typography
-              id="modal-modal-title"
-              variant="h5"
-              component="h1"
-              className="text-red-500"
-            >
-              Excluir comentário
-            </Typography>
-            <Typography
-              id="modal-modal-description"
-              sx={{ fontSize: 18 }}
-              className="text-zinc-500"
-            >
-              Tem certeza? Essa ação não pode ser desfeita
-            </Typography>
-          </div>
-
-          <PrimaryButton
-            onClick={() => handleDelete(comment.id)}
-            disabled={isPending}
-          >
-            {isPending ? (
-              <Loader2 className="animate-spin" />
-            ) : (
-              <Trash2 strokeWidth={3} />
-            )}
-          </PrimaryButton>
-        </Box>
-      </Modal>
+      <DeleteModal
+        whoDelete="comentário"
+        handleDelete={handleDelete}
+        handleModal={handleModal}
+        id={comment.id}
+        isModalOpen={isModalOpen}
+        isPending={isPending}
+      />
     </>
   );
 };

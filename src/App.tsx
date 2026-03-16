@@ -25,7 +25,7 @@ function App() {
 
   return (
     <>
-      <div className="max-w-dvw overflow-hidden min-h-screen flex flex-col justify-between">
+      <div className="max-w-dvw overflow-hidden min-h-screen h-full flex flex-col justify-between">
         <HomeBar />
 
         <div className="container mx-auto px-10 overflow-hidden bg-linear-to-r bg-background ">
