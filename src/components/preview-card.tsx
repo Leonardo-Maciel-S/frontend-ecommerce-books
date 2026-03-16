@@ -1,13 +1,34 @@
 import type { Book } from "@/@types/books";
 import { convertPriceInCentsToReal } from "@/utils/convert-price-in-cent-to-real";
 import { Link } from "react-router";
+import PrimaryButton from "./primary-button";
+import { Trash2 } from "lucide-react";
+import { useState } from "react";
+import DeleteModal from "./delete-modal";
+import useDeleteBook from "@/hooks/books/use-delete-book";
 
 interface PreviewCardProps {
   book: Book;
   isMyBooks?: boolean;
 }
 
-const PreviewCard = ({ book }: PreviewCardProps) => {
+const PreviewCard = ({ book, isMyBooks }: PreviewCardProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { mutate, isPending } = useDeleteBook();
+
+  const handleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
+  const handleDelete = (id?: string) => {
+    if (!id) {
+      return;
+    }
+
+    mutate(id);
+  };
+
   return (
     <div className="grid grid-cols-1 gap-3 p-5 bg-white/30 rounded-4xl ">
       <Link to={`/book-details/${book.id}`}>
@@ -29,11 +50,38 @@ const PreviewCard = ({ book }: PreviewCardProps) => {
         </div>
 
         <div className="w-full flex flex-col gap-3">
-          <p className="font-bold text-xl text-primary font-primary">
-            {convertPriceInCentsToReal(book.priceInCents)}
-          </p>
+          {isMyBooks ? (
+            <div className="flex gap-3 flex-wrap">
+              <Link to={`/edit-book/${book.id}`} className="flex-1">
+                <PrimaryButton variant="secondary" className="w-full ">
+                  Editar
+                </PrimaryButton>
+              </Link>
+
+              <PrimaryButton
+                variant="outline"
+                className="p-2 w-full"
+                onClick={handleModal}
+              >
+                <Trash2 />
+              </PrimaryButton>
+            </div>
+          ) : (
+            <p className="font-bold text-xl text-primary font-primary">
+              {convertPriceInCentsToReal(book.priceInCents)}
+            </p>
+          )}
         </div>
       </div>
+
+      <DeleteModal
+        whoDelete="livro"
+        handleDelete={handleDelete}
+        handleModal={handleModal}
+        id={book.id}
+        isModalOpen={isModalOpen}
+        isPending={isPending}
+      />
     </div>
   );
 };
