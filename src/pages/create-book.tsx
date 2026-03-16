@@ -89,9 +89,9 @@ const CreateBook = () => {
                     <PopoverContent className="bg-background">
                       <PopoverHeader>
                         <PopoverTitle className="font-secondary text-md">
-                          Como pegar a url da capa
+                          Como pegar a url da capa?
                         </PopoverTitle>
-                        <PopoverDescription className="mt-2 text-md font-secondary italic text-zinc-600 font-semibold px-2">
+                        <PopoverDescription className="mt-2 text-smd font-secondary italic text-zinc-600 font-semibold px-2">
                           Acesse esse{" "}
                           <a
                             href="https://br.pinterest.com/search/pins/?q=capa%20de%20livros&rs=typed"
