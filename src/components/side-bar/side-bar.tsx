@@ -31,7 +31,7 @@ const SideBar = ({ isOpen, setIsOpen, children }: SideBarProps) => {
 
   return (
     <div
-      className={`w-screen h-screen bg-black/30 fixed right-0 top-0 ${isOpen ? "block" : "hidden"}`}
+      className={`w-screen h-screen z-20 bg-black/30 fixed right-0 top-0 ${isOpen ? "block" : "hidden"}`}
     >
       <div
         ref={sideBar}
