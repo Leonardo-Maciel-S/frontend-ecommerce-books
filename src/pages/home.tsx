@@ -5,7 +5,7 @@ import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
 
 const Home = () => {
-  const { data: books, isLoading, isSuccess } = useGetAllBooks("");
+  const { data: books, isLoading, isSuccess } = useGetAllBooks("limit=4");
 
   return (
     <div className="space-y-10">
