@@ -1,10 +1,31 @@
 import ErrorMessage from "@/components/error-message";
+import PrimaryButton from "@/components/primary-button";
 import ShowComponent from "@/components/show-component";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+  InputGroupTextarea,
+} from "@/components/ui/input-group";
+import {
+  PopoverContent,
+  PopoverDescription,
+  PopoverHeader,
+  PopoverTitle,
+  PopoverTrigger,
+  Popover,
+} from "@/components/ui/popover";
 import useEditBook from "@/hooks/books/use-edit-book";
 import useFindBookById from "@/hooks/books/use-find-book-by-id";
+import {
+  BookImage,
+  BookText,
+  BookType,
+  CircleQuestionMark,
+  DollarSign,
+  UserPen,
+} from "lucide-react";
 
 import { useParams } from "react-router";
 
@@ -29,7 +50,7 @@ const EditBook = () => {
         onSubmit={handleSubmit(editBook)}
         className="min-w-[300px] w-1/3   mx-auto p-5 rounded-2xl shadow-lg shadow-zinc-500/50 space-y-2 bg-white/30"
       >
-        <h2 className="text-xl font-semibold font-primary text-center">
+        <h2 className="lg:text-2xl font-bold tracking-wide font-primary text-center text-primary">
           Livro
         </h2>
 
@@ -38,98 +59,149 @@ const EditBook = () => {
             <img
               src={imgUrl}
               alt=""
-              className="rounded-2xl shadow-lg shadow-black/10 my-4 mx-auto"
+              className="rounded-2xl shadow-lg shadow-black/10 my-4 w-full object-cover"
             />
           )}
 
           <div className="flex flex-col gap-0  ">
-            <Input
-              {...register("coverImg")}
-              type="text"
-              onChange={(e) => setImgUrl(e.target.value)}
-              className="font-secondary md:text-md font-semibold"
-              placeholder="URL da capa"
-            />
+            <div className="flex flex-col gap-2 ">
+              <InputGroup className="h-12 bg-background">
+                <InputGroupInput
+                  {...register("coverImg")}
+                  type="text"
+                  onChange={(e) => setImgUrl(e.target.value)}
+                  className="font-secondary text-zinc-600 md:text-md font-semibold"
+                  placeholder="URL da capa"
+                />
+                <InputGroupAddon>
+                  <BookImage className="text-zinc-400 text-4xl size-5" />
+                </InputGroupAddon>
 
-            <ShowComponent when={errors.coverImg !== undefined}>
-              <ErrorMessage>{errors.coverImg?.message}</ErrorMessage>
-            </ShowComponent>
+                {!imgUrl && (
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <InputGroupAddon align={"inline-end"}>
+                        <InputGroupButton
+                          variant="secondary"
+                          size="icon-sm"
+                          className="cursor-pointer"
+                        >
+                          <CircleQuestionMark className="text-zinc-400 text-4xl size-5" />
+                        </InputGroupButton>
+                      </InputGroupAddon>
+                    </PopoverTrigger>
 
-            {!imgUrl && (
-              <p className="mt-2 font-primary italic text-zinc-600 font-semibold">
-                Acesse esse{" "}
-                <a
-                  href="https://br.pinterest.com/search/pins/?q=capa%20de%20livros&rs=typed"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <strong>link</strong>
-                </a>{" "}
-                clique na capa que gostou, então clique com o botão direito e
-                copie a endereço da imagem e veja se vai aparecer o preview.
-              </p>
-            )}
+                    <PopoverContent className="bg-background">
+                      <PopoverHeader>
+                        <PopoverTitle className="font-secondary text-md">
+                          Como pegar a url da capa?
+                        </PopoverTitle>
+                        <PopoverDescription className="mt-2 text-smd font-secondary italic text-zinc-600 font-semibold px-2">
+                          Acesse esse{" "}
+                          <a
+                            href="https://br.pinterest.com/search/pins/?q=capa%20de%20livros&rs=typed"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            <strong>link</strong>
+                          </a>{" "}
+                          clique na capa que gostou, então clique com o botão
+                          direito e copie a endereço da imagem e veja se vai
+                          aparecer o preview.
+                        </PopoverDescription>
+                      </PopoverHeader>
+                    </PopoverContent>
+                  </Popover>
+                )}
+              </InputGroup>
+
+              <ShowComponent when={errors.coverImg !== undefined}>
+                <ErrorMessage>{errors.coverImg?.message}</ErrorMessage>
+              </ShowComponent>
+            </div>
           </div>
 
-          <div className="flex flex-col gap-0  ">
-            <Input
-              {...register("title")}
-              type="text"
-              className="font-secondary md:text-md font-semibold"
-              placeholder="Título"
-            />
+          <div className="flex flex-col gap-2 ">
+            <InputGroup className="h-12 bg-background">
+              <InputGroupInput
+                {...register("title")}
+                type="text"
+                className="font-secondary text-zinc-600 md:text-md font-semibold"
+                placeholder="Título"
+              />
+              <InputGroupAddon>
+                <BookType className="text-zinc-400 text-4xl size-5" />
+              </InputGroupAddon>
+            </InputGroup>
 
             <ShowComponent when={errors.title !== undefined}>
               <ErrorMessage>{errors.title?.message}</ErrorMessage>
             </ShowComponent>
           </div>
 
-          <div className="flex flex-col gap-0  ">
-            <Input
-              {...register("author")}
-              type="text"
-              className="font-secondary md:text-md font-semibold"
-              placeholder="Autor"
-            />
+          <div className="flex flex-col gap-2 ">
+            <InputGroup className="h-12 bg-background">
+              <InputGroupInput
+                {...register("author")}
+                type="text"
+                className="font-secondary text-zinc-600 md:text-md font-semibold"
+                placeholder="Autor"
+              />
+              <InputGroupAddon>
+                <UserPen className="text-zinc-400 text-4xl size-5" />
+              </InputGroupAddon>
+            </InputGroup>
 
             <ShowComponent when={errors.author !== undefined}>
               <ErrorMessage>{errors.author?.message}</ErrorMessage>
             </ShowComponent>
           </div>
 
-          <div className="flex flex-col gap-0  ">
-            <Textarea
-              {...register("synopsis")}
-              className="font-secondary h-28 md:text-md font-semibold resize-none"
-              placeholder="Sinopse"
-            />
+          <div className="flex flex-col gap-2 ">
+            <InputGroup className="h-12 bg-background flex items-start">
+              <InputGroupTextarea
+                {...register("synopsis")}
+                className="font-secondary text-zinc-600 h-28 md:text-md font-semibold resize-none placeholder:flex placeholder:items-center"
+                placeholder="Sinopse"
+              />
+
+              <InputGroupAddon className="mt-2">
+                <BookText className="text-zinc-400 text-4xl size-5" />
+              </InputGroupAddon>
+            </InputGroup>
 
             <ShowComponent when={errors.synopsis !== undefined}>
               <ErrorMessage>{errors.synopsis?.message}</ErrorMessage>
             </ShowComponent>
           </div>
 
-          <div className="flex flex-col gap-0  ">
-            <Input
-              {...register("priceInCents")}
-              type="number"
-              step="0.01"
-              className="font-secondary md:text-md font-semibold"
-              placeholder="Preço"
-            />
+          <div className="flex flex-col gap-2 ">
+            <InputGroup className="h-12 bg-background">
+              <InputGroupInput
+                {...register("priceInCents")}
+                type="number"
+                step="0.01"
+                min={0}
+                className="font-secondary text-zinc-600 md:text-md font-semibold"
+                placeholder="Preço"
+              />
+              <InputGroupAddon>
+                <DollarSign className="text-zinc-400 text-4xl size-5" />
+              </InputGroupAddon>
+            </InputGroup>
 
             <ShowComponent when={errors.priceInCents !== undefined}>
               <ErrorMessage>{errors.priceInCents?.message}</ErrorMessage>
             </ShowComponent>
           </div>
 
-          <Button
-            className="text-lg py-5 font-semibold w-full cursor-pointer hover:bg-red-700 disabled:bg-red-400"
-            type="submit"
+          <PrimaryButton
+            className="text-lg  font-semibold w-full"
+            onClick={() => setImgUrl("")}
             disabled={isPending || !book}
           >
             Editar
-          </Button>
+          </PrimaryButton>
         </div>
       </form>
     </div>

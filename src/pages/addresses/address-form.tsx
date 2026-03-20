@@ -133,11 +133,11 @@ const AddressForm = ({
         ref={div}
         className="fixed w-screen min-h-screen h-full top-0 left-0 bg-black/40 z-10"
       />
-      <div className="w-full max-w-screen h-screen overflow-y-auto absolute z-20 top-0 left-0 flex justify-center items-center p-5">
+      <div className="w-full max-w-screen h-screen overflow-y-auto absolute z-20 top-0 left-0 p-5 ">
         <form
           ref={form}
           onSubmit={handleSubmit(handleSubmitClick)}
-          className="bg-white z-20 p-5 rounded-2xl space-y-3 lg:w-[600px]"
+          className="bg-white z-20  p-5 rounded-2xl space-y-3 lg:w-[600px] mx-auto"
         >
           <div className="flex justify-between">
             <h2 className="text-xl sm:text-2xl font-primary font-semibold">
@@ -225,7 +225,7 @@ const AddressForm = ({
 
                 <Input
                   {...register("number")}
-                  className="font-secondary md:text-md font-semibold"
+                  className="font-secondary text-zinc-600 md:text-md font-semibold "
                   placeholder="Ex: 1234"
                 />
 

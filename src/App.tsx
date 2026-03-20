@@ -19,7 +19,7 @@ function App() {
     }
 
     window.alert(
-      'Devido a utilização do render no deploy da api, a mesma fica inativa depois de um tempo sem requisições, por esse motivo a primeira busca dos livros demora um pouco esperando a api subir novamente, após sumir a mensagem de "carregando" fica normal',
+      'Devido a utilização do render no deploy da api, a mesma fica inativa depois de um tempo sem requisições, por esse motivo a primeira busca dos livros demora um pouco esperando a api subir novamente, assim que aparecer os livros na sessão "Ultimas postagens" o acesso fica normal',
     );
   }, []);
 

@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-const LoadingDetails = () => {
+const BookDetailsSkeleton = () => {
   return (
     <>
       <div className="flex gap-8 justify-center sm:justify-start flex-wrap ">
@@ -90,4 +90,4 @@ const LoadingDetails = () => {
   );
 };
 
-export default LoadingDetails;
+export default BookDetailsSkeleton;

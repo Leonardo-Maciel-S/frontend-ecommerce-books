@@ -1,8 +1,8 @@
 import useGetAllBooks from "@/hooks/books/use-get-all-book";
 import BooksList from "../components/books-list";
-import Loading from "@/components/loading";
 import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
+import BookListSkeleton from "@/components/skeletons/book-list-skeleton";
 
 const Home = () => {
   const { data: books, isLoading, isSuccess } = useGetAllBooks("limit=4");
@@ -30,7 +30,7 @@ const Home = () => {
         />
       </section>
 
-      {isLoading && <Loading />}
+      {isLoading && <BookListSkeleton />}
 
       {isSuccess && (
         <section className="space-y-4">
