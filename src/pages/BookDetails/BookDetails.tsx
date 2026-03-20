@@ -118,7 +118,7 @@ const BookDetails = () => {
                   <CarouselContent className="p-3 -ml-3 rounded-2xl w-60 ">
                     {books?.map((book) => (
                       <CarouselItem key={book.id} className="pl-4">
-                        <div className="p-3 w-52 h-full space-y-1  ">
+                        <div className="p-3 h-full space-y-1">
                           <Link
                             to={`/book-details/${book.id}`}
                             className="block"
@@ -126,7 +126,7 @@ const BookDetails = () => {
                             <img
                               src={book?.coverImg}
                               alt=""
-                              className=" object-fill hover:shadow-lg shadow-zinc-500/30 rounded-lg cursor-pointer transition-all duration-200 mx-auto"
+                              className="hover:shadow-lg h-[250px] shadow-zinc-500/30 rounded-lg cursor-pointer transition-all duration-200 "
                             />
                           </Link>
 
