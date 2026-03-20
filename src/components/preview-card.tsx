@@ -35,7 +35,7 @@ const PreviewCard = ({ book, isMyBooks }: PreviewCardProps) => {
         <img
           src={book.coverImg}
           alt=""
-          className="object-cover h-full md:h-[400px] rounded-lg shadow shadow-black/5 cursor-pointer transition-all duration-200 hover:-translate-y-2 hover:shadow-black"
+          className="object-fill w-full  h-full md:h-[400px] rounded-lg shadow shadow-black/5 cursor-pointer transition-all duration-200 hover:-translate-y-2 hover:shadow-black"
         />
       </Link>
 
@@ -49,18 +49,18 @@ const PreviewCard = ({ book, isMyBooks }: PreviewCardProps) => {
           </p>
         </div>
 
-        <div className="w-full flex flex-col gap-3">
+        <div className="w-full  gap-3">
           {isMyBooks ? (
-            <div className="flex gap-3 flex-wrap">
+            <div className="flex gap-3 ">
               <Link to={`/edit-book/${book.id}`} className="flex-1">
-                <PrimaryButton variant="secondary" className="w-full ">
+                <PrimaryButton variant="secondary" className="w-full p-2 ">
                   Editar
                 </PrimaryButton>
               </Link>
 
               <PrimaryButton
                 variant="outline"
-                className="p-2 w-full"
+                className="p-2"
                 onClick={handleModal}
               >
                 <Trash2 />
