@@ -16,9 +16,9 @@ import { useContext, useState } from "react";
 import { AuthContext } from "@/context/auth";
 import useGetAllBooks from "@/hooks/books/use-get-all-book";
 import useGetBookById from "@/hooks/books/use-get-by-id";
-import LoadingDetails from "./loading-details";
 import PrimaryButton from "@/components/primary-button";
 import { ShoppingCart } from "lucide-react";
+import BookDetailsSkeleton from "@/components/skeletons/book-details-skeleton";
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -43,7 +43,7 @@ const BookDetails = () => {
     <>
       <div className="w-full space-y-10 py-4 min-h-[400px]">
         <ShowComponent when={isLoading || loading}>
-          <LoadingDetails />
+          <BookDetailsSkeleton />
         </ShowComponent>
 
         <ShowComponent when={!isLoading && !loading}>
