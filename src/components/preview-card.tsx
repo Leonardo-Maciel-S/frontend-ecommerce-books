@@ -35,7 +35,7 @@ const PreviewCard = ({ book, isMyBooks }: PreviewCardProps) => {
         <img
           src={book.coverImg}
           alt=""
-          className="object-fill w-full  h-full md:h-[400px] rounded-lg shadow shadow-black/5 cursor-pointer transition-all duration-200 hover:-translate-y-2 hover:shadow-black"
+          className="object-fill w-full  h-full md:h-[450px] rounded-lg shadow shadow-black/5 cursor-pointer transition-all duration-200 hover:-translate-y-2 hover:shadow-black"
         />
       </Link>
 
