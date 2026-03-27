@@ -44,7 +44,7 @@ const Home = () => {
               to={"/see-all"}
               className="group flex items-center gap-2 font-primary text-primary w-fit"
             >
-              <p className="group-hover:underline">Ver todos</p>{" "}
+              <p className="group-hover:underline text-lg">Ver todos</p>{" "}
               <ArrowRight className="group-hover:translate-x-1 transform duration-200 ease-in" />
             </Link>
           </div>
