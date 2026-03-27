@@ -33,7 +33,7 @@ const BookDetails = () => {
   const navigate = useNavigate();
 
   const { data: book, isLoading, isError } = useGetBookById(id);
-  const { data: books, isLoading: loading } = useGetAllBooks();
+  const { data, isLoading: loading } = useGetAllBooks();
 
   if (isError) {
     navigate(-1);
@@ -105,7 +105,7 @@ const BookDetails = () => {
               Ultimas postagens
             </h3>
 
-            <ShowComponent when={!!books}>
+            <ShowComponent when={!!data?.books}>
               <div className="p-5 pb-0 rounded-2xl ">
                 <Carousel
                   className="w-full"
@@ -116,7 +116,7 @@ const BookDetails = () => {
                   <CarouselPrevious />
 
                   <CarouselContent className="p-3 -ml-3 rounded-2xl w-60 ">
-                    {books?.map((book) => (
+                    {data?.books?.map((book) => (
                       <CarouselItem key={book.id} className="pl-4">
                         <div className="p-3 h-full space-y-1">
                           <Link

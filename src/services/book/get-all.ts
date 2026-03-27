@@ -7,17 +7,27 @@ interface GetAllParams {
   queryParams: string;
 }
 
+interface GetAllApiReturn {
+  pagination: {
+    totalBooks: number;
+    totalPages: number;
+    actualPage: number;
+    limit: number;
+  };
+  books: Book[];
+}
+
 const getAll = async ({ id, queryParams }: GetAllParams) => {
   try {
     if (id) {
-      const res = await api.get<{ books: Book[] }>("/book/user/" + id);
+      const res = await api.get<GetAllApiReturn>("/book/user/" + id);
 
-      return res.data.books;
+      return res.data;
     }
 
-    const res = await api.get<{ books: Book[] }>(`/book?${queryParams}`);
+    const res = await api.get<GetAllApiReturn>(`/book?${queryParams}`);
 
-    return res.data.books;
+    return res.data;
   } catch (error) {
     const axiosError = error as AxiosError<{ message: string }>;
     throw new Error(axiosError.response?.data.message);

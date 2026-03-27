@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import BookListSkeleton from "@/components/skeletons/book-list-skeleton";
 
 const Home = () => {
-  const { data: books, isLoading, isSuccess } = useGetAllBooks("limit=4");
+  const { data, isLoading, isSuccess } = useGetAllBooks("limit=4");
 
   return (
     <div className="space-y-10">
@@ -48,7 +48,7 @@ const Home = () => {
               <ArrowRight className="group-hover:translate-x-1 transform duration-200 ease-in" />
             </Link>
           </div>
-          <BooksList books={books} />
+          <BooksList books={data?.books} />
         </section>
       )}
 
