@@ -4,22 +4,23 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group";
 import { Search } from "lucide-react";
-import { useRef, useState } from "react";
 import SeeAllPreview from "./components/see-all-preview";
 import useGetAllBooks from "@/hooks/books/use-get-all-book";
+import { useSearchParams } from "react-router";
+import Pagination from "@/components/pagination";
 
 const SeeAllBooks = () => {
-  const inputRef = useRef<null | HTMLInputElement>(null);
+  const [searchParams] = useSearchParams();
 
-  const [page, setPage] = useState(1);
+  const page = Number(searchParams.get("page")) || 1;
+  const limit = 1;
 
-  const { data: books } = useGetAllBooks(`limit=8&page=${page}`);
+  const { data } = useGetAllBooks(`limit=${limit}&page=${page || 1}`);
 
   return (
     <section className="py-10 space-y-10">
       <InputGroup className="py-8 px-5 bg-background">
         <InputGroupInput
-          ref={inputRef}
           type="text"
           className="peer font-secondary text-zinc-500 md:text-lg font-semibold placeholder:text-zinc-400 placeholder:text-lg placeholder:italic placeholder:font-light"
           placeholder="Procure por título, autor..."
@@ -29,13 +30,15 @@ const SeeAllBooks = () => {
         </InputGroupAddon>
       </InputGroup>
 
-      {books && (
+      {data?.books && (
         <div className="flex flex-wrap gap-10">
-          {books.map((book) => (
+          {data?.books.map((book) => (
             <SeeAllPreview key={book.id} book={book} />
           ))}
         </div>
       )}
+
+      <Pagination actualPage={page} totalPages={data?.pagination.totalPages!} />
     </section>
   );
 };
