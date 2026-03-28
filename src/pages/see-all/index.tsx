@@ -8,27 +8,48 @@ import SeeAllPreview from "./components/see-all-preview";
 import useGetAllBooks from "@/hooks/books/use-get-all-book";
 import { useSearchParams } from "react-router";
 import Pagination from "@/components/pagination";
+import { useForm } from "react-hook-form";
+import ErrorMessage from "@/components/error-message";
 
 const SeeAllBooks = () => {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const page = Number(searchParams.get("page")) || 1;
-  const limit = 1;
+  const search = searchParams.get("search") || "";
+  const limit = 8;
 
-  const { data } = useGetAllBooks(`limit=${limit}&page=${page || 1}`);
+  const { data } = useGetAllBooks(
+    `search=${search}&limit=${limit}&page=${page}`,
+  );
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<{ search: string }>();
+
+  const handleSearch = (data: { search: string }) => {
+    setSearchParams({ search: data.search });
+  };
 
   return (
     <section className="py-10 space-y-10 w-full">
-      <InputGroup className="py-8 px-5 bg-background">
-        <InputGroupInput
-          type="text"
-          className="peer font-secondary text-zinc-500 md:text-lg font-semibold placeholder:text-zinc-400 placeholder:text-lg placeholder:italic placeholder:font-light"
-          placeholder="Procure por título, autor..."
-        />
-        <InputGroupAddon className="text-zinc-400 peer-focus:text-primary">
-          <Search className="text-4xl size-5" />
-        </InputGroupAddon>
-      </InputGroup>
+      <form action="" onSubmit={handleSubmit(handleSearch)}>
+        <InputGroup className="py-8 px-5 bg-background">
+          <InputGroupInput
+            {...register("search")}
+            type="text"
+            className="peer font-secondary text-zinc-500 md:text-lg font-semibold placeholder:text-zinc-400 placeholder:text-lg placeholder:italic placeholder:font-light"
+            placeholder="Procure por título ou autor."
+            defaultValue={search}
+          />
+          <InputGroupAddon className="text-zinc-400 peer-focus:text-primary">
+            <Search className="text-4xl size-5" />
+          </InputGroupAddon>
+        </InputGroup>
+
+        {errors.search && <ErrorMessage>{errors.search.message}</ErrorMessage>}
+      </form>
 
       {data?.books && (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-10">
