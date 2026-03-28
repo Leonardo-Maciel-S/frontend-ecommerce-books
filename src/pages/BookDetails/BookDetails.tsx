@@ -116,34 +116,40 @@ const BookDetails = () => {
                   <CarouselPrevious />
 
                   <CarouselContent className="p-3 -ml-3 rounded-2xl w-60 ">
-                    {data?.books?.map((book) => (
-                      <CarouselItem key={book.id} className="pl-4">
-                        <div className="p-3 h-full space-y-1">
-                          <Link
-                            to={`/book-details/${book.id}`}
-                            className="block"
-                          >
-                            <img
-                              src={book?.coverImg}
-                              alt=""
-                              className="hover:shadow-lg h-[250px] shadow-zinc-500/30 rounded-lg cursor-pointer transition-all duration-200 "
-                            />
-                          </Link>
+                    {data?.books?.map((carouselBook) => {
+                      if (book?.id !== carouselBook.id) {
+                        return (
+                          <CarouselItem key={carouselBook.id} className="pl-4">
+                            <div className="p-3 h-full space-y-1">
+                              <Link
+                                to={`/book-details/${carouselBook.id}`}
+                                className="block"
+                              >
+                                <img
+                                  src={carouselBook.coverImg}
+                                  alt=""
+                                  className="hover:shadow-lg h-[250px] shadow-zinc-500/30 rounded-lg cursor-pointer transition-all duration-200 "
+                                />
+                              </Link>
 
-                          <div>
-                            <p className="font-bold font-secondary">
-                              {book.title}
-                            </p>
-                            <p className="text-xs font-secondary font-medium tracking-wider text-zinc-500">
-                              {book.author}
-                            </p>
-                          </div>
-                          <p className="font-extrabold text-primary">
-                            {convertPriceInCentsToReal(book.priceInCents)}
-                          </p>
-                        </div>
-                      </CarouselItem>
-                    ))}
+                              <div>
+                                <p className="font-bold font-secondary">
+                                  {carouselBook.title}
+                                </p>
+                                <p className="text-xs font-secondary font-medium tracking-wider text-zinc-500">
+                                  {carouselBook.author}
+                                </p>
+                              </div>
+                              <p className="font-extrabold text-primary">
+                                {convertPriceInCentsToReal(
+                                  carouselBook.priceInCents,
+                                )}
+                              </p>
+                            </div>
+                          </CarouselItem>
+                        );
+                      }
+                    })}
                   </CarouselContent>
 
                   <CarouselNext />
