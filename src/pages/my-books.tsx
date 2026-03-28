@@ -4,7 +4,7 @@ import BookListSkeleton from "@/components/skeletons/book-list-skeleton";
 import useGetAllBooksByUserId from "@/hooks/books/use-get-all-books-by-user-id";
 
 const MyBooks = () => {
-  const { data: books, isLoading } = useGetAllBooksByUserId();
+  const { data, isLoading } = useGetAllBooksByUserId();
 
   return (
     <div>
@@ -16,14 +16,14 @@ const MyBooks = () => {
         <BookListSkeleton />
       </ShowComponent>
 
-      <ShowComponent when={books?.length === 0}>
+      <ShowComponent when={data?.books.length === 0}>
         <p className="text-center w-full text-zinc-500 text-lg font-semibold">
           Você não possui livros cadastrados.
         </p>
       </ShowComponent>
 
-      <ShowComponent when={!!books}>
-        <BooksList books={books} isMyBooks={true} />
+      <ShowComponent when={!!data?.books}>
+        <BooksList books={data?.books} isMyBooks={true} />
       </ShowComponent>
     </div>
   );

@@ -5,15 +5,16 @@ import { ArrowRight } from "lucide-react";
 import BookListSkeleton from "@/components/skeletons/book-list-skeleton";
 
 const Home = () => {
-  const { data: books, isLoading, isSuccess } = useGetAllBooks("limit=4");
+  const { data, isLoading, isSuccess } = useGetAllBooks("limit=4");
 
   return (
     <div className="space-y-10">
       <section className=" grid lg:grid-cols-2 gap-10 lg:gap-36  justify-between items-center py-20 min-h-[80dvh] border-b-2 border-primary/30">
         <div className="flex flex-col gap-2">
           <h1 className="text-xl md:text-4xl xl:text-5xl tracking-wide font-primary ">
-            "Sempre imaginei que o <span className="text-primary">paraíso</span>{" "}
-            fosse uma espécie de <strong>livraria</strong>."
+            "Sempre imaginei que o{" "}
+            <span className="text-primary italic">paraíso</span> fosse uma
+            espécie de <strong>livraria</strong>."
           </h1>
 
           <p className="font-medium italic text-xs md:text-base text-zinc-600 ">
@@ -40,14 +41,14 @@ const Home = () => {
             </h2>
 
             <Link
-              to={"/all-books"}
+              to={"/see-all"}
               className="group flex items-center gap-2 font-primary text-primary w-fit"
             >
-              <p className="group-hover:underline">See all</p>{" "}
+              <p className="group-hover:underline text-lg">Ver todos</p>{" "}
               <ArrowRight className="group-hover:translate-x-1 transform duration-200 ease-in" />
             </Link>
           </div>
-          <BooksList books={books} />
+          <BooksList books={data?.books} />
         </section>
       )}
 

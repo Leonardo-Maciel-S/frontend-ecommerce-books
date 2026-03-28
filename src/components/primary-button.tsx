@@ -6,10 +6,11 @@ import { tv } from "tailwind-variants";
 interface PrimaryButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "outline";
   disabled?: boolean;
+  size?: "default" | "medium" | "sm";
 }
 
 const button = tv({
-  base: " py-3 px-10 rounded-lg font-bold font-secondary text-lg flex items-center justify-center gap-2 cursor-pointer ease-linear duration-150",
+  base: "rounded-lg font-bold font-secondary  flex items-center justify-center gap-2 cursor-pointer ease-linear duration-150 disabled:border-inherit disabled:cursor-default",
   variants: {
     variant: {
       primary:
@@ -17,9 +18,15 @@ const button = tv({
       secondary: "bg-private-secondary text-white",
       outline: "border-2 border-primary/30 text-primary hover:border-primary ",
     },
+    size: {
+      default: "py-3 px-10 text-lg",
+      sm: "py-3 px-3 text-sm",
+      medium: "py-3 px-5 text-md",
+    },
   },
   defaultVariants: {
     variant: "primary",
+    size: "default",
   },
 });
 
@@ -28,12 +35,13 @@ const PrimaryButton = ({
   className,
   variant,
   disabled,
+  size,
   ...props
 }: PrimaryButtonProps) => {
   return (
     <button
       {...props}
-      className={cn(button({ variant }), className)}
+      className={cn(button({ variant, size }), className)}
       disabled={disabled}
     >
       {children}

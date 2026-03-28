@@ -1,5 +1,5 @@
 import { bookService } from "@/services/book";
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
 const useGetAllBooks = (queryParams?: string) => {
@@ -18,6 +18,7 @@ const useGetAllBooks = (queryParams?: string) => {
         toast.error((error as Error).message);
       }
     },
+    placeholderData: keepPreviousData,
   });
 
   return { ...query };

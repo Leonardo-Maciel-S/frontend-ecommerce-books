@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import useGetAllBooks from "./use-get-all-book";
 
 const useFindBookById = (id?: string) => {
-  const { data: books } = useGetAllBooks();
+  const { data } = useGetAllBooks();
 
-  const book = books?.find((data) => data.id === id);
+  const book = data?.books?.find((data) => data.id === id);
 
   useEffect(() => {}, [book, id]);
 

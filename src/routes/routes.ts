@@ -9,6 +9,7 @@ import EditBook from "@/pages/edit-book";
 import BookDetails from "@/pages/BookDetails/BookDetails";
 import Addresses from "@/pages/addresses/addresses";
 import { redirectHome } from "./loaders/redirect-home";
+import SeeAllBooks from "@/pages/see-all";
 
 export const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
         path: "/my-addresses",
         loader: authLoader,
         Component: Addresses,
+      },
+      {
+        path: "/see-all",
+        Component: SeeAllBooks,
       },
     ],
   },
