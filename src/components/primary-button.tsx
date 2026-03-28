@@ -6,11 +6,11 @@ import { tv } from "tailwind-variants";
 interface PrimaryButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "outline";
   disabled?: boolean;
-  size: "default" | "medium" | "sm";
+  size?: "default" | "medium" | "sm";
 }
 
 const button = tv({
-  base: "rounded-lg font-bold font-secondary  flex items-center justify-center gap-2 cursor-pointer ease-linear duration-150 disabled:border-inherit",
+  base: "rounded-lg font-bold font-secondary  flex items-center justify-center gap-2 cursor-pointer ease-linear duration-150 disabled:border-inherit disabled:cursor-default",
   variants: {
     variant: {
       primary:

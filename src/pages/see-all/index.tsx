@@ -18,7 +18,7 @@ const SeeAllBooks = () => {
   const { data } = useGetAllBooks(`limit=${limit}&page=${page || 1}`);
 
   return (
-    <section className="py-10 space-y-10">
+    <section className="py-10 space-y-10 w-full">
       <InputGroup className="py-8 px-5 bg-background">
         <InputGroupInput
           type="text"
@@ -31,7 +31,7 @@ const SeeAllBooks = () => {
       </InputGroup>
 
       {data?.books && (
-        <div className="flex flex-wrap gap-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-10">
           {data?.books.map((book) => (
             <SeeAllPreview key={book.id} book={book} />
           ))}

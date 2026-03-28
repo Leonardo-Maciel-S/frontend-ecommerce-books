@@ -16,7 +16,11 @@ const SeeAllPreview = ({ book }: SeeAllPreviewProps) => {
     <div className="flex flex-col relative gap-2">
       <div className="group relative overflow-hidden hover:shadow-lg shadow-black/30 hover:-translate-y-2 transition-all duration-200 ease-in rounded-sm">
         <Link to={`/book-details/${book.id}`}>
-          <img src={book.coverImg} alt="" className="lg:h-[500px]" />
+          <img
+            src={book.coverImg}
+            alt=""
+            className="h-[500px] w-full object-fill "
+          />
         </Link>
         <PrimaryButton className="text-primary hover:bg-primary hover:text-white bg-white absolute -bottom-11 group-hover:bottom-3 right-3 p-3 transition-all duration-150 ease-in">
           <ShoppingBag strokeWidth={2} />
@@ -36,7 +40,7 @@ const SeeAllPreview = ({ book }: SeeAllPreviewProps) => {
           <p className="font-primary text-primary font-bold">{4.2}</p>
         </span>
 
-        <p className="lg:text-xl font-light tracking-tighter">
+        <p className="lg:text-xl font-semibold lg:font-light tracking-tighter">
           {convertPriceInCentsToReal(book.priceInCents)}
         </p>
       </div>
