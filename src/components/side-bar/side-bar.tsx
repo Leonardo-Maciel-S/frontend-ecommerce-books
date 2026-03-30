@@ -31,11 +31,11 @@ const SideBar = ({ isOpen, setIsOpen, children }: SideBarProps) => {
 
   return (
     <div
-      className={`w-screen h-screen z-20 bg-black/30 fixed right-0 top-0 ${isOpen ? "block" : "hidden"}`}
+      className={`w-screen h-screen z-20 bg-black/30 fixed right-0 top-0 transition-all duration-300 ease-in ${isOpen ? "visible" : "invisible"}`}
     >
       <div
         ref={sideBar}
-        className={`w-[300px] h-screen fixed right-[300px] top-0 rounded-tl-4xl rounded-bl-4xl shadow-2xl shadow-black  bg-white z-20 ${"translate-x-[300px]"}`}
+        className={`w-[300px] h-screen fixed -right-[300px] top-0 rounded-tl-4xl rounded-bl-4xl shadow-2xl shadow-black bg-white z-20 transition-all duration-300 ease-linear ${isOpen && "-translate-x-[300px]"}`}
       >
         <div className="border-b-2 p-5 pb-2 border-zinc-300">
           <h3 className="font-semibold font-secondary text-lg">
