@@ -49,22 +49,21 @@ const HomeBar = () => {
 
           <div className="flex justify-between items-center gap-5 ">
             <button
-              className="hover:bg-primary/80 hover:text-white p-2 cursor-pointer transition-all duration-100 rounded-md"
+              onClick={openCartBar}
+              className="group hover:text-white cursor-pointer rounded-md"
+            >
+              <Handbag className="group-hover:text-primary text-zinc-500 transition-all duration-100" />
+            </button>
+            <button
+              className="group hover:text-white p-2 cursor-pointer transition-all duration-100 rounded-md"
               onClick={openProfileBar}
             >
-              <User />
-            </button>
-
-            <button
-              onClick={openCartBar}
-              className="hover:bg-primary/80 hover:text-white p-2 cursor-pointer transition-all duration-100 rounded-md"
-            >
-              <Handbag />
+              <User className="group-hover:text-primary text-zinc-500 transition-all duration-100" />
             </button>
           </div>
         </div>
       </nav>
-
+      z
       <SideBar isOpen={isSideBarOpen} setIsOpen={setIsSideBarOpen}>
         {isProfileBar ? (
           <UserSideBar
