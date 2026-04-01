@@ -5,11 +5,14 @@ import useCheckIsLogged from "./hooks/user/use-check-is-logged";
 import { useEffect } from "react";
 import useGetAllBooks from "./hooks/books/use-get-all-book";
 import Footer from "./components/Footer";
+import useGetCart from "./hooks/cart/get-cart";
 
 function App() {
   useCheckIsLogged();
 
   useGetAllBooks();
+
+  useGetCart();
 
   useEffect(() => {
     const environment: string = import.meta.env.MODE;
