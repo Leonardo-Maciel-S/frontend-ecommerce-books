@@ -5,7 +5,7 @@ import useCheckIsLogged from "./hooks/user/use-check-is-logged";
 import { useEffect } from "react";
 import useGetAllBooks from "./hooks/books/use-get-all-book";
 import Footer from "./components/Footer";
-import useGetCart from "./hooks/cart/get-cart";
+import useGetCart from "./hooks/cart/use-get-cart";
 
 function App() {
   useCheckIsLogged();

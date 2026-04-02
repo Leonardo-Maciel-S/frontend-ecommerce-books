@@ -7,10 +7,9 @@ const useGetCart = () => {
     queryFn: async () => {
       const response = await cartService.getCart();
 
-      console.log(response);
-
       return response;
     },
+    staleTime: 1000 * 60 * 5,
   });
 };
 
