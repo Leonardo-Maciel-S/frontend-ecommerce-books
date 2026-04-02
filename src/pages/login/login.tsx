@@ -20,7 +20,7 @@ const Login = () => {
         <h2 className="font-bold text-xl">BookStore</h2>
       </div>
 
-      <div className="flex flex-col gap-2 md:w-/3">
+      <div className="flex flex-col gap-2 md:w-/3 z-10">
         <Button
           variant="outline"
           className="w-min self-end cursor-pointer z-20 bg-white hover:bg-primary/90 hover:text-white"
