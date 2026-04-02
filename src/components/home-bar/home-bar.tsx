@@ -63,7 +63,6 @@ const HomeBar = () => {
           </div>
         </div>
       </nav>
-      z
       <SideBar isOpen={isSideBarOpen} setIsOpen={setIsSideBarOpen}>
         {isProfileBar ? (
           <UserSideBar
