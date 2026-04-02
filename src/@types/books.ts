@@ -8,3 +8,10 @@ export interface Book {
   evaluation?: number | undefined;
   userId: string;
 }
+
+export interface bookInCart {
+  id: string;
+  title: string;
+  coverImg: string;
+  priceInCents: number;
+}
