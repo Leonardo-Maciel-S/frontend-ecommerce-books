@@ -63,7 +63,11 @@ const HomeBar = () => {
           </div>
         </div>
       </nav>
-      <SideBar isOpen={isSideBarOpen} setIsOpen={setIsSideBarOpen}>
+      <SideBar
+        isOpen={isSideBarOpen}
+        setIsOpen={setIsSideBarOpen}
+        isProfileBar={isProfileBar}
+      >
         {isProfileBar ? (
           <UserSideBar
             user={user}
@@ -71,11 +75,7 @@ const HomeBar = () => {
             navigateTo={navigateTo}
           />
         ) : (
-          <CartSideBar
-            user={user}
-            setIsOpen={setIsSideBarOpen}
-            navigateTo={navigateTo}
-          />
+          <CartSideBar user={user} navigateTo={navigateTo} />
         )}
       </SideBar>
     </>
