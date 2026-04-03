@@ -12,6 +12,7 @@ export interface Book {
 export interface bookInCart {
   id: string;
   title: string;
+  autor: string;
   coverImg: string;
   priceInCents: number;
 }
