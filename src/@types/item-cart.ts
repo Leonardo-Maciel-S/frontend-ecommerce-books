@@ -13,4 +13,5 @@ export interface ItemCartResponse {
     cartItem: ItemCart;
     book: bookInCart;
   }[];
+  subtotal: number;
 }
