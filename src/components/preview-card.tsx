@@ -52,7 +52,7 @@ const PreviewCard = ({ book, isMyBooks }: PreviewCardProps) => {
         <div className="w-full  gap-3">
           {isMyBooks ? (
             <div className="flex gap-3 ">
-              <Link to={`/edit-book/${book.id}`} className="flex-1">
+              <Link to={`/profile/edit-book/${book.id}`} className="flex-1">
                 <PrimaryButton variant="secondary" className="w-full p-2 ">
                   Editar
                 </PrimaryButton>
