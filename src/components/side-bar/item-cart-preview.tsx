@@ -3,6 +3,7 @@ import InputQuantity from "../input-quantity";
 import type { ItemCart } from "@/@types/item-cart";
 import { convertPriceInCentsToReal } from "@/utils/convert-price-in-cent-to-real";
 import { Trash2 } from "lucide-react";
+import useIncrementAndDecreaseItem from "@/hooks/cart/use-increment-and-decrease-item";
 
 interface ItemCartPreviewProps {
   item: {
@@ -12,6 +13,11 @@ interface ItemCartPreviewProps {
 }
 
 const ItemCartPreview = ({ item }: ItemCartPreviewProps) => {
+  const { incrementItem, decreaseItem } = useIncrementAndDecreaseItem(
+    item.cartItem.id,
+    item.cartItem.quantity,
+  );
+
   return (
     <div className="flex gap-5">
       <img
@@ -31,8 +37,10 @@ const ItemCartPreview = ({ item }: ItemCartPreviewProps) => {
 
         <InputQuantity
           defaultQuantity={item.cartItem.quantity}
-          btnNextFn={() => {}}
-          btnPrevFn={() => {}}
+          btnNextFn={incrementItem.mutate}
+          btnPrevFn={decreaseItem.mutate}
+          prevLoad={decreaseItem.isPending}
+          nextLoad={incrementItem.isPending}
         />
       </div>
 
