@@ -49,16 +49,16 @@ export const router = createBrowserRouter([
         loader: authLoader,
         Component: MyBooks,
       },
-      {
-        path: "create-book",
-        loader: authLoader,
-        Component: CreateBook,
-      },
 
       {
         path: "edit-book/:id",
         loader: authLoader,
         Component: EditBook,
+      },
+      {
+        path: "create-book",
+        loader: authLoader,
+        Component: CreateBook,
       },
 
       {
@@ -67,9 +67,5 @@ export const router = createBrowserRouter([
         Component: Addresses,
       },
     ],
-  },
-  {
-    path: "*",
-    loader: redirectHome,
   },
 ]);
