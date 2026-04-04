@@ -7,10 +7,6 @@ export async function addItemCart(id: string) {
       withCredentials: true,
     });
 
-    if (response.status === 400) {
-      throw new Error(response.data);
-    }
-
     return response.data;
   } catch (error) {
     throw new Error(
