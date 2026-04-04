@@ -1,33 +1,32 @@
 import { Handbag, User } from "lucide-react";
-// import ButtonWithMarkBook from "./button-with-mark-book";
 import { Link } from "react-router";
 import { useState } from "react";
-import UserSideBar from "../side-bar/user-side-bar";
 import SideBar from "../side-bar/side-bar";
-import CartSideBar from "../side-bar/cart-side-bar";
 import useGetUserAuth from "@/hooks/user/use-get-user-auth";
 
 const HomeBar = () => {
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-  const [isProfileBar, setIsProfileBar] = useState(false);
 
   const { user, navigate } = useGetUserAuth();
 
   const openSideBar = () => setIsSideBarOpen(true);
 
-  const openProfileBar = () => {
-    setIsProfileBar(true);
-    openSideBar();
-  };
-
   const openCartBar = () => {
     openSideBar();
-    setIsProfileBar(false);
   };
 
   const navigateTo = (route: string) => {
     navigate(route);
     setIsSideBarOpen(false);
+  };
+
+  const navigateToProfile = () => {
+    if (!user) {
+      navigateTo("/login");
+      return;
+    }
+
+    navigateTo(`/profile/${user?.id}`);
   };
 
   return (
@@ -54,30 +53,24 @@ const HomeBar = () => {
             >
               <Handbag className="group-hover:text-primary text-zinc-500 transition-all duration-100" />
             </button>
+
             <button
+              onClick={navigateToProfile}
               className="group hover:text-white p-2 cursor-pointer transition-all duration-100 rounded-md"
-              onClick={openProfileBar}
             >
               <User className="group-hover:text-primary text-zinc-500 transition-all duration-100" />
             </button>
           </div>
         </div>
       </nav>
-      <SideBar isOpen={isSideBarOpen} setIsOpen={setIsSideBarOpen}>
-        {isProfileBar ? (
-          <UserSideBar
-            user={user}
-            setIsOpen={setIsSideBarOpen}
-            navigateTo={navigateTo}
-          />
-        ) : (
-          <CartSideBar
-            user={user}
-            setIsOpen={setIsSideBarOpen}
-            navigateTo={navigateTo}
-          />
-        )}
-      </SideBar>
+      
+      <SideBar
+        user={user}
+        isOpen={isSideBarOpen}
+        setIsOpen={setIsSideBarOpen}
+        navigateTo={navigateTo}
+      />
+
     </>
   );
 };

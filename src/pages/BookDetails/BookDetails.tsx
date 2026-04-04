@@ -17,8 +17,9 @@ import { AuthContext } from "@/context/auth";
 import useGetAllBooks from "@/hooks/books/use-get-all-book";
 import useGetBookById from "@/hooks/books/use-get-by-id";
 import PrimaryButton from "@/components/primary-button";
-import { ShoppingCart } from "lucide-react";
+import { Loader2, ShoppingCart } from "lucide-react";
 import BookDetailsSkeleton from "@/components/skeletons/book-details-skeleton";
+import useAddItemCart from "@/hooks/cart/use-add-item-cart";
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -34,6 +35,7 @@ const BookDetails = () => {
 
   const { data: book, isLoading, isError } = useGetBookById(id);
   const { data, isLoading: loading } = useGetAllBooks();
+  const { mutate: addItem, isPending: addItemLoading } = useAddItemCart(id);
 
   if (isError) {
     navigate(-1);
@@ -88,8 +90,16 @@ const BookDetails = () => {
               </div>
 
               <div className="flex gap-3 w-full">
-                <PrimaryButton>
-                  <ShoppingCart strokeWidth="3" />
+                <PrimaryButton
+                  onClick={() => addItem()}
+                  disabled={addItemLoading}
+                >
+                  {addItemLoading ? (
+                    <Loader2 className="animate-spin" />
+                  ) : (
+                    <ShoppingCart strokeWidth="3" />
+                  )}
+
                   <p>Adicionar ao carrinho</p>
                 </PrimaryButton>
 

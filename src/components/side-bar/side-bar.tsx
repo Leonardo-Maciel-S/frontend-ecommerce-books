@@ -1,24 +1,42 @@
-import useGetUserAuth from "@/hooks/user/use-get-user-auth";
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef } from "react";
+import PrimaryButton from "../primary-button";
+import { X } from "lucide-react";
+import useGetAllItemCart from "@/hooks/cart/use-get-all-item-cart";
+import CartSideBar from "./cart-side-bar";
+import type { User } from "@/@types/user";
 
 interface SideBarProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<boolean>;
-  children: ReactNode;
+  navigateTo: (route: string) => void;
+  user: User | null;
 }
 
-const SideBar = ({ isOpen, setIsOpen, children }: SideBarProps) => {
+const SideBar = ({ isOpen, setIsOpen, navigateTo, user }: SideBarProps) => {
   const sideBar = useRef<HTMLDivElement>(null);
 
-  const { user } = useGetUserAuth();
+  const body = document.querySelector("body");
+
+  const { data } = useGetAllItemCart();
+
+  const qtyItemsInCart = data?.cartItems.length;
+
+  const closeBar = () => {
+    setIsOpen(false);
+    body?.classList.remove("noScroll");
+  };
 
   useEffect(() => {
+    if (isOpen) {
+      body?.classList.add("noScroll");
+    }
+
     const handleClick = (e: Event) => {
       if (
         sideBar.current &&
         !sideBar.current.contains(e.target as HTMLDivElement)
       ) {
-        setIsOpen(false);
+        closeBar();
       }
     };
 
@@ -31,20 +49,35 @@ const SideBar = ({ isOpen, setIsOpen, children }: SideBarProps) => {
 
   return (
     <div
-      className={`w-screen h-screen z-20 bg-black/30 fixed right-0 top-0 transition-all duration-300 ease-in ${isOpen ? "visible" : "invisible"}`}
+      className={`w-screen h-screen z-20 bg-black/40 backdrop-blur-xs fixed right-0 top-0 transition-all duration-300 ease-in ${isOpen ? "visible" : "invisible"}`}
     >
       <div
         ref={sideBar}
-        className={`w-[300px] h-screen fixed -right-[300px] top-0 rounded-tl-4xl rounded-bl-4xl shadow-2xl shadow-black bg-white z-20 transition-all duration-300 ease-linear ${isOpen && "-translate-x-[300px]"}`}
+        className={` flex flex-col justify-between gap-5 py-8 px-8 w-full sm:w-[450px] h-screen fixed md:-right-[450px] top-0 shadow-2xl shadow-black/5 bg-background z-20 transition-all duration-300 ease-linear ${isOpen && "md:-translate-x-[450px]"}`}
       >
-        <div className="border-b-2 p-5 pb-2 border-zinc-300">
-          <h3 className="font-semibold font-secondary text-lg">
-            {user ? `Óla, ${user.name}` : "Faça login"}
-          </h3>
+        <div className="flex items-start justify-between  ">
+          <div className="">
+            <h3 className="font-bold font-primary lg:text-2xl tracking-wide">
+              "CARRINHO"
+            </h3>
+
+            <p className="text-sm text-zinc-500 font-secondary font-semibold">
+              {qtyItemsInCart || 0} items no carrinho
+            </p>
+          </div>
+
+          <PrimaryButton
+            onClick={closeBar}
+            variant="outline"
+            size="sm"
+            className="border-none font-xl text-zinc-400 hover:text-red-500"
+          >
+            <X />
+          </PrimaryButton>
         </div>
 
-        <div className="p-4 flex flex-col justify-between h-[93%] ">
-          {children}
+        <div className="flex flex-col justify-between h-[93%]">
+          <CartSideBar user={user} navigateTo={navigateTo} />
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { type ReactNode } from "react";
 
 interface ShowComponentProps {
-  when: boolean;
+  when: boolean | undefined;
   children: ReactNode;
 }
 const ShowComponent = ({ when, children }: ShowComponentProps) => {
