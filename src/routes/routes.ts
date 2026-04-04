@@ -2,16 +2,16 @@ import { createBrowserRouter } from "react-router";
 import App from "../App";
 import Home from "../pages/home";
 import Login from "../pages/login/login";
-import CreateBook from "@/pages/create-book";
 import { authLoader } from "./loaders/auth";
-import EditBook from "@/pages/edit-book";
 import BookDetails from "@/pages/BookDetails/BookDetails";
 import Addresses from "@/pages/addresses/addresses";
 import { redirectHome } from "./loaders/redirect-home";
 import SeeAllBooks from "@/pages/see-all";
-import ProfilePage from "@/pages/profile";
 import { redirectMyBooks } from "./loaders/redirect-my-book";
+import ProfilePage from "@/pages/profile";
 import MyBooks from "@/pages/profile/components/my-books";
+import CreateBook from "@/pages/profile/components/create-book";
+import EditBook from "@/pages/profile/components/edit-book";
 
 export const router = createBrowserRouter([
   {
