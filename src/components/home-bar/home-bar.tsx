@@ -26,7 +26,7 @@ const HomeBar = () => {
       return;
     }
 
-    navigateTo(`/profile/${user?.id}`);
+    navigateTo(`/profile/my-books`);
   };
 
   return (

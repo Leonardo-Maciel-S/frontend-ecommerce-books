@@ -1,44 +1,54 @@
 import ShowComponent from "../show-component";
-import type { User } from "@/@types/user";
-import Button from "../button";
 import { useLogout } from "@/hooks/user/use-logout";
+import useGetUserAuth from "@/hooks/user/use-get-user-auth";
+import { Link } from "react-router";
+import { BookMarked, BookOpenText, MapPin, NotebookPen } from "lucide-react";
+import ProfileButton from "@/pages/profile/profile-button";
 
-interface UserSideBarProps {
-  setIsOpen: React.Dispatch<boolean>;
-  navigateTo: (route: string) => void;
-  user: User | null;
-}
+const UserSideBar = () => {
+  const { user, navigate } = useGetUserAuth();
 
-const UserSideBar = ({ user, setIsOpen, navigateTo }: UserSideBarProps) => {
   const { mutate } = useLogout();
 
   const logout = () => {
-    setIsOpen(false);
     mutate();
   };
 
   return (
-    <>
-      <div className="space-y-4">
-        <ShowComponent when={!!user}>
-          {/* <Button>Editar Conta</Button> */}
+    <div className="bg-white h-screen px-5 pb-8 flex justify-between flex-col">
+      <div>
+        <Link to="/">
+          <button className="flex gap-2 items-center px-10 font-bold cursor-pointer font-secondary py-10  w-full">
+            <BookOpenText className="text-primary text-2xl" strokeWidth={3} />
+            <p className="text-2xl">Bookstore</p>
+          </button>
+        </Link>
 
-          <h4 className="text-zinc-700 font-semibold">Conta</h4>
+        <div className="space-y-4  ">
+          <ShowComponent when={!!user}>
+            {/* <Button>Editar Conta</Button> */}
 
-          <Button onClick={() => navigateTo("/my-addresses")}>Endereços</Button>
+            <ProfileButton to={"./my-books"}>
+              <BookMarked />
+              <p>Meus Livros</p>
+            </ProfileButton>
 
-          <h4 className="text-zinc-700 font-semibold">Livros</h4>
-          <Button onClick={() => navigateTo("/my-books")}>Meus Livros</Button>
-          <Button onClick={() => navigateTo("/create-book")}>
-            Criar Livro
-          </Button>
-        </ShowComponent>
+            <ProfileButton to={"./my-addresses"}>
+              <MapPin />
+              <p>Endereços</p>
+            </ProfileButton>
 
-        <ShowComponent when={!user}>
-          <Button onClick={() => navigateTo("/login")}>Fazer Login</Button>
-        </ShowComponent>
+            <ProfileButton to={"./create-book"}>
+              <NotebookPen />
+              <p>Criar Livro</p>
+            </ProfileButton>
+          </ShowComponent>
+
+          <ShowComponent when={!user}>
+            <ProfileButton to={"/login"}>Fazer Login</ProfileButton>
+          </ShowComponent>
+        </div>
       </div>
-
       <ShowComponent when={!!user}>
         <button
           onClick={() => logout()}
@@ -47,7 +57,7 @@ const UserSideBar = ({ user, setIsOpen, navigateTo }: UserSideBarProps) => {
           Sair
         </button>
       </ShowComponent>
-    </>
+    </div>
   );
 };
 
