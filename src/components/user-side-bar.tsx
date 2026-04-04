@@ -6,7 +6,7 @@ import { BookMarked, BookOpenText, MapPin, NotebookPen } from "lucide-react";
 import ProfileButton from "@/pages/profile/components/profile-button";
 
 const UserSideBar = () => {
-  const { user, navigate } = useGetUserAuth();
+  const { user } = useGetUserAuth();
 
   const { mutate } = useLogout();
 
