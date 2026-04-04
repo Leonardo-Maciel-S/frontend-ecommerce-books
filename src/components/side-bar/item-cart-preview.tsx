@@ -4,6 +4,7 @@ import type { ItemCart } from "@/@types/item-cart";
 import { convertPriceInCentsToReal } from "@/utils/convert-price-in-cent-to-real";
 import { Trash2 } from "lucide-react";
 import useIncrementAndDecreaseItem from "@/hooks/cart/use-increment-and-decrease-item";
+import useDeleteItem from "@/hooks/cart/use-delete-item";
 
 interface ItemCartPreviewProps {
   item: {
@@ -17,6 +18,8 @@ const ItemCartPreview = ({ item }: ItemCartPreviewProps) => {
     item.cartItem.id,
     item.cartItem.quantity,
   );
+
+  const { mutateAsync, isPending } = useDeleteItem(item.cartItem.id);
 
   return (
     <div className="flex gap-5">
@@ -45,7 +48,11 @@ const ItemCartPreview = ({ item }: ItemCartPreviewProps) => {
       </div>
 
       <div className="flex flex-col justify-between items-start  gap-2 ">
-        <button className="self-end flex p-2 items-center justify-center w-min  rounded-lg mx-auto hover:bg-zinc-50 text-zinc-400 hover:text-primary cursor-pointer">
+        <button
+          onClick={() => mutateAsync()}
+          disabled={isPending}
+          className="self-end disabled:text-zinc-300 flex p-2 items-center justify-center w-min  rounded-lg mx-auto not-disabled:hover:bg-zinc-50 text-zinc-400 not-disabled:hover:text-primary cursor-pointer"
+        >
           <Trash2 size={20} className="" />
         </button>
 

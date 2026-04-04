@@ -1,5 +1,6 @@
 import { addItemCart } from "./add-item-cart";
 import { decreaseItem } from "./decrease-item";
+import { deleteItemCart } from "./delete-item-cart";
 import { getAllItemCart } from "./get-all-item-cart";
 import { getCart } from "./get-cart";
 import { incrementItem } from "./increment-item";
@@ -10,4 +11,5 @@ export const cartService = {
   incrementItem,
   decreaseItem,
   addItemCart,
+  deleteItemCart,
 };
