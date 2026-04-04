@@ -28,7 +28,6 @@ const Addresses = () => {
           <p>Criar endereço</p>
         </PrimaryButton>
       </div>
-      s
       <ShowComponent when={isLoading}>
         <div className="py-10">
           <Loading />
