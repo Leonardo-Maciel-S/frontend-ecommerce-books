@@ -3,10 +3,10 @@ import { Outlet } from "react-router";
 
 const ProfilePage = () => {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-1 h-screen">
       <UserSideBar />
 
-      <div>
+      <div className="w-full overflow-auto">
         <Outlet />
       </div>
     </div>

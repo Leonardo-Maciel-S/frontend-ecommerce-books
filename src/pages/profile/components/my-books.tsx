@@ -8,7 +8,7 @@ const MyBooks = () => {
 
   return (
     <div>
-      <h2 className="font-semibold font-primary text-private-secondary text-4xl py-5 text-center">
+      <h2 className="font-extrabold tracking-wide bg-white font-secondary text-2xl p-5 py-6">
         Meus Livros
       </h2>
 
@@ -23,7 +23,9 @@ const MyBooks = () => {
       </ShowComponent>
 
       <ShowComponent when={!!data?.books}>
-        <BooksList books={data?.books} isMyBooks={true} />
+        <div className="p-5">
+          <BooksList books={data?.books} isMyBooks={true} />
+        </div>
       </ShowComponent>
     </div>
   );
