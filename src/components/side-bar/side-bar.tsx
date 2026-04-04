@@ -1,37 +1,32 @@
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef } from "react";
 import PrimaryButton from "../primary-button";
 import { X } from "lucide-react";
 import useGetAllItemCart from "@/hooks/cart/use-get-all-item-cart";
+import CartSideBar from "./cart-side-bar";
+import type { User } from "@/@types/user";
 
 interface SideBarProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<boolean>;
-  children: ReactNode;
-  isProfileBar?: boolean;
+  navigateTo: (route: string) => void;
+  user: User | null;
 }
 
-const SideBar = ({
-  isOpen,
-  setIsOpen,
-  isProfileBar,
-  children,
-}: SideBarProps) => {
+const SideBar = ({ isOpen, setIsOpen, navigateTo, user }: SideBarProps) => {
   const sideBar = useRef<HTMLDivElement>(null);
+
+  const body = document.querySelector("body");
 
   const { data } = useGetAllItemCart();
 
   const qtyItemsInCart = data?.cartItems.length;
 
   const closeBar = () => {
-    const body = document.querySelector("body");
-
     setIsOpen(false);
     body?.classList.remove("noScroll");
   };
 
   useEffect(() => {
-    const body = document.querySelector("body");
-
     if (isOpen) {
       body?.classList.add("noScroll");
     }
@@ -63,7 +58,7 @@ const SideBar = ({
         <div className="flex items-start justify-between  ">
           <div className="">
             <h3 className="font-bold font-primary lg:text-2xl tracking-wide">
-              {isProfileBar ? "Usuário" : "CARRINHO"}
+              "CARRINHO"
             </h3>
 
             <p className="text-sm text-zinc-500 font-secondary font-semibold">
@@ -81,7 +76,9 @@ const SideBar = ({
           </PrimaryButton>
         </div>
 
-        <div className="flex flex-col justify-between h-[93%]">{children}</div>
+        <div className="flex flex-col justify-between h-[93%]">
+          <CartSideBar user={user} navigateTo={navigateTo} />
+        </div>
       </div>
     </div>
   );
