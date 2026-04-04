@@ -68,4 +68,9 @@ export const router = createBrowserRouter([
       },
     ],
   },
+
+  {
+    path: "*",
+    loader: redirectHome,
+  },
 ]);
