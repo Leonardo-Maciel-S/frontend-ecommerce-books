@@ -10,6 +10,8 @@ import BookDetails from "@/pages/BookDetails/BookDetails";
 import Addresses from "@/pages/addresses/addresses";
 import { redirectHome } from "./loaders/redirect-home";
 import SeeAllBooks from "@/pages/see-all";
+import ProfilePage from "@/pages/profile";
+import { redirectMyBooks } from "./loaders/redirect-my-book";
 
 export const router = createBrowserRouter([
   {
@@ -29,32 +31,40 @@ export const router = createBrowserRouter([
         path: "book-details/:id",
         Component: BookDetails,
       },
+
       {
-        path: "/create-book",
+        path: "/see-all",
+        Component: SeeAllBooks,
+      },
+    ],
+  },
+
+  {
+    path: "profile",
+    Component: ProfilePage,
+    children: [
+      { path: "", loader: redirectMyBooks },
+      {
+        path: "my-books",
+        loader: authLoader,
+        Component: MyBooks,
+      },
+      {
+        path: "create-book",
         loader: authLoader,
         Component: CreateBook,
       },
 
       {
-        path: "/edit-book/:id",
+        path: "edit-book/:id",
         loader: authLoader,
         Component: EditBook,
       },
 
       {
-        path: "/my-books",
-        loader: authLoader,
-        Component: MyBooks,
-      },
-
-      {
-        path: "/my-addresses",
+        path: "my-addresses",
         loader: authLoader,
         Component: Addresses,
-      },
-      {
-        path: "/see-all",
-        Component: SeeAllBooks,
       },
     ],
   },
