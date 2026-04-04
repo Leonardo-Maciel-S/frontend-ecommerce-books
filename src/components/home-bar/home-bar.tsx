@@ -63,12 +63,14 @@ const HomeBar = () => {
           </div>
         </div>
       </nav>
+      
       <SideBar
         user={user}
         isOpen={isSideBarOpen}
         setIsOpen={setIsSideBarOpen}
         navigateTo={navigateTo}
       />
+     
     </>
   );
 };
