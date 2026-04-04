@@ -1,4 +1,4 @@
-import ShowComponent from "../show-component";
+import ShowComponent from "./show-component";
 import { useLogout } from "@/hooks/user/use-logout";
 import useGetUserAuth from "@/hooks/user/use-get-user-auth";
 import { Link } from "react-router";

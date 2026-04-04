@@ -1,4 +1,4 @@
-import UserSideBar from "@/components/side-bar/user-side-bar";
+import UserSideBar from "@/components/user-side-bar";
 import { Outlet } from "react-router";
 
 const ProfilePage = () => {
