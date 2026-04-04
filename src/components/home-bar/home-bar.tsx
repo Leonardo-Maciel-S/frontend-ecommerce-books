@@ -70,7 +70,6 @@ const HomeBar = () => {
         setIsOpen={setIsSideBarOpen}
         navigateTo={navigateTo}
       />
-     
     </>
   );
 };
