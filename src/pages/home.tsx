@@ -11,7 +11,7 @@ const Home = () => {
     <div className="space-y-10">
       <section className=" grid lg:grid-cols-2 gap-10 lg:gap-36  justify-between items-center py-20 min-h-[80dvh] border-b-2 border-primary/30">
         <div className="flex flex-col gap-2">
-          <h1 className="text-xl md:text-4xl xl:text-5xl tracking-wide font-primary ">
+          <h1 className="text-2xl md:text-4xl xl:text-5xl tracking-wide font-primary ">
             "Sempre imaginei que o{" "}
             <span className="text-primary italic">paraíso</span> fosse uma
             espécie de <strong>livraria</strong>."
@@ -36,7 +36,7 @@ const Home = () => {
       {isSuccess && (
         <section className="space-y-4">
           <div className="flex justify-between pb-5">
-            <h2 className="text-3xl font-medium font-primary">
+            <h2 className=" text-2xl lg:text-3xl font-medium font-primary">
               Ultimas postagens
             </h2>
 
@@ -52,12 +52,12 @@ const Home = () => {
         </section>
       )}
 
-      <section className="bg-[#F7F0EA] p-10 rounded-lg my-10">
-        <div className="flex flex-col md:flex-row justify-end items-center gap-10">
+      <section className="bg-[#F7F0EA] p-5 md:p-10 rounded-lg my-10">
+        <div className="flex flex-col md:flex-row justify-end items-center gap-5 md:gap-10">
           <img
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgGzH_zccXO5p95I_wu2V-R1VAwx9_PhnKOb4-4Ab6iZU2KbR_WUo2AEYSOABBaut09REZqQ-34ujtXZRqbhaaC17bmO2RBM0AXmuBq0GUoeILFEoKzwcyBFqt8Q4mzWk90UkT8zskVqB5aOcXa7TxMpk7aMDpYtAto-aeIkDHZoRCjqwEmK3J5t8RvlSV4C6wJqKeqsWh7puE0kLsyIcqFXBV50dfBwzTjR6tLeSSGJbar1Dw5pSx-VCGO2NJIT03lJWUBBSDOh52"
             alt=""
-            className="rounded-lg w-full md:w-2/3"
+            className="rounded-lg w-full md:w-1/2"
           />
 
           <div className="space-y-2 self-center">
