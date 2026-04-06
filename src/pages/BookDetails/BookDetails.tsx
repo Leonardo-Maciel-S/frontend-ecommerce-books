@@ -49,17 +49,17 @@ const BookDetails = () => {
         </ShowComponent>
 
         <ShowComponent when={!isLoading && !loading}>
-          <div className="flex gap-8 justify-center sm:justify-start flex-wrap ">
+          <div className="flex gap-x-8 gap-y-0 justify-center sm:justify-start flex-wrap ">
             <img
               src={book?.coverImg}
               alt=""
               className="w-full sm:w-70 lg:w-96 object-fill rounded-lg shadow-lg shadow-black/40 cursor-pointer transition-all duration-200"
             />
 
-            <div className="flex-1 p-5 flex flex-col gap-3 justify-between">
+            <div className="flex-1 py-5 flex flex-col gap-3 justify-between ">
               <div className="flex flex-col gap-3">
                 <div className="space-y-1">
-                  <h2 className="font-bold text-2xl lg:text-4xl font-secondary text-private-secondary ">
+                  <h2 className="font-bold text-3xl lg:text-4xl font-secondary text-private-secondary ">
                     {book?.title}
                   </h2>
 
@@ -75,13 +75,13 @@ const BookDetails = () => {
                     />
                   </Box>
 
-                  <p className="font-medium font-secondary text-gray-500 tracking-wider overflow-clip text-start ">
+                  <p className="font-medium font-secondary text-gray-500 tracking-wider overflow-clip text-start text-wrap text-sm ">
                     {book?.synopsis}
                   </p>
                 </div>
 
                 <div className="text-3xl border-y py-4 border-primary/15 ">
-                  <p className="font-extrabold">
+                  <p className="font-bold md:font-extrabold">
                     {book?.priceInCents
                       ? convertPriceInCentsToReal(book?.priceInCents!)
                       : ""}
@@ -89,10 +89,11 @@ const BookDetails = () => {
                 </div>
               </div>
 
-              <div className="flex gap-3 w-full">
+              <div className="flex gap-3 w-full flex-wrap ">
                 <PrimaryButton
                   onClick={() => addItem()}
                   disabled={addItemLoading}
+                  className="flex-10 md:flex-none min-w-[300px]"
                 >
                   {addItemLoading ? (
                     <Loader2 className="animate-spin" />
@@ -103,7 +104,10 @@ const BookDetails = () => {
                   <p>Adicionar ao carrinho</p>
                 </PrimaryButton>
 
-                <PrimaryButton variant="outline" className="px-5">
+                <PrimaryButton
+                  variant="outline"
+                  className="px-5 flex-1 md:flex-none min-w-48"
+                >
                   Comprar agora
                 </PrimaryButton>
               </div>
@@ -169,7 +173,7 @@ const BookDetails = () => {
           </div>
 
           <div className="space-y-3 border-t border-primary/15 pt-8">
-            <div className="flex items-center justify-between py-2">
+            <div className="flex items-center justify-between py-2 flex-wrap gap-3">
               <div className="space-y-1">
                 <h3 className="text-2xl font-secondary font-semibold">
                   Avaliações
@@ -184,7 +188,7 @@ const BookDetails = () => {
               {context?.user && (
                 <PrimaryButton
                   variant="secondary"
-                  className="text-md"
+                  className="text-md flex-1 md:flex-none min-w-[300px]"
                   onClick={handleModal}
                 >
                   {showAddComment ? "Cancelar" : "Adicionar Comentário"}
