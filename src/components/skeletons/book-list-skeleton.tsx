@@ -10,7 +10,7 @@ const BookListSkeleton = () => {
           key={index}
           className="grid grid-cols-1 gap-3 p-5 bg-white/30 rounded-4xl "
         >
-          <Skeleton className="object-cover h-full md:h-[400px] rounded-lg shadow shadow-black/5 cursor-pointer" />
+          <Skeleton className="object-cover h-[400px] rounded-lg shadow shadow-black/5 cursor-pointer" />
 
           <div className=" flex flex-col gap-3 justify-between">
             <div className="space-y-1">
