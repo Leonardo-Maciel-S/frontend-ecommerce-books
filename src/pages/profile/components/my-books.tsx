@@ -8,7 +8,7 @@ const MyBooks = () => {
 
   return (
     <div>
-      <h2 className="font-extrabold tracking-wide bg-white font-secondary text-xl md:text-2xl p-3 md:px-5 py-6">
+      <h2 className="font-extrabold tracking-wide bg-white font-secondary text-xl md:text-2xl px-6 py-5">
         Meus Livros
       </h2>
 

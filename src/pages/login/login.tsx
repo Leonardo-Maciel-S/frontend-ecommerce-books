@@ -11,7 +11,7 @@ const Login = () => {
   const toggleSignIn = () => setSignIn(!signIn);
 
   return (
-    <div className="w-full h-max flex flex-col justify-start items-center py-5 ">
+    <div className="w-full h-max flex flex-col justify-start items-center py-5 pb-10 ">
       <div className="flex flex-col items-center gap-2">
         <div className="bg-primary p-4 rounded-lg">
           <BookOpenText size={30} color="white" />

@@ -46,7 +46,7 @@ const EditBook = () => {
 
   return (
     <section className="h-screen w-full overflow-x-hidden flex flex-col gap-5 lg:items-center">
-      <h2 className="w-full font-extrabold tracking-wide bg-white font-secondary text-xl md:text-2xl p-3 md:px-5 py-6">
+      <h2 className="w-full font-extrabold tracking-wide bg-white font-secondary text-xl md:text-2xl px-6 py-5">
         Editar livro
       </h2>
 
