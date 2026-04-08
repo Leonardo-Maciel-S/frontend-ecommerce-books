@@ -53,13 +53,14 @@ const BookDetails = () => {
             <img
               src={book?.coverImg}
               alt=""
+              id="cover"
               className="w-full sm:w-70 lg:w-96 object-fill rounded-lg shadow-lg shadow-black/40 cursor-pointer transition-all duration-200"
             />
 
             <div className="flex-1 py-5 flex flex-col gap-3 justify-between ">
               <div className="flex flex-col gap-3">
                 <div className="space-y-1">
-                  <h2 className="font-bold text-3xl lg:text-4xl font-secondary text-private-secondary ">
+                  <h2 className="font-bold text-3xl lg:text-4xl font-secondary text-private-secondary">
                     {book?.title}
                   </h2>
 
