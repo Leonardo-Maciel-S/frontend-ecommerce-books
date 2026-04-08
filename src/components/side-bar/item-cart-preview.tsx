@@ -22,45 +22,47 @@ const ItemCartPreview = ({ item }: ItemCartPreviewProps) => {
   const { mutateAsync, isPending } = useDeleteItem(item.cartItem.id);
 
   return (
-    <div className="flex gap-5">
+    <div className="flex gap-5 w-full">
       <img
         src={item.book.coverImg}
         alt=""
         className="w-28 max-h-40 object-fil rounded-md shadow shadow-black/10"
       />
-      <div className="flex flex-col justify-between flex-1">
-        <div className="flex flex-col">
-          <h3 className="font-primary font-semibold text-xl italic ">
-            {item.book.title}
-          </h3>
-          <p className="text-sm font-secondary text-zinc-600 font-light tracking-wide">
-            {item.book.autor}
-          </p>
+      <div className="flex flex-col justify-between flex-1 gap-2">
+        <div className="flex justify-between items-start">
+          <div className="flex flex-col">
+            <h3 className="font-primary font-semibold text-xl italic ">
+              {item.book.title}
+            </h3>
+            <p className="text-sm font-secondary text-zinc-600 font-light tracking-wide">
+              {item.book.autor}
+            </p>
+          </div>
+
+          <button
+            onClick={() => mutateAsync()}
+            disabled={isPending}
+            className="disabled:text-zinc-300 flex p-2 items-center justify-center w-min rounded-lg not-disabled:hover:bg-zinc-50 text-zinc-400 not-disabled:hover:text-primary cursor-pointer "
+          >
+            <Trash2 size={20} className="" />
+          </button>
         </div>
 
-        <InputQuantity
-          defaultQuantity={item.cartItem.quantity}
-          btnNextFn={incrementItem.mutate}
-          btnPrevFn={decreaseItem.mutate}
-          prevLoad={decreaseItem.isPending}
-          nextLoad={incrementItem.isPending}
-        />
-      </div>
+        <div className="flex gap-2 flex-wrap-reverse w-full items-center justify-between">
+          <InputQuantity
+            defaultQuantity={item.cartItem.quantity}
+            btnNextFn={incrementItem.mutate}
+            btnPrevFn={decreaseItem.mutate}
+            prevLoad={decreaseItem.isPending}
+            nextLoad={incrementItem.isPending}
+          />
 
-      <div className="flex flex-col justify-between items-start  gap-2 ">
-        <button
-          onClick={() => mutateAsync()}
-          disabled={isPending}
-          className="self-end disabled:text-zinc-300 flex p-2 items-center justify-center w-min  rounded-lg mx-auto not-disabled:hover:bg-zinc-50 text-zinc-400 not-disabled:hover:text-primary cursor-pointer"
-        >
-          <Trash2 size={20} className="" />
-        </button>
-
-        <p className="text-lg font-bold">
-          {convertPriceInCentsToReal(
-            item.book.priceInCents * item.cartItem.quantity,
-          )}
-        </p>
+          <p className="text-lg font-bold">
+            {convertPriceInCentsToReal(
+              item.book.priceInCents * item.cartItem.quantity,
+            )}
+          </p>
+        </div>
       </div>
     </div>
   );

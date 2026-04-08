@@ -1,4 +1,4 @@
-import { Outlet } from "react-router";
+import { Outlet, ScrollRestoration } from "react-router";
 import HomeBar from "./components/home-bar/home-bar";
 import { ToastContainer } from "react-toastify";
 import useCheckIsLogged from "./hooks/user/use-check-is-logged";
@@ -33,6 +33,7 @@ function App() {
 
         <div className="container mx-auto px-10 overflow-hidden bg-linear-to-r flex-1">
           <Outlet />
+          <ScrollRestoration />
         </div>
 
         <Footer />

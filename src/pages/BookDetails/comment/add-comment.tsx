@@ -4,7 +4,7 @@ import PrimaryButton from "@/components/primary-button";
 import {
   InputGroup,
   InputGroupAddon,
-  InputGroupInput,
+  InputGroupTextarea,
 } from "@/components/ui/input-group";
 import { Label } from "@/components/ui/label";
 import useCreateComment from "@/hooks/comment/create";
@@ -110,15 +110,15 @@ const AddComment = ({
 
       <Label className="flex gap-4 flex-wrap pb-4 ">
         <div className="flex-1 relative">
-          <InputGroup className="h-12 bg-background">
-            <InputGroupInput
+          <InputGroup className="h-12 bg-background flex items-start">
+            <InputGroupTextarea
               {...register("text")}
-              type="text"
-              className=" md:text-lg placeholder:text-zinc-400 text-zinc-600 font-medium  "
+              className=" md:text-lg h-28 placeholder:text-zinc-400 text-zinc-600 font-medium  "
               placeholder="Descreva sua experiência"
               autoFocus
             />
-            <InputGroupAddon>
+
+            <InputGroupAddon className="mt-2">
               <MessageSquareText className="text-zinc-400 text-4xl size-5" />
             </InputGroupAddon>
           </InputGroup>
@@ -129,7 +129,7 @@ const AddComment = ({
             </p>
           )}
         </div>
-        <PrimaryButton disabled={isPending} className="w-1/4">
+        <PrimaryButton disabled={isPending} className="w-full sm:w-1/4">
           {isPending ? "Carregando" : "Enviar"}
         </PrimaryButton>
       </Label>

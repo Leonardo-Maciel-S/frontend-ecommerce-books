@@ -30,7 +30,7 @@ const CartSideBar = ({ user, navigateTo }: CartSideBarProps) => {
           </ShowComponent>
 
           <ShowComponent when={data && data?.cartItems.length > 0}>
-            <div className="flex flex-col h-[70vh] overflow-auto gap-5 border-b-2 border-primary/20 pr-2 py-2">
+            <div className="flex flex-col max-h-[60vh] overflow-auto gap-5 border-b-2 border-primary/20 pr-2 py-2">
               {data?.cartItems.map((item) => (
                 <ItemCartPreview key={item.cartItem.id} item={item} />
               ))}
@@ -38,18 +38,20 @@ const CartSideBar = ({ user, navigateTo }: CartSideBarProps) => {
           </ShowComponent>
         </div>
 
-        {data && (
-          <div className="flex justify-between items-center">
-            <p className="text-zinc-400 font-primary font-medium tracking-wider">
-              SUBTOTAL:
-            </p>
-            <p className="font-primary text-orange-700 text-2xl font-extrabold italic">
-              {convertPriceInCentsToReal(data.subtotal)}
-            </p>
-          </div>
-        )}
+        <div className="space-y-5 w-full">
+          {data && (
+            <div className="flex justify-between items-center ">
+              <p className="text-zinc-400 font-primary font-medium tracking-wider">
+                SUBTOTAL:
+              </p>
+              <p className="font-primary text-orange-700 text-2xl font-extrabold italic">
+                {convertPriceInCentsToReal(data.subtotal)}
+              </p>
+            </div>
+          )}
 
-        {user && <PrimaryButton>Continuar</PrimaryButton>}
+          {user && <PrimaryButton className="w-full">Continuar</PrimaryButton>}
+        </div>
       </div>
     </>
   );
