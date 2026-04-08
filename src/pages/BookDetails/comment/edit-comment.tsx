@@ -4,7 +4,6 @@ import PrimaryButton from "@/components/primary-button";
 import {
   InputGroup,
   InputGroupAddon,
-  InputGroupInput,
   InputGroupTextarea,
 } from "@/components/ui/input-group";
 import { Label } from "@/components/ui/label";
