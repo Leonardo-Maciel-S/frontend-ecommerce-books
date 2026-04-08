@@ -20,7 +20,7 @@ const AddressCard = ({
   };
 
   return (
-    <div className="bg-white/30 p-5 rounded-lg shadow-lg shadow-zinc-600/30 flex gap-10 justify-between items-start hover:bg-white/60  ">
+    <div className="bg-white p-5 rounded-lg shadow-lg shadow-zinc-600/30 flex gap-10 justify-between items-start hover:bg-white/60 w-full lg:w-auto ">
       <div>
         <h3 className="font-bold text-lg md:text-xl">
           {`${address.street} - ${address.number}  ${

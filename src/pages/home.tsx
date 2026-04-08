@@ -3,13 +3,14 @@ import BooksList from "../components/books-list";
 import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
 import BookListSkeleton from "@/components/skeletons/book-list-skeleton";
+import PreviewCard from "@/components/preview-card";
 
 const Home = () => {
   const { data, isLoading, isSuccess } = useGetAllBooks("limit=4");
 
   return (
     <div className="space-y-10">
-      <section className=" grid lg:grid-cols-2 gap-10 lg:gap-36  justify-between items-center py-20 min-h-[80dvh] border-b-2 border-primary/30">
+      <section className=" grid lg:grid-cols-2 gap-10 lg:gap-20  justify-between items-center py-20 min-h-[80dvh] border-b-2 border-primary/30">
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl md:text-4xl xl:text-5xl tracking-wide font-primary ">
             "Sempre imaginei que o{" "}
@@ -48,7 +49,12 @@ const Home = () => {
               <ArrowRight className="group-hover:translate-x-1 transform duration-200 ease-in" />
             </Link>
           </div>
-          <BooksList books={data?.books} />
+
+          <BooksList>
+            {data?.books.map((book) => (
+              <PreviewCard key={book.id} book={book} />
+            ))}
+          </BooksList>
         </section>
       )}
 
@@ -57,7 +63,7 @@ const Home = () => {
           <img
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgGzH_zccXO5p95I_wu2V-R1VAwx9_PhnKOb4-4Ab6iZU2KbR_WUo2AEYSOABBaut09REZqQ-34ujtXZRqbhaaC17bmO2RBM0AXmuBq0GUoeILFEoKzwcyBFqt8Q4mzWk90UkT8zskVqB5aOcXa7TxMpk7aMDpYtAto-aeIkDHZoRCjqwEmK3J5t8RvlSV4C6wJqKeqsWh7puE0kLsyIcqFXBV50dfBwzTjR6tLeSSGJbar1Dw5pSx-VCGO2NJIT03lJWUBBSDOh52"
             alt=""
-            className="rounded-lg w-full md:w-1/2"
+            className="rounded-lg w-full md:w-1/2 lg:w-full"
           />
 
           <div className="space-y-2 self-center">

@@ -1,18 +1,16 @@
-import type { Book } from "@/@types/books";
-
-import PreviewCard from "./preview-card";
+import type { ReactNode } from "react";
 
 interface BooksListProps {
   isMyBooks?: boolean;
-  books?: Book[];
+  children: ReactNode;
 }
 
-const BooksList = ({ books, isMyBooks }: BooksListProps) => {
+const BooksList = ({ children }: BooksListProps) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-evenly items-stretch flex-wrap ">
-      {books?.map((book) => (
-        <PreviewCard key={book.id} book={book} isMyBooks={isMyBooks} />
-      ))}
+    <div
+      className={`mx-auto lg:w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 justify-evenly items-stretch flex-wrap gap-5`}
+    >
+      {children}
     </div>
   );
 };

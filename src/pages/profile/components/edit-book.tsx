@@ -45,16 +45,20 @@ const EditBook = () => {
   } = useEditBook(book);
 
   return (
-    <section className="h-screen flex items-center">
+    <section className="h-screen w-full overflow-x-hidden flex flex-col gap-5 lg:items-center">
+      <h2 className="w-full font-extrabold tracking-wide bg-white font-secondary text-xl md:text-2xl p-3 md:px-5 py-6">
+        Editar livro
+      </h2>
+
       <form
         onSubmit={handleSubmit(editBook)}
-        className="mx-auto lg:w-[900px] lg:min-w-[500px] p-8 rounded-2xl shadow-lg shadow-zinc-500/50 space-y-3 "
+        className="mx-5 md:mx-12 mb-10 w-fit h-max lg:min-w-[500px] p-5 rounded-2xl shadow-lg shadow-zinc-500/50 space-y-3 bg-white"
       >
         <h2 className="lg:text-2xl font-bold tracking-wider font-primary text-center text-primary">
-          Editar Livro
+          Livro
         </h2>
 
-        <div className={`grid ${imgUrl && "md:grid-cols-2"} gap-5 items-start`}>
+        <div className={`grid ${imgUrl && "lg:grid-cols-2"} gap-5 items-start`}>
           {imgUrl && (
             <img
               src={imgUrl}
