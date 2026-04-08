@@ -35,7 +35,7 @@ const HomeBar = () => {
         <div className="container mx-auto px-10 flex justify-between items-center py-5 ">
           <Link
             to="/"
-            className="text-4xl font-semibold cursor-pointer font-primary text-primary italic"
+            className="text-2xl md:text-4xl font-semibold cursor-pointer font-primary text-primary italic"
           >
             Bookstore
           </Link>
@@ -63,7 +63,7 @@ const HomeBar = () => {
           </div>
         </div>
       </nav>
-      
+
       <SideBar
         user={user}
         isOpen={isSideBarOpen}

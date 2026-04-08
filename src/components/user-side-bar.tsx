@@ -32,7 +32,7 @@ const UserSideBar = ({ isOpen, setIsOpen }: UserSideBarProps) => {
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`md:hidden text-zinc-500 px-3 py-2 rounded-lg mt-5 bg-zinc-100/80 flex justify-center items-center w-min self-end absolute`}
+        className={`md:hidden text-zinc-500 px-3 py-2 rounded-lg mt-5 bg-zinc-100/80 flex justify-center items-center w-min self-end absolute right-6`}
       >
         {isOpen ? <X size={20} /> : <Menu size={20} />}
       </button>

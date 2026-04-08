@@ -16,11 +16,12 @@ const Addresses = () => {
 
   return (
     <div className="min-h-screen flex flex-col pb-4">
-      <div className="flex flex-col sm:flex-row sm:items-center gap-2 justify-between font-extrabold tracking-wide bg-white font-secondary text-2xl p-5">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2 justify-between font-extrabold tracking-wide bg-white font-secondary text-2xl px-6 py-5">
         <h2>Endereços</h2>
 
         <PrimaryButton
           onClick={() => setIsModalOpen(true)}
+          size="sm"
           className="py-2 px-5 hidden md:flex items-center"
         >
           <Plus />
@@ -28,7 +29,7 @@ const Addresses = () => {
         </PrimaryButton>
       </div>
 
-      <div className="h-full  flex-1">
+      <div className="h-full flex-1">
         <ShowComponent when={isLoading}>
           <div className="py-10">
             <Loading />

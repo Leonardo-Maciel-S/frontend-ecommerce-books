@@ -2,8 +2,8 @@ import { Github } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#0F172A] text-white p-10">
-      <div className="container mx-auto px-10 overflow-hidden flex justify-between flex-wrap md:flex-nowrap gap-3">
+    <footer className="bg-[#0F172A] text-white px-10 py-8">
+      <div className="container mx-auto md:px-10 overflow-hidden flex justify-between flex-wrap md:flex-nowrap gap-4">
         <p className="text-sm md:text-base text-zinc-300">
           © 2025 BookStore Editions. All rights reserved.
         </p>
