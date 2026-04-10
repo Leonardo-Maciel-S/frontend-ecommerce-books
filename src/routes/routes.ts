@@ -12,6 +12,7 @@ import MyBooks from "@/pages/profile/components/my-books";
 import CreateBook from "@/pages/profile/components/create-book";
 import EditBook from "@/pages/profile/components/edit-book";
 import Addresses from "@/pages/profile/components/addresses/addresses";
+import Checkout from "@/pages/checkout";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +36,11 @@ export const router = createBrowserRouter([
       {
         path: "/see-all",
         Component: SeeAllBooks,
+      },
+      {
+        path: "/checkout",
+        loader: authLoader,
+        Component: Checkout,
       },
     ],
   },
