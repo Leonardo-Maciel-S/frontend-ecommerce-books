@@ -4,6 +4,7 @@ import { deleteItemCart } from "./delete-item-cart";
 import { getAllItemCart } from "./get-all-item-cart";
 import { getCart } from "./get-cart";
 import { incrementItem } from "./increment-item";
+import { selectDefaultCartAddress } from "./select-default-cart-address";
 
 export const cartService = {
   getCart,
@@ -12,4 +13,5 @@ export const cartService = {
   decreaseItem,
   addItemCart,
   deleteItemCart,
+  selectDefaultCartAddress,
 };
