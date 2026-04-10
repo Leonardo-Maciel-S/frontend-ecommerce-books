@@ -1,15 +1,13 @@
 import PrimaryButton from "@/components/primary-button";
 import useGetAllItemCart from "@/hooks/cart/use-get-all-item-cart";
-// import useGetCart from "@/hooks/cart/use-get-cart";
 import { CircleAlert, Lock } from "lucide-react";
-import BookCheckoutPreview from "./components/book-checkout-preview";
+
 import { convertPriceInCentsToReal } from "@/utils/convert-price-in-cent-to-real";
-import useGetAllAddress from "@/hooks/address/get-all-address";
+import CartSection from "./components/cart-section";
+import AddressSection from "./components/addresses-section";
 
 const Checkout = () => {
-  // const { data: cartResponse } = useGetCart();
   const { data } = useGetAllItemCart();
-  const { data: addresses } = useGetAllAddress();
 
   const subtotal = data?.subtotal || 0;
   const taxa = 0 * 100; // n * 100 = converte para centavos
@@ -28,26 +26,9 @@ const Checkout = () => {
         </header>
 
         <section className="">
-          <div>
-            <div className="font-primary flex items-center justify-between pb-3 border-b border-primary/10">
-              <h2 className="font-medium text-xl">Itens no Pedido</h2>
+          <CartSection data={data} />
 
-              <p className="uppercase tracking-wider font-primary text-xs text-zinc-500">
-                itens selecionados
-              </p>
-            </div>
-
-            <div className="space-y-8 py-8">
-              {data?.cartItems.map((item) => (
-                <BookCheckoutPreview
-                  key={item.book.id}
-                  book={item.book}
-                  itemId={item.cartItem.id}
-                  quantity={item.cartItem.quantity}
-                />
-              ))}
-            </div>
-          </div>
+          <AddressSection />
         </section>
       </div>
 
