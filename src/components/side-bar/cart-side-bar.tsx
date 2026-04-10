@@ -10,9 +10,10 @@ import { convertPriceInCentsToReal } from "@/utils/convert-price-in-cent-to-real
 interface CartSideBarProps {
   navigateTo: (route: string) => void;
   user: User | null;
+  closeBar: () => void;
 }
 
-const CartSideBar = ({ user, navigateTo }: CartSideBarProps) => {
+const CartSideBar = ({ user, navigateTo, closeBar }: CartSideBarProps) => {
   const { data, isLoading, isPending } = useGetAllItemCart();
 
   return (
@@ -50,7 +51,17 @@ const CartSideBar = ({ user, navigateTo }: CartSideBarProps) => {
             </div>
           )}
 
-          {user && <PrimaryButton className="w-full">Continuar</PrimaryButton>}
+          {user && (
+            <PrimaryButton
+              onClick={() => {
+                navigateTo("/checkout");
+                closeBar();
+              }}
+              className="w-full"
+            >
+              Continuar
+            </PrimaryButton>
+          )}
         </div>
       </div>
     </>
