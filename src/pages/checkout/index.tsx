@@ -5,6 +5,7 @@ import { CircleAlert, Lock } from "lucide-react";
 import { convertPriceInCentsToReal } from "@/utils/convert-price-in-cent-to-real";
 import CartSection from "./components/cart-section";
 import AddressSection from "./components/addresses-section";
+import PaymentSection from "./components/payment-section";
 
 const Checkout = () => {
   const { data } = useGetAllItemCart();
@@ -29,6 +30,8 @@ const Checkout = () => {
           <CartSection data={data} />
 
           <AddressSection />
+
+          <PaymentSection />
         </section>
       </div>
 
@@ -82,7 +85,7 @@ const Checkout = () => {
           </p>
         </div>
 
-        <PrimaryButton className="mt-8 font-primary py-5 rounded-sm font-medium uppercase tracking-widest text-nowrap">
+        <PrimaryButton className="mt-8 w-full font-primary py-5 rounded-sm font-medium uppercase tracking-widest text-nowrap">
           Finalizar Compra
         </PrimaryButton>
 

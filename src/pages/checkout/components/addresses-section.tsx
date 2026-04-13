@@ -5,20 +5,23 @@ import useGetCart from "@/hooks/cart/use-get-cart";
 import useSelectDefaultCartAddress from "@/hooks/cart/use-select-default-cart-address";
 import AddressForm from "@/pages/profile/components/addresses/address-form";
 import { Modal, Typography, Box } from "@mui/material";
-import { Loader2, MapPin } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useState } from "react";
+import AddressSectionCard from "./address-section-card";
 
 const AddressSection = () => {
+  const [openModal, setOpenModal] = useState(false);
+  const [openNewAddress, setOpenNewAddress] = useState(false);
+
   const { data: cartResponse } = useGetCart();
   const { data } = useGetAllAddress();
   const { mutateAsync, isPending } = useSelectDefaultCartAddress();
 
-  const defaultAddress = data?.find(
-    (address) => address.id === cartResponse?.cart.userAddressId,
-  );
+  const cartUserAddressId = cartResponse?.cart.userAddressId;
 
-  const [openModal, setOpenModal] = useState(false);
-  const [openNewAddress, setOpenNewAddress] = useState(false);
+  const defaultAddress = data?.find(
+    (address) => address.id === cartUserAddressId,
+  );
 
   const handleOpenModal = () => {
     setOpenModal(!openModal);
@@ -33,52 +36,39 @@ const AddressSection = () => {
   return (
     <>
       <div>
-        <div className="font-primary flex items-center justify-between pb-3 border-b border-primary/10">
+        <div className="font-primary flex items-center justify-between pb-3 border-b border-primary/10 ">
           <h2 className="font-medium text-xl">Endereço de Entrega</h2>
         </div>
 
-        <ShowComponent when={!!defaultAddress}>
-          <div className="bg-[#F3F2F1] p-8 flex gap-5 shadow rounded-md shadow-black/10">
-            <div className="bg-primary/15 h-min p-3 rounded-lg">
-              <MapPin className="text-primary" />
+        <div className="py-8">
+          <ShowComponent when={!!defaultAddress}>
+            <div className="bg-[#F3F2F1] p-8 flex gap-5 shadow rounded-md shadow-black/10">
+              <AddressSectionCard address={defaultAddress} />
+
+              <button
+                onClick={handleOpenModal}
+                className="transition-all duration-200 ease-linear border border-primary hover:bg-primary hover:text-white cursor-pointer rounded-2xl py-2 text-sm text-primary/90 h-min px-5 font-primary font-semibold"
+              >
+                Trocar
+              </button>
             </div>
+          </ShowComponent>
 
-            <div className="font-primary text-zinc-600 flex-1">
-              <p className="font-semibold text-black">
-                {defaultAddress?.street} - {defaultAddress?.number}
+          <ShowComponent when={!cartUserAddressId}>
+            <div className="bg-[#F3F2F1] p-8 flex items-center gap-5 shadow rounded-md shadow-black/10">
+              <p className="flex-1">
+                Endereço padrão ainda não salvo, escolha um ou cadastre outro.
               </p>
-              <p>{defaultAddress?.neighborhood}</p>
-              <p>
-                {defaultAddress?.city} - {defaultAddress?.state}
-              </p>
-              <p className="capitalize">
-                {defaultAddress?.recipientName} - {defaultAddress?.zipCode}
-              </p>
+
+              <button
+                onClick={handleOpenModal}
+                className="transition-all duration-200 ease-linear border border-primary hover:bg-primary hover:text-white cursor-pointer rounded-2xl py-2 text-sm text-primary/90 h-min px-5 font-primary font-semibold"
+              >
+                Ver endereços
+              </button>
             </div>
-
-            <button
-              onClick={handleOpenModal}
-              className="transition-all duration-200 ease-linear border border-primary hover:bg-primary hover:text-white cursor-pointer rounded-2xl py-2 text-sm text-primary/90 h-min px-5 font-primary font-semibold"
-            >
-              Trocar
-            </button>
-          </div>
-        </ShowComponent>
-
-        <ShowComponent when={!cartResponse?.cart.userAddressId}>
-          <div className="bg-[#F3F2F1] p-8 flex items-center gap-5 shadow rounded-md shadow-black/10">
-            <p className="flex-1">
-              Endereço padrão ainda não salvo, escolha um ou cadastre outro.
-            </p>
-
-            <button
-              onClick={handleOpenModal}
-              className="transition-all duration-200 ease-linear border border-primary hover:bg-primary hover:text-white cursor-pointer rounded-2xl py-2 text-sm text-primary/90 h-min px-5 font-primary font-semibold"
-            >
-              Ver endereços
-            </button>
-          </div>
-        </ShowComponent>
+          </ShowComponent>
+        </div>
       </div>
 
       <Modal
@@ -114,28 +104,11 @@ const AddressSection = () => {
             {data?.map((address) => (
               <div
                 key={address.id}
-                className={`bg-[#F3F2F1] p-8 flex gap-5 shadow rounded-md shadow-black/10 ${cartResponse?.cart.userAddressId === address.id && "border-primary border-2"} `}
+                className={`bg-[#F3F2F1] lg:min-w-[500px] p-8 flex gap-5 shadow rounded-md shadow-black/10 ${cartUserAddressId === address.id && "border-primary border-2"} `}
               >
-                <div className="bg-primary/15 h-min p-3 rounded-lg">
-                  <MapPin className="text-primary" />
-                </div>
+                <AddressSectionCard address={address} />
 
-                <div className="font-primary text-zinc-600 flex-1">
-                  <div className="font-semibold text-black">
-                    {address.street} - {address.number}
-                  </div>
-                  <div>{address.neighborhood}</div>
-                  <div>
-                    {address.city} - {address.state}
-                  </div>
-                  <div className="capitalize">
-                    {address.recipientName} - {address.zipCode}
-                  </div>
-                </div>
-
-                <ShowComponent
-                  when={cartResponse?.cart.userAddressId !== address.id}
-                >
+                <ShowComponent when={cartUserAddressId !== address.id}>
                   <button
                     onClick={() => {
                       handleSelectAddress(address.id);
