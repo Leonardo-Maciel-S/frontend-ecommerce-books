@@ -31,7 +31,7 @@ const CartSideBar = ({ user, navigateTo, closeBar }: CartSideBarProps) => {
           </ShowComponent>
 
           <ShowComponent when={data && data?.cartItems.length > 0}>
-            <div className="flex flex-col max-h-[60vh] overflow-auto gap-5 border-b-2 border-primary/20 pr-2 py-2">
+            <div className="flex flex-col max-h-[60vh] pb-8 overflow-auto gap-5 border-b-2 border-primary/20 pr-2 py-2">
               {data?.cartItems.map((item) => (
                 <ItemCartPreview key={item.cartItem.id} item={item} />
               ))}
