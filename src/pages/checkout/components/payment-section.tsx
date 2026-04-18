@@ -26,7 +26,7 @@ const PaymentSection = () => {
         <h2 className="font-medium text-xl">Método de Pagamento</h2>
       </header>
 
-      <section className="flex gap-8 ">
+      <section className="flex gap-8 flex-wrap">
         {paymentTypes.map((paymentType, index) => (
           <PaymentSectionCard
             key={index}

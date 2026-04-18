@@ -42,12 +42,12 @@ const AddressSection = () => {
 
         <div className="py-8">
           <ShowComponent when={!!defaultAddress}>
-            <div className="bg-[#F3F2F1] p-8 flex gap-5 shadow rounded-md shadow-black/10">
+            <div className="bg-[#F3F2F1] p-8 flex gap-5 shadow rounded-md shadow-black/10 flex-wrap">
               <AddressSectionCard address={defaultAddress} />
 
               <button
                 onClick={handleOpenModal}
-                className="transition-all duration-200 ease-linear border border-primary hover:bg-primary hover:text-white cursor-pointer rounded-2xl py-2 text-sm text-primary/90 h-min px-5 font-primary font-semibold"
+                className="transition-all duration-200 ease-linear border border-primary hover:bg-primary hover:text-white cursor-pointer rounded-2xl py-2 text-sm text-primary/90 h-min px-5 font-primary font-semibold flex-1 md:flex-none"
               >
                 Trocar
               </button>

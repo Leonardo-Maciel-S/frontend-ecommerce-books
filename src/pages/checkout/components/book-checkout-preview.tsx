@@ -21,11 +21,11 @@ const BookCheckoutPreview = ({
   );
 
   return (
-    <div className="flex gap-6 items-start">
+    <div className="flex gap-6 items-start flex-wrap">
       <img
         src={book.coverImg}
         alt="foto da capa"
-        className="h-40 w-28 rounded-md shadow-lg shadow-black/30"
+        className="md:h-40 md:w-28 rounded-md shadow-lg shadow-black/30"
       />
 
       <div className="flex-1 font-primary space-y-3 font-light">
@@ -42,7 +42,7 @@ const BookCheckoutPreview = ({
           Quantidade: <strong>{quantity}</strong>
         </p>
 
-        <div className="flex gap-2 items-baseline">
+        <div className="flex gap-2 items-baseline flex-1 justify-around">
           <button
             onClick={() => decreaseItem.mutateAsync()}
             disabled={decreaseItem.isPending || quantity <= 1}
