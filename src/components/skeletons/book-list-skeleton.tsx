@@ -4,7 +4,9 @@ const BookListSkeleton = () => {
   const mockList = [1, 2, 3, 4];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-evenly items-stretch flex-wrap gap-5">
+    <div
+      className={`mx-auto lg:w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 justify-evenly items-stretch flex-wrap gap-5`}
+    >
       {mockList.map((_, index) => (
         <div
           key={index}

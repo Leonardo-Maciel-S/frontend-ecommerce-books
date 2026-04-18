@@ -7,11 +7,11 @@ const useGetAddressById = (id: string) => {
     queryFn: async () => {
       const response = await addressService.getAddressById(id);
 
-      if (response?.addresses) {
-        return response.addresses;
+      if (response?.address) {
+        return response.address;
       }
 
-      return [];
+      return null;
     },
     staleTime: 1000 * 60 * 5,
   });

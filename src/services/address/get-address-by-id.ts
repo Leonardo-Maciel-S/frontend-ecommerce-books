@@ -4,11 +4,11 @@ import type { AxiosError } from "axios";
 
 export async function getAddressById(id: string) {
   try {
-    const response = await api.get<{ addresses: UserAddress[] }>(
+    const response = await api.get<{ address: UserAddress }>(
       `/user/address/${id}`,
       {
         withCredentials: true,
-      }
+      },
     );
 
     if (response.data) {

@@ -4,7 +4,6 @@ import { X } from "lucide-react";
 import useGetAllItemCart from "@/hooks/cart/use-get-all-item-cart";
 import CartSideBar from "./cart-side-bar";
 import type { User } from "@/@types/user";
-
 interface SideBarProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<boolean>;
@@ -77,7 +76,11 @@ const SideBar = ({ isOpen, setIsOpen, navigateTo, user }: SideBarProps) => {
         </div>
 
         <div className="flex flex-col justify-between h-[93%]">
-          <CartSideBar user={user} navigateTo={navigateTo} />
+          <CartSideBar
+            user={user}
+            navigateTo={navigateTo}
+            closeBar={closeBar}
+          />
         </div>
       </div>
     </div>

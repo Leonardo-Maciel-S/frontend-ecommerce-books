@@ -10,15 +10,17 @@ import { useSearchParams } from "react-router";
 import Pagination from "@/components/pagination";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "@/components/error-message";
+import SeeAllListSkeleton from "@/components/skeletons/see-all-list-skeleton";
+import ShowComponent from "@/components/show-component";
 
 const SeeAllBooks = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const page = Number(searchParams.get("page")) || 1;
   const search = searchParams.get("search") || "";
-  const limit = 8;
+  const limit = 9;
 
-  const { data } = useGetAllBooks(
+  const { data, isLoading } = useGetAllBooks(
     `search=${search}&limit=${limit}&page=${page}`,
   );
 
@@ -50,6 +52,10 @@ const SeeAllBooks = () => {
 
         {errors.search && <ErrorMessage>{errors.search.message}</ErrorMessage>}
       </form>
+
+      <ShowComponent when={isLoading}>
+        <SeeAllListSkeleton />
+      </ShowComponent>
 
       {data?.books && (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-10">

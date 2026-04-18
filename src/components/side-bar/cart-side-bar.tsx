@@ -10,9 +10,10 @@ import { convertPriceInCentsToReal } from "@/utils/convert-price-in-cent-to-real
 interface CartSideBarProps {
   navigateTo: (route: string) => void;
   user: User | null;
+  closeBar: () => void;
 }
 
-const CartSideBar = ({ user, navigateTo }: CartSideBarProps) => {
+const CartSideBar = ({ user, navigateTo, closeBar }: CartSideBarProps) => {
   const { data, isLoading, isPending } = useGetAllItemCart();
 
   return (
@@ -21,8 +22,8 @@ const CartSideBar = ({ user, navigateTo }: CartSideBarProps) => {
         <Button onClick={() => navigateTo("/login")}>Fazer Login</Button>
       </ShowComponent>
 
-      <div className="space-y-5 flex flex-col justify-between h-full">
-        <div>
+      <div className="space-y-5 grid grid-rows-5 h-full  overflow-hidden">
+        <div className="row-span-4">
           <ShowComponent when={!!user && (isLoading || isPending)}>
             <div className="w-full flex justify-center">
               <Loader2 className="animate-spin" />
@@ -30,7 +31,7 @@ const CartSideBar = ({ user, navigateTo }: CartSideBarProps) => {
           </ShowComponent>
 
           <ShowComponent when={data && data?.cartItems.length > 0}>
-            <div className="flex flex-col max-h-[60vh] overflow-auto gap-5 border-b-2 border-primary/20 pr-2 py-2">
+            <div className="flex flex-col h-full overflow-auto gap-5 pr-2 py-2 pb-10 border-b-2 border-primary/20">
               {data?.cartItems.map((item) => (
                 <ItemCartPreview key={item.cartItem.id} item={item} />
               ))}
@@ -38,7 +39,7 @@ const CartSideBar = ({ user, navigateTo }: CartSideBarProps) => {
           </ShowComponent>
         </div>
 
-        <div className="space-y-5 w-full">
+        <div className="space-y-5 w-full pt-10 self-end">
           {data && (
             <div className="flex justify-between items-center ">
               <p className="text-zinc-400 font-primary font-medium tracking-wider">
@@ -50,7 +51,17 @@ const CartSideBar = ({ user, navigateTo }: CartSideBarProps) => {
             </div>
           )}
 
-          {user && <PrimaryButton className="w-full">Continuar</PrimaryButton>}
+          {user && (
+            <PrimaryButton
+              onClick={() => {
+                navigateTo("/checkout");
+                closeBar();
+              }}
+              className="w-full"
+            >
+              Continuar
+            </PrimaryButton>
+          )}
         </div>
       </div>
     </>
