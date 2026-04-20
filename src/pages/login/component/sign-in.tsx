@@ -1,5 +1,6 @@
 import ErrorMessage from "@/components/error-message";
 import ShowComponent from "@/components/show-component";
+import UnderImplementation from "@/components/under-implementation";
 import { Button } from "@/components/ui/button";
 import {
   InputGroup,
@@ -16,6 +17,7 @@ import { useState } from "react";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [isRecoveryModalOpen, setIsRecoveryModalOpen] = useState(false);
 
   const {
     register,
@@ -58,12 +60,13 @@ const SignIn = () => {
           <div className="flex justify-between">
             <Label className="text-lg font-semibold text-zinc-500">Senha</Label>
 
-            <a
-              href=""
+            <button
+              type="button"
+              onClick={() => setIsRecoveryModalOpen(true)}
               className="text-sm text-primary font-medium hover:underline"
             >
               Esqueceu a senha?
-            </a>
+            </button>
           </div>
           <InputGroup className="h-12 bg-background">
             <InputGroupAddon>
@@ -102,6 +105,13 @@ const SignIn = () => {
       >
         {isPending ? <Loader2 className="animate-spin" /> : "Entrar"}
       </Button>
+
+      <UnderImplementation
+        isOpen={isRecoveryModalOpen}
+        onClose={() => setIsRecoveryModalOpen(false)}
+        title="Função em desenvolvimento"
+        description="Ainda nao disponibilizamos a recuperação de senha. Em breve essa opção estará ativa."
+      />
     </form>
   );
 };

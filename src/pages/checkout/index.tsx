@@ -1,6 +1,8 @@
 import PrimaryButton from "@/components/primary-button";
+import UnderImplementation from "@/components/under-implementation";
 import useGetAllItemCart from "@/hooks/cart/use-get-all-item-cart";
 import { CircleAlert, Lock } from "lucide-react";
+import { useState } from "react";
 
 import { convertPriceInCentsToReal } from "@/utils/convert-price-in-cent-to-real";
 import CartSection from "./components/cart-section";
@@ -9,6 +11,8 @@ import PaymentSection from "./components/payment-section";
 
 const Checkout = () => {
   const { data } = useGetAllItemCart();
+  const [isUnderImplementationOpen, setIsUnderImplementationOpen] =
+    useState(false);
 
   const subtotal = data?.subtotal || 0;
   const taxa = 0 * 100; // n * 100 = converte para centavos
@@ -85,7 +89,10 @@ const Checkout = () => {
           </p>
         </div>
 
-        <PrimaryButton className="mt-8 w-full font-primary py-5 rounded-sm font-medium uppercase tracking-widest text-nowrap">
+        <PrimaryButton
+          onClick={() => setIsUnderImplementationOpen(true)}
+          className="mt-8 w-full font-primary py-5 rounded-sm font-medium uppercase tracking-widest text-nowrap"
+        >
           Finalizar Compra
         </PrimaryButton>
 
@@ -97,6 +104,13 @@ const Checkout = () => {
           <p>Pagamento 100% Seguro</p>
         </div>
       </aside>
+
+      <UnderImplementation
+        isOpen={isUnderImplementationOpen}
+        onClose={() => setIsUnderImplementationOpen(false)}
+        title="Etapa em desenvolvimento"
+        description="Estamos finalizando a etapa de pagamento. Em breve voce poderá concluir sua compra por aqui."
+      />
     </div>
   );
 };
