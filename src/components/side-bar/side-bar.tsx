@@ -75,7 +75,7 @@ const SideBar = ({ isOpen, setIsOpen, navigateTo, user }: SideBarProps) => {
           </PrimaryButton>
         </div>
 
-        <div className="flex flex-col justify-between h-[93%]">
+        <div className="flex flex-1 min-h-0 flex-col">
           <CartSideBar
             user={user}
             navigateTo={navigateTo}
