@@ -7,7 +7,7 @@ const CartSection = ({ data }: { data?: ItemCartResponse }) => {
       <div className="font-primary flex items-center justify-between pb-3 border-b border-primary/10">
         <h2 className="font-medium text-xl">Itens no Pedido</h2>
 
-        <p className="uppercase tracking-wider font-primary text-xs text-zinc-500">
+        <p className="uppercase tracking-wider font-secondary text-xs text-zinc-500">
           itens selecionados
         </p>
       </div>

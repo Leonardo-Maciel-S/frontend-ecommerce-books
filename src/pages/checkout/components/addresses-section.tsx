@@ -42,14 +42,14 @@ const AddressSection = () => {
 
         <div className="py-8">
           <ShowComponent when={!!defaultAddress}>
-            <div className="bg-[#F3F2F1] p-8 flex gap-5 shadow rounded-md shadow-black/10 flex-wrap">
+            <div className="bg-[#F3F2F1] p-8 flex gap-5 shadow rounded-md shadow-black/10 flex-wrap justify-between">
               <AddressSectionCard address={defaultAddress} />
 
               <button
                 onClick={handleOpenModal}
-                className="transition-all duration-200 ease-linear border border-primary hover:bg-primary hover:text-white cursor-pointer rounded-2xl py-2 text-sm text-primary/90 h-min px-5 font-primary font-semibold flex-1 md:flex-none"
+                className="transition-all duration-200 ease-linear border border-primary hover:bg-primary hover:text-white cursor-pointer rounded-2xl py-2 text-sm text-primary/90 h-min px-5 font-secondary font-semibold flex-1 md:flex-none"
               >
-                Trocar
+                Trocar Endereço
               </button>
             </div>
           </ShowComponent>
@@ -62,7 +62,7 @@ const AddressSection = () => {
 
               <button
                 onClick={handleOpenModal}
-                className="transition-all duration-200 ease-linear border border-primary hover:bg-primary hover:text-white cursor-pointer rounded-2xl py-2 text-sm text-primary/90 h-min px-5 font-primary font-semibold"
+                className="transition-all duration-200 ease-linear border border-primary hover:bg-primary hover:text-white cursor-pointer rounded-2xl py-2 text-sm text-primary/90 h-min px-5 font-secondary font-semibold"
               >
                 Ver endereços
               </button>
@@ -104,7 +104,7 @@ const AddressSection = () => {
             {data?.map((address) => (
               <div
                 key={address.id}
-                className={`bg-[#F3F2F1] lg:min-w-[500px] p-8 flex gap-5 shadow rounded-md shadow-black/10 ${cartUserAddressId === address.id && "border-primary border-2"} `}
+                className={`bg-[#F3F2F1] md:min-w-[500px] p-8 flex justify-between gap-5 shadow rounded-md shadow-black/10 ${cartUserAddressId === address.id && "border-primary border-2"} `}
               >
                 <AddressSectionCard address={address} />
 
@@ -114,7 +114,7 @@ const AddressSection = () => {
                       handleSelectAddress(address.id);
                     }}
                     disabled={isPending}
-                    className="transition-all duration-200 ease-linear border not-disabled:border-primary not-disabled:hover:bg-primary not-disabled:hover:text-white cursor-pointer rounded-2xl py-2 text-sm text-primary/90 disabled:text-zinc-400 h-min px-5 font-primary font-semibold min-w-30 flex justify-center"
+                    className="transition-all duration-200 ease-linear border not-disabled:border-primary not-disabled:hover:bg-primary not-disabled:hover:text-white cursor-pointer rounded-2xl py-2 text-sm text-primary/90 disabled:text-zinc-400 h-min px-5 font-secondary font-semibold min-w-30 flex justify-center"
                   >
                     Selecionar
                   </button>

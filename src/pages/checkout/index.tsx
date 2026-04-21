@@ -19,7 +19,7 @@ const Checkout = () => {
   const total = subtotal + taxa;
 
   return (
-    <div className="py-10 flex flex-col md:flex-row gap-20 w-full max-h-full overflow-auto flex-wrap">
+    <div className="py-10 flex flex-col lg:flex-row gap-20 w-full max-h-full overflow-auto flex-wrap">
       <div className="flex-3">
         <header className="flex flex-col gap-6 mb-10">
           <span className="text-primary tracking-widest text-xs font-medium font-primary">
@@ -39,7 +39,7 @@ const Checkout = () => {
         </section>
       </div>
 
-      <aside className="bg-[#EEEBE9] p-8 flex-1 md:min-w-min h-max space-y-4 shadow-lg shadow-black/20 rounded-sm">
+      <aside className="bg-[#EEEBE9] p-8 flex-1 md:min-w-min  h-max space-y-4 shadow-lg shadow-black/20 rounded-sm">
         <h3 className="text-2xl font-primary font-light italic">
           Resumo da Compra
         </h3>

@@ -30,23 +30,23 @@ const BookCheckoutPreview = ({
 
       <div className="flex-1 font-primary space-y-3 font-light">
         <div className="space-y-1">
-          <h4 className="text-2xl italic text-zinc-800 font-medium ">
+          <h4 className="text-2xl italic text-zinc-800 font-medium">
             {book.title}
           </h4>
-          <p className="text-zinc-700 tracking-widest uppercase text-xs">
+          <p className="text-zinc-700 tracking-widest uppercase text-xs font-secondary">
             {book.autor}
           </p>
         </div>
 
-        <p className="text-zinc-800  tracking-widest text-sm">
+        <p className="text-zinc-800  tracking-widest text-sm ">
           Quantidade: <strong>{quantity}</strong>
         </p>
 
-        <div className="flex gap-2 items-baseline flex-1 justify-around">
+        <div className="flex gap-2 items-baseline flex-1 lg:flex-none lg:w-max lg:gap-5 justify-between">
           <button
             onClick={() => decreaseItem.mutateAsync()}
             disabled={decreaseItem.isPending || quantity <= 1}
-            className="w-min text-xs text-zinc-500 not-disabled:hover:text-primary cursor-pointer"
+            className="w-min text-xs text-zinc-600 not-disabled:hover:text-primary cursor-pointer disabled:text-zinc-300"
           >
             DIMINUIR
           </button>
@@ -56,7 +56,7 @@ const BookCheckoutPreview = ({
           <button
             onClick={() => incrementItem.mutateAsync()}
             disabled={incrementItem.isPending}
-            className="w-min text-xs text-zinc-500 hover:text-primary cursor-pointer"
+            className="w-min text-xs text-zinc-500 hover:text-primary cursor-pointer disabled:text-zinc-300"
           >
             AUMENTAR
           </button>
@@ -65,7 +65,7 @@ const BookCheckoutPreview = ({
 
           <button
             onClick={() => mutateAsync()}
-            className="w-min text-xs text-zinc-500 hover:text-primary cursor-pointer"
+            className="w-min text-xs text-zinc-500 hover:text-primary cursor-pointer disabled:text-zinc-300"
           >
             REMOVER
           </button>
