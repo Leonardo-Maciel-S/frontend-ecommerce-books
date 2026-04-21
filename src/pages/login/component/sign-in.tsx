@@ -105,7 +105,7 @@ const SignIn = () => {
 
       <Button
         disabled={isPending}
-        className="cursor-pointer md:text-lg font-semibold p-6 disabled:bg-blue-600"
+        className="cursor-pointer md:text-lg font-semibold p-6"
       >
         {isPending ? <Loader2 className="animate-spin" /> : "Entrar"}
       </Button>
