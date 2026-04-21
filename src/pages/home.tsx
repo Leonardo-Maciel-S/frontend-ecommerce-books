@@ -37,7 +37,7 @@ const Home = () => {
       {isSuccess && (
         <section className="space-y-4">
           <div className="flex justify-between pb-5">
-            <h2 className=" text-2xl lg:text-3xl font-medium font-primary">
+            <h2 className=" text-xl md:text-2xl lg:text-3xl font-medium font-primary">
               Ultimas postagens
             </h2>
 
