@@ -8,8 +8,10 @@ import { convertPriceInCentsToReal } from "@/utils/convert-price-in-cent-to-real
 import CartSection from "./components/cart-section";
 import AddressSection from "./components/addresses-section";
 import PaymentSection from "./components/payment-section";
+import { useNavigate } from "react-router";
 
 const Checkout = () => {
+  const navigate = useNavigate();
   const { data } = useGetAllItemCart();
   const [isUnderImplementationOpen, setIsUnderImplementationOpen] =
     useState(false);
@@ -17,6 +19,10 @@ const Checkout = () => {
   const subtotal = data?.subtotal || 0;
   const taxa = 0 * 100; // n * 100 = converte para centavos
   const total = subtotal + taxa;
+
+  if (data?.cartItems.length === 0) {
+    return navigate("/");
+  }
 
   return (
     <div className="py-10 flex flex-col lg:flex-row gap-20 w-full max-h-full overflow-auto flex-wrap">

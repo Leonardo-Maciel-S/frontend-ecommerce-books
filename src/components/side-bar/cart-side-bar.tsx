@@ -16,6 +16,8 @@ interface CartSideBarProps {
 const CartSideBar = ({ user, navigateTo, closeBar }: CartSideBarProps) => {
   const { data, isLoading, isPending } = useGetAllItemCart();
 
+  const isCartEmpty = data && data?.cartItems.length === 0;
+
   return (
     <>
       <ShowComponent when={!user}>
@@ -51,7 +53,7 @@ const CartSideBar = ({ user, navigateTo, closeBar }: CartSideBarProps) => {
             </div>
           )}
 
-          {user && (
+          {user && !isCartEmpty && (
             <PrimaryButton
               onClick={() => {
                 navigateTo("/checkout");
