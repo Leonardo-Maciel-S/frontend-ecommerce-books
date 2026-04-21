@@ -1,27 +1,39 @@
 import PrimaryButton from "@/components/primary-button";
+import UnderImplementation from "@/components/under-implementation";
 import useGetAllItemCart from "@/hooks/cart/use-get-all-item-cart";
 import { CircleAlert, Lock } from "lucide-react";
+import { useState } from "react";
 
 import { convertPriceInCentsToReal } from "@/utils/convert-price-in-cent-to-real";
 import CartSection from "./components/cart-section";
 import AddressSection from "./components/addresses-section";
 import PaymentSection from "./components/payment-section";
+import { useNavigate } from "react-router";
 
 const Checkout = () => {
+  const navigate = useNavigate();
   const { data } = useGetAllItemCart();
+  const [isUnderImplementationOpen, setIsUnderImplementationOpen] =
+    useState(false);
 
   const subtotal = data?.subtotal || 0;
   const taxa = 0 * 100; // n * 100 = converte para centavos
   const total = subtotal + taxa;
 
+  if (data?.cartItems.length === 0) {
+    navigate("/");
+
+    return;
+  }
+
   return (
-    <div className="py-10 flex flex-col md:flex-row gap-20 w-full max-h-full overflow-auto flex-wrap">
+    <div className="py-10 flex flex-col lg:flex-row gap-20 w-full max-h-full overflow-auto flex-wrap">
       <div className="flex-3">
         <header className="flex flex-col gap-6 mb-10">
           <span className="text-primary tracking-widest text-xs font-medium font-primary">
             CHECKOUT PROCESS
           </span>
-          <h1 className="font-primary font-light text-5xl">
+          <h1 className="font-primary font-light text-5xl text-wrap">
             Revisão do Pedido
           </h1>
         </header>
@@ -35,7 +47,7 @@ const Checkout = () => {
         </section>
       </div>
 
-      <aside className="bg-[#EEEBE9] p-8 flex-1 md:min-w-min h-max space-y-4 shadow-lg shadow-black/20 rounded-sm">
+      <aside className="bg-[#EEEBE9] p-8 flex-1 md:min-w-min  h-max space-y-4 shadow-lg shadow-black/20 rounded-sm">
         <h3 className="text-2xl font-primary font-light italic">
           Resumo da Compra
         </h3>
@@ -85,7 +97,10 @@ const Checkout = () => {
           </p>
         </div>
 
-        <PrimaryButton className="mt-8 w-full font-primary py-5 rounded-sm font-medium uppercase tracking-widest text-nowrap">
+        <PrimaryButton
+          onClick={() => setIsUnderImplementationOpen(true)}
+          className="mt-8 w-full font-primary py-5 rounded-sm font-medium uppercase tracking-widest md:text-nowrap text-sm px-2 md:px-10 md:text-lg"
+        >
           Finalizar Compra
         </PrimaryButton>
 
@@ -97,6 +112,13 @@ const Checkout = () => {
           <p>Pagamento 100% Seguro</p>
         </div>
       </aside>
+
+      <UnderImplementation
+        isOpen={isUnderImplementationOpen}
+        onClose={() => setIsUnderImplementationOpen(false)}
+        title="Etapa em desenvolvimento"
+        description="Estamos finalizando a etapa de pagamento. Em breve voce poderá concluir sua compra por aqui."
+      />
     </div>
   );
 };

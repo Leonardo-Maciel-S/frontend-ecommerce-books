@@ -14,10 +14,10 @@ const Login = () => {
     <div className="w-full h-max flex flex-col justify-start items-center py-5 pb-10 ">
       <div className="flex flex-col items-center gap-2">
         <div className="bg-primary p-4 rounded-lg">
-          <BookOpenText size={30} color="white" />
+          <BookOpenText color="white" className="size-6 md:size-10" />
         </div>
 
-        <h2 className="font-bold text-xl">BookStore</h2>
+        <h2 className="font-bold md:text-xl">BookStore</h2>
       </div>
 
       <div className="flex flex-col gap-2 md:w-/3 z-10">

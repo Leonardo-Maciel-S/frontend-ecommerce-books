@@ -48,11 +48,11 @@ const SideBar = ({ isOpen, setIsOpen, navigateTo, user }: SideBarProps) => {
 
   return (
     <div
-      className={`w-screen h-screen z-20 bg-black/40 backdrop-blur-xs fixed right-0 top-0 transition-all duration-300 ease-in ${isOpen ? "visible" : "invisible"}`}
+      className={`w-screen h-screen z-20 bg-black/40 backdrop-blur-xs fixed right-0 top-0 transition-all duration-300 ease-in ${!isOpen && "hidden"}`}
     >
       <div
         ref={sideBar}
-        className={` flex flex-col justify-between gap-5 py-8 px-8 w-full sm:w-[450px] h-screen fixed md:-right-[450px] top-0 shadow-2xl shadow-black/5 bg-background z-20 transition-all duration-300 ease-linear ${isOpen && "md:-translate-x-[450px]"}`}
+        className={`flex flex-col justify-between gap-5 py-8 px-8 w-full sm:w-[450px] h-screen fixed md:-right-[450px] top-0 shadow-2xl shadow-black/5 bg-background z-20 transition-all delay-100 duration-300 ease-linear ${isOpen && "md:-translate-x-[450px]"} ${!isOpen && "hidden "}`}
       >
         <div className="flex items-start justify-between  ">
           <div className="">
@@ -75,7 +75,7 @@ const SideBar = ({ isOpen, setIsOpen, navigateTo, user }: SideBarProps) => {
           </PrimaryButton>
         </div>
 
-        <div className="flex flex-col justify-between h-[93%]">
+        <div className="flex flex-1 min-h-0 flex-col">
           <CartSideBar
             user={user}
             navigateTo={navigateTo}

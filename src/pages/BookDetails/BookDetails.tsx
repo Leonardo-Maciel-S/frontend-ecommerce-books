@@ -20,12 +20,14 @@ import PrimaryButton from "@/components/primary-button";
 import { Loader2, ShoppingCart } from "lucide-react";
 import BookDetailsSkeleton from "@/components/skeletons/book-details-skeleton";
 import useAddItemCart from "@/hooks/cart/use-add-item-cart";
+import useGetAllItemCart from "@/hooks/cart/use-get-all-item-cart";
 
 const BookDetails = () => {
   const { id } = useParams();
   const context = useContext(AuthContext);
 
   const [showAddComment, setShowAddComment] = useState(false);
+  const [isBuyingNow, setIsBuyingNow] = useState(false);
 
   const handleModal = () => {
     setShowAddComment(!showAddComment);
@@ -35,7 +37,36 @@ const BookDetails = () => {
 
   const { data: book, isLoading, isError } = useGetBookById(id);
   const { data, isLoading: loading } = useGetAllBooks();
-  const { mutate: addItem, isPending: addItemLoading } = useAddItemCart(id);
+  const { data: cartData } = useGetAllItemCart();
+  const {
+    mutate: addItem,
+    mutateAsync: addItemAsync,
+    isPending: addItemLoading,
+  } = useAddItemCart(id);
+
+  const handleBuyNow = async () => {
+    if (!book?.id) return;
+
+    if (!context?.user) {
+      return navigate("/login");
+    }
+
+    setIsBuyingNow(true);
+
+    try {
+      const hasBookInCart = cartData?.cartItems?.some(
+        (item) => item.book.id === book.id,
+      );
+
+      if (!hasBookInCart) {
+        await addItemAsync();
+      }
+
+      navigate("/checkout");
+    } finally {
+      setIsBuyingNow(false);
+    }
+  };
 
   if (isError) {
     navigate(-1);
@@ -108,7 +139,10 @@ const BookDetails = () => {
                 <PrimaryButton
                   variant="outline"
                   className="px-5 flex-1 md:flex-none min-w-48"
+                  onClick={handleBuyNow}
+                  disabled={isBuyingNow || addItemLoading}
                 >
+                  {isBuyingNow ? <Loader2 className="animate-spin" /> : null}
                   Comprar agora
                 </PrimaryButton>
               </div>

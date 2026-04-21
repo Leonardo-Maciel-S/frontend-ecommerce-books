@@ -1,5 +1,6 @@
 import ErrorMessage from "@/components/error-message";
 import ShowComponent from "@/components/show-component";
+import UnderImplementation from "@/components/under-implementation";
 import { Button } from "@/components/ui/button";
 import {
   InputGroup,
@@ -16,6 +17,7 @@ import { useState } from "react";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [isRecoveryModalOpen, setIsRecoveryModalOpen] = useState(false);
 
   const {
     register,
@@ -30,13 +32,15 @@ const SignIn = () => {
       onSubmit={handleSubmit(submitLogin)}
       className="flex flex-col gap-2 z-20 bg-white rounded-xl py-5 px-6  min-w-[270px] md:w-[400px] border border-zinc-200"
     >
-      <h2 className="text-center font-extrabold text-3xl leading-normal">
+      <h2 className="text-center font-extrabold text-xl md:text-3xl leading-normal">
         Login
       </h2>
 
       <div className="flex flex-col gap-4 mb-5  ">
         <div className="flex flex-col gap-2 ">
-          <Label className="text-lg font-semibold text-zinc-500">Email</Label>
+          <Label className="md:text-lg font-semibold text-zinc-500">
+            Email
+          </Label>
           <InputGroup className="h-12 bg-background">
             <InputGroupInput
               {...register("email")}
@@ -56,14 +60,17 @@ const SignIn = () => {
 
         <div className="flex flex-col gap-2">
           <div className="flex justify-between">
-            <Label className="text-lg font-semibold text-zinc-500">Senha</Label>
+            <Label className="md:text-lg font-semibold text-zinc-500">
+              Senha
+            </Label>
 
-            <a
-              href=""
+            <button
+              type="button"
+              onClick={() => setIsRecoveryModalOpen(true)}
               className="text-sm text-primary font-medium hover:underline"
             >
               Esqueceu a senha?
-            </a>
+            </button>
           </div>
           <InputGroup className="h-12 bg-background">
             <InputGroupAddon>
@@ -98,10 +105,17 @@ const SignIn = () => {
 
       <Button
         disabled={isPending}
-        className="cursor-pointer md:text-lg font-semibold p-6"
+        className="cursor-pointer md:text-lg font-semibold p-6 disabled:bg-blue-600"
       >
         {isPending ? <Loader2 className="animate-spin" /> : "Entrar"}
       </Button>
+
+      <UnderImplementation
+        isOpen={isRecoveryModalOpen}
+        onClose={() => setIsRecoveryModalOpen(false)}
+        title="Função em desenvolvimento"
+        description="Ainda nao disponibilizamos a recuperação de senha. Em breve essa opção estará ativa."
+      />
     </form>
   );
 };

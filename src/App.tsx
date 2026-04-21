@@ -39,7 +39,7 @@ function App() {
         <Footer />
       </div>
 
-      <ToastContainer />
+      <ToastContainer closeOnClick />
     </>
   );
 }

@@ -16,14 +16,16 @@ interface CartSideBarProps {
 const CartSideBar = ({ user, navigateTo, closeBar }: CartSideBarProps) => {
   const { data, isLoading, isPending } = useGetAllItemCart();
 
+  const isCartEmpty = data && data?.cartItems.length === 0;
+
   return (
     <>
       <ShowComponent when={!user}>
         <Button onClick={() => navigateTo("/login")}>Fazer Login</Button>
       </ShowComponent>
 
-      <div className="space-y-5 grid grid-rows-5 h-full  overflow-hidden">
-        <div className="row-span-4">
+      <div className="flex h-full min-h-0 flex-col overflow-hidden">
+        <div className="flex-1 min-h-0">
           <ShowComponent when={!!user && (isLoading || isPending)}>
             <div className="w-full flex justify-center">
               <Loader2 className="animate-spin" />
@@ -31,7 +33,7 @@ const CartSideBar = ({ user, navigateTo, closeBar }: CartSideBarProps) => {
           </ShowComponent>
 
           <ShowComponent when={data && data?.cartItems.length > 0}>
-            <div className="flex flex-col h-full overflow-auto gap-5 pr-2 py-2 pb-10 border-b-2 border-primary/20">
+            <div className="flex h-full min-h-0 flex-col gap-5 overflow-y-auto border-b-2 border-primary/20 py-2 pr-2">
               {data?.cartItems.map((item) => (
                 <ItemCartPreview key={item.cartItem.id} item={item} />
               ))}
@@ -39,7 +41,7 @@ const CartSideBar = ({ user, navigateTo, closeBar }: CartSideBarProps) => {
           </ShowComponent>
         </div>
 
-        <div className="space-y-5 w-full pt-10 self-end">
+        <div className="w-full shrink-0 space-y-5 border-t border-primary/20 pt-6">
           {data && (
             <div className="flex justify-between items-center ">
               <p className="text-zinc-400 font-primary font-medium tracking-wider">
@@ -51,7 +53,7 @@ const CartSideBar = ({ user, navigateTo, closeBar }: CartSideBarProps) => {
             </div>
           )}
 
-          {user && (
+          {user && !isCartEmpty && (
             <PrimaryButton
               onClick={() => {
                 navigateTo("/checkout");

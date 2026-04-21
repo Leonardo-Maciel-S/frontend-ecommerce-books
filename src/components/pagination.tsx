@@ -42,7 +42,8 @@ const Pagination = ({ actualPage, totalPages }: PaginationProps) => {
           onClick={() => setSearchParams({ page: String(actualPage) })}
           variant="primary"
           size="sm"
-          className="rounded-xl font-primary py-3 px-4"
+          className="rounded-xl font-primary py-3 px-4 "
+          disabled
         >
           {actualPage}
         </PrimaryButton>
@@ -63,7 +64,7 @@ const Pagination = ({ actualPage, totalPages }: PaginationProps) => {
         disabled={actualPage >= totalPages}
         variant="outline"
         size="sm"
-        className="border-zinc-200 group disabled:border-zinc-200/50"
+        className="border-zinc-300 group disabled:border-zinc-200/50"
         onClick={() => setSearchParams({ page: String(actualPage + 1) })}
       >
         <ChevronRight
