@@ -18,7 +18,7 @@ const PaymentSectionCard = ({
   return (
     <button
       type="button"
-      className={`flex-1 p-10 min-w-[300px] space-y-3 rounded-md border-2 shadow shadow-black/10 ${isSelect ? "bg-white/70 border-primary" : "bg-[#F3F2F1] border-primary/10 hover:border-primary/40"} cursor-pointer group transition-all duration-150 ease-in`}
+      className={`flex-1 p-10 min-w-[200px] space-y-3 rounded-md border-2 shadow shadow-black/10 ${isSelect ? "bg-white/70 border-primary" : "bg-[#F3F2F1] border-primary/10 hover:border-primary/40"} cursor-pointer group transition-all duration-150 ease-in`}
       onClick={setIsSelect}
     >
       <div className="flex items-center justify-between">

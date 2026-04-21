@@ -25,7 +25,7 @@ const Checkout = () => {
           <span className="text-primary tracking-widest text-xs font-medium font-primary">
             CHECKOUT PROCESS
           </span>
-          <h1 className="font-primary font-light text-5xl">
+          <h1 className="font-primary font-light text-5xl text-wrap">
             Revisão do Pedido
           </h1>
         </header>
@@ -91,7 +91,7 @@ const Checkout = () => {
 
         <PrimaryButton
           onClick={() => setIsUnderImplementationOpen(true)}
-          className="mt-8 w-full font-primary py-5 rounded-sm font-medium uppercase tracking-widest text-nowrap"
+          className="mt-8 w-full font-primary py-5 rounded-sm font-medium uppercase tracking-widest md:text-nowrap text-sm px-2 md:px-10 md:text-lg"
         >
           Finalizar Compra
         </PrimaryButton>

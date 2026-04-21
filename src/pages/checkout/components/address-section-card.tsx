@@ -7,12 +7,12 @@ interface AddressSectionCardProps {
 
 const AddressSectionCard = ({ address }: AddressSectionCardProps) => {
   return (
-    <>
+    <div className="flex gap-3 items-start">
       <div className="bg-primary/15 h-min p-3 rounded-lg">
         <MapPin className="text-primary" />
       </div>
 
-      <div className="font-primary text-zinc-600 flex-1">
+      <div className="font-primary text-zinc-600 flex-1 ">
         <p className="font-semibold text-black">
           {address?.street} - {address?.number}
         </p>
@@ -24,7 +24,7 @@ const AddressSectionCard = ({ address }: AddressSectionCardProps) => {
           <strong>{address?.recipientName} </strong> - {address?.zipCode}
         </p>
       </div>
-    </>
+    </div>
   );
 };
 
