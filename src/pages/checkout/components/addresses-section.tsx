@@ -55,7 +55,7 @@ const AddressSection = () => {
           </ShowComponent>
 
           <ShowComponent when={!cartUserAddressId}>
-            <div className="bg-[#F3F2F1] p-8 flex items-center gap-5 shadow rounded-md shadow-black/10">
+            <div className="bg-[#F3F2F1] p-8 flex flex-col md:flex-flow items-center gap-5 shadow rounded-md shadow-black/10">
               <p className="flex-1">
                 Endereço padrão ainda não salvo, escolha um ou cadastre outro.
               </p>
@@ -76,9 +76,9 @@ const AddressSection = () => {
         onClose={handleOpenModal}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-        className="flex items-center justify-center"
+        className="flex items-start md:items-center justify-center overflow-y-auto p-4"
       >
-        <Box className="bg-white m-auto p-6 rounded-md">
+        <Box className="bg-white m-auto p-6 rounded-md w-full md:w-auto max-h-[90vh] overflow-y-auto">
           <Typography
             id="modal-modal-title"
             variant="h6"
@@ -104,7 +104,7 @@ const AddressSection = () => {
             {data?.map((address) => (
               <div
                 key={address.id}
-                className={`bg-[#F3F2F1] md:min-w-[500px] p-8 flex justify-between gap-5 shadow rounded-md shadow-black/10 ${cartUserAddressId === address.id && "border-primary border-2"} `}
+                className={`bg-[#F3F2F1] md:min-w-[500px] p-8 flex flex-wrap justify-between gap-5 shadow rounded-md shadow-black/10 ${cartUserAddressId === address.id && "border-primary border-2"} `}
               >
                 <AddressSectionCard address={address} />
 
@@ -114,7 +114,7 @@ const AddressSection = () => {
                       handleSelectAddress(address.id);
                     }}
                     disabled={isPending}
-                    className="transition-all duration-200 ease-linear border not-disabled:border-primary not-disabled:hover:bg-primary not-disabled:hover:text-white cursor-pointer rounded-2xl py-2 text-sm text-primary/90 disabled:text-zinc-400 h-min px-5 font-secondary font-semibold min-w-30 flex justify-center"
+                    className="flex-1 md:flex-none transition-all duration-200 ease-linear border not-disabled:border-primary not-disabled:hover:bg-primary not-disabled:hover:text-white cursor-pointer rounded-2xl py-2 text-sm text-primary/90 disabled:text-zinc-400 h-min px-5 font-secondary font-semibold min-w-30 flex justify-center"
                   >
                     Selecionar
                   </button>

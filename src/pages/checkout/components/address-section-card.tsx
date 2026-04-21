@@ -7,7 +7,7 @@ interface AddressSectionCardProps {
 
 const AddressSectionCard = ({ address }: AddressSectionCardProps) => {
   return (
-    <div className="flex gap-3 items-start">
+    <div className="flex gap-3 items-start flex-3 md:min-w-[250px] ">
       <div className="bg-primary/15 h-min p-3 rounded-lg">
         <MapPin className="text-primary" />
       </div>
