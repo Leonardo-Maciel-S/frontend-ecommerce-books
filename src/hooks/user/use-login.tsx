@@ -27,7 +27,7 @@ const useLogin = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const { mutate, isPending } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationKey: ["login"],
     mutationFn: async (data: FormSchemaType) => {
       try {
@@ -35,7 +35,7 @@ const useLogin = () => {
 
         setUserAuth(response.user);
         toast.success(response.message);
-        navigate("/");
+        navigate(-1);
         return response.user;
       } catch (error) {
         toast.error((error as Error).message || "Erro inesperado");
@@ -45,7 +45,7 @@ const useLogin = () => {
   });
 
   const submitLogin = (data: FormSchemaType) => {
-    mutate(data);
+    mutateAsync(data);
   };
 
   return {

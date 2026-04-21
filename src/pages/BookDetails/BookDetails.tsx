@@ -47,6 +47,10 @@ const BookDetails = () => {
   const handleBuyNow = async () => {
     if (!book?.id) return;
 
+    if (!context?.user) {
+      return navigate("/login");
+    }
+
     setIsBuyingNow(true);
 
     try {
