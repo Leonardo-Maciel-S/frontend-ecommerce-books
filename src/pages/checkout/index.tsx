@@ -21,7 +21,9 @@ const Checkout = () => {
   const total = subtotal + taxa;
 
   if (data?.cartItems.length === 0) {
-    return navigate("/");
+    navigate("/");
+
+    return;
   }
 
   return (
