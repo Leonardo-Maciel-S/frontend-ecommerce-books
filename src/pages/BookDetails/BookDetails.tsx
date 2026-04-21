@@ -38,11 +38,18 @@ const BookDetails = () => {
   const { data: book, isLoading, isError } = useGetBookById(id);
   const { data, isLoading: loading } = useGetAllBooks();
   const { data: cartData } = useGetAllItemCart();
-  const {
-    mutate: addItem,
-    mutateAsync: addItemAsync,
-    isPending: addItemLoading,
-  } = useAddItemCart(id);
+  const { mutateAsync: addItemAsync, isPending: addItemLoading } =
+    useAddItemCart(id);
+
+  const handleAddCart = async () => {
+    if (!book?.id) return;
+
+    if (!context?.user) {
+      return navigate("/login");
+    }
+
+    await addItemAsync();
+  };
 
   const handleBuyNow = async () => {
     if (!book?.id) return;
@@ -123,11 +130,11 @@ const BookDetails = () => {
 
               <div className="flex gap-3 w-full flex-wrap ">
                 <PrimaryButton
-                  onClick={() => addItem()}
+                  onClick={handleAddCart}
                   disabled={addItemLoading}
                   className="flex-10 md:flex-none min-w-[300px]"
                 >
-                  {addItemLoading ? (
+                  {addItemLoading && !isBuyingNow ? (
                     <Loader2 className="animate-spin" />
                   ) : (
                     <ShoppingCart strokeWidth="3" />

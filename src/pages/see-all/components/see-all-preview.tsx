@@ -1,9 +1,13 @@
 import type { Book } from "@/@types/books";
 import PrimaryButton from "@/components/primary-button";
+import useAddItemCart from "@/hooks/cart/use-add-item-cart";
+import useGetAllItemCart from "@/hooks/cart/use-get-all-item-cart";
 import { convertPriceInCentsToReal } from "@/utils/convert-price-in-cent-to-real";
 import { StarFilled } from "@ant-design/icons";
 import { ShoppingBag } from "lucide-react";
-import { Link } from "react-router";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router";
+import { AuthContext } from "@/context/auth";
 
 interface SeeAllPreviewProps {
   book: Book;
@@ -11,6 +15,26 @@ interface SeeAllPreviewProps {
 
 const SeeAllPreview = ({ book }: SeeAllPreviewProps) => {
   const primaryColor = "#ec6d13";
+  const navigate = useNavigate();
+  const context = useContext(AuthContext);
+  const { data: cartData } = useGetAllItemCart();
+  const { mutateAsync: addItemAsync } = useAddItemCart(book.id);
+
+  const handleBuyNow = async () => {
+    if (!context?.user) {
+      return navigate("/login");
+    }
+
+    const hasBookInCart = cartData?.cartItems?.some(
+      (item) => item.book.id === book.id,
+    );
+
+    if (!hasBookInCart) {
+      await addItemAsync();
+    }
+
+    navigate("/checkout");
+  };
 
   return (
     <div className="flex flex-col relative gap-2">
@@ -19,10 +43,13 @@ const SeeAllPreview = ({ book }: SeeAllPreviewProps) => {
           <img
             src={book.coverImg}
             alt=""
-            className="h-[500px] w-full object-fill "
+            className=" h-[400px] md:h-[500px] w-full object-fill "
           />
         </Link>
-        <PrimaryButton className="text-primary hover:bg-primary hover:text-white bg-white absolute -bottom-11 group-hover:bottom-3 right-3 p-3 transition-all duration-150 ease-in">
+        <PrimaryButton
+          onClick={handleBuyNow}
+          className="text-primary hover:bg-primary hover:text-white bg-white absolute -bottom-11 group-hover:bottom-3 right-3 p-3 transition-all duration-150 ease-in"
+        >
           <ShoppingBag strokeWidth={2} />
         </PrimaryButton>
       </div>
