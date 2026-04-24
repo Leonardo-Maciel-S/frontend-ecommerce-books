@@ -82,9 +82,9 @@ const Home = () => {
               target="_blank"
               className="group flex items-center gap-2 font-primary text-primary w-fit"
             >
-              <p className="group-hover:underline font-semibold lg:text-xl">
+              <p className="group-hover:underline font-bold lg:text-xl">
                 Ler artigo
-              </p>{" "}
+              </p>
               <ArrowRight className="group-hover:translate-x-1 transform duration-200 ease-in" />
             </Link>
           </div>
