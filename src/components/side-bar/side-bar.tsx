@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import PrimaryButton from "../primary-button";
 import { X } from "lucide-react";
-import useGetAllItemCart from "@/hooks/cart/use-get-all-item-cart";
 import CartSideBar from "./cart-side-bar";
 import type { User } from "@/@types/user";
 import type { ItemCartResponse } from "@/@types/item-cart";
