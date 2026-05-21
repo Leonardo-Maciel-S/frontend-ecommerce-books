@@ -3,11 +3,14 @@ import { Link } from "react-router";
 import { useState } from "react";
 import SideBar from "../side-bar/side-bar";
 import useGetUserAuth from "@/hooks/user/use-get-user-auth";
+import useGetAllItemCart from "@/hooks/cart/use-get-all-item-cart";
 
 const HomeBar = () => {
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
 
   const { user, navigate } = useGetUserAuth();
+
+  const { data } = useGetAllItemCart();
 
   const openSideBar = () => setIsSideBarOpen(true);
 
@@ -49,16 +52,21 @@ const HomeBar = () => {
           <div className="flex justify-between items-center gap-5 ">
             <button
               onClick={openCartBar}
-              className="group hover:text-white cursor-pointer rounded-md"
+              className="group relative hover:text-white cursor-pointer rounded-md"
             >
-              <Handbag className="group-hover:text-primary text-zinc-500 transition-all duration-100" />
+              <div className="absolute -right-2 -bottom-2 rounded-full bg-primary size-6 flex items-center justify-center">
+                <p className="text-[14px] text-white font-semibold">
+                  {data?.cartItems.length}
+                </p>
+              </div>
+              <Handbag className="group-hover:text-primary size-8 text-zinc-500 transition-all duration-100" />
             </button>
 
             <button
               onClick={navigateToProfile}
               className="group hover:text-white p-2 cursor-pointer transition-all duration-100 rounded-md"
             >
-              <User className="group-hover:text-primary text-zinc-500 transition-all duration-100" />
+              <User className="group-hover:text-primary size-8 text-zinc-500 transition-all duration-100" />
             </button>
           </div>
         </div>
@@ -69,6 +77,7 @@ const HomeBar = () => {
         isOpen={isSideBarOpen}
         setIsOpen={setIsSideBarOpen}
         navigateTo={navigateTo}
+        cartItemsResponse={data}
       />
     </>
   );

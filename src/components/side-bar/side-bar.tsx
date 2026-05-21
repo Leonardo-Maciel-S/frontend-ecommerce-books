@@ -4,21 +4,27 @@ import { X } from "lucide-react";
 import useGetAllItemCart from "@/hooks/cart/use-get-all-item-cart";
 import CartSideBar from "./cart-side-bar";
 import type { User } from "@/@types/user";
+import type { ItemCartResponse } from "@/@types/item-cart";
 interface SideBarProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<boolean>;
   navigateTo: (route: string) => void;
   user: User | null;
+  cartItemsResponse: ItemCartResponse | undefined;
 }
 
-const SideBar = ({ isOpen, setIsOpen, navigateTo, user }: SideBarProps) => {
+const SideBar = ({
+  isOpen,
+  setIsOpen,
+  navigateTo,
+  user,
+  cartItemsResponse,
+}: SideBarProps) => {
   const sideBar = useRef<HTMLDivElement>(null);
 
   const body = document.querySelector("body");
 
-  const { data } = useGetAllItemCart();
-
-  const qtyItemsInCart = data?.cartItems.length;
+  const qtyItemsInCart = cartItemsResponse?.cartItems.length;
 
   const closeBar = () => {
     setIsOpen(false);
