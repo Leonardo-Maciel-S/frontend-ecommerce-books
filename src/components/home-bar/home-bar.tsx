@@ -54,19 +54,27 @@ const HomeBar = () => {
               onClick={openCartBar}
               className="group relative hover:text-white cursor-pointer rounded-md"
             >
-              <div className="absolute -right-2 -bottom-2 rounded-full bg-primary size-6 flex items-center justify-center">
-                <p className="text-[14px] text-white font-semibold">
-                  {data?.cartItems.length}
-                </p>
-              </div>
-              <Handbag className="group-hover:text-primary size-8 text-zinc-500 transition-all duration-100" />
+              {data && data?.cartItems.length > 0 && (
+                <div className="absolute -right-2 -bottom-2 rounded-full bg-primary size-6 flex items-center justify-center">
+                  <p className="text-[14px] text-white font-semibold">
+                    {data?.cartItems.length}
+                  </p>
+                </div>
+              )}
+              <Handbag
+                strokeWidth={2}
+                className="group-hover:text-primary size-8 text-zinc-500 transition-all duration-100"
+              />
             </button>
 
             <button
               onClick={navigateToProfile}
               className="group hover:text-white p-2 cursor-pointer transition-all duration-100 rounded-md"
             >
-              <User className="group-hover:text-primary size-8 text-zinc-500 transition-all duration-100" />
+              <User
+                strokeWidth={2}
+                className="group-hover:text-primary size-8 text-zinc-500 transition-all duration-100"
+              />
             </button>
           </div>
         </div>
